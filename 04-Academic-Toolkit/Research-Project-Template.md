@@ -1,39 +1,80 @@
-# Academic Project Template
+# Academic / Research Project Template
+
+For semester projects, final-year projects, and faculty research work. Fill Overview + Scope in week 1 and get the guide to sign off on Scope — undefined scope is how projects eat semesters.
 
 ## Project Overview
 
 - Title:
 - Domain:
-- Problem:
-- Faculty Guide:
+- Problem (one sentence, no jargon):
+- Why it matters (who benefits, what improves):
+- Faculty guide / meeting cadence:
+- Repo link:
 
-## Objectives
+## Objectives — max 3, each verifiable
+
+<!-- Bad: "explore ML for X". Good: "achieve >= baseline+5% F1 on dataset Y
+     with method Z, reproducible via one script". -->
+
+1.
+2.
+3.
 
 ## Scope
 
 - In scope:
-- Out of scope:
+- **Out of scope** (longer than in-scope, or the project will sprawl):
+- Success threshold (minimum result that still counts as done):
 
 ## Literature Snapshot
 
+<!-- 5-8 papers max at start. Use Paper-Summary-Template per paper;
+     link summaries here. One line each: what they did + the gap left. -->
+
+| Paper | Approach | Gap this project addresses |
+|-------|----------|---------------------------|
+| | | |
+
 ## Architecture / Design
 
-## Implementation Plan
+<!-- Diagram (mermaid/ASCII) + data flow + where the novel part sits.
+     Mark the riskiest component — build that FIRST (see plan). -->
 
-- Phase 1:
-- Phase 2:
-- Phase 3:
+## Implementation Plan — risk-first, not easy-first
 
-## Evaluation Metrics
+| Phase | Weeks | Deliverable | Risk it retires |
+|-------|-------|-------------|-----------------|
+| 1 — Spike riskiest assumption | | Working proof-of-concept of the hard part | "is this even feasible" |
+| 2 — Baseline + eval harness | | Reproducible baseline number | "can we measure progress" |
+| 3 — The contribution | | Method beating/matching baseline | the thesis itself |
+| 4 — Write-up + polish | | Report, demo, clean repo | "can others use/verify it" |
+
+## Evaluation
+
+- Metric(s) + why appropriate:
+- Baseline(s):
+- Dataset / testbed:
+- Reproduce command: `python run_experiments.py` (make this true from week 2 — see `05-Research-Toolkit/Experiment-Tracker.md`)
 
 ## Risk Register
 
-## Deliverables
+| Risk | Likelihood | Impact | Mitigation | Trigger to activate |
+|------|-----------|--------|------------|---------------------|
+| Dataset unavailable/too small | | | Backup dataset named now: | |
+| Method underperforms baseline | | | Negative result + analysis is still a report | |
+| Guide unavailable near deadline | | | Buffer week + email trail of decisions | |
 
-## Documentation Checklist
+## Deliverables Checklist
 
-- README
-- Setup instructions
-- Demo script
-- Test cases
-- Future work
+- [ ] Working code, `README` with setup + run instructions
+- [ ] Reproducible results (script + fixed seeds + data pointer)
+- [ ] Report (use department format; draft sections as you go, not at the end)
+- [ ] Demo script — rehearsed, offline-safe, with backup recording
+- [ ] Test cases for core logic
+- [ ] Future work section (feeds next semester / paper attempt — see `05-Research-Toolkit/Publication-Checklist.md`)
+
+## Meeting Log
+
+| Date | Decisions | Actions before next meeting |
+|------|-----------|------------------------------|
+| | | |

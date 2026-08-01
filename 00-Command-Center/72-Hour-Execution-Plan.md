@@ -1,66 +1,67 @@
-# 72-Hour Knowledge Extraction Plan
+# 72-Hour Sprint Playbook
 
-## Objective
-Create high-value permanent assets across software engineering, cybersecurity, AI, academics, research, and career systems.
+Status: **Sprint 1 completed** (2026-08-01) — produced this Engineering OS: 126 assets, tested coding library, project templates, vault note pack. This file is now the reusable playbook for future sprints.
+
+A 72-hour sprint is for standing up a SYSTEM (new skill area, project, exam push), not for routine work. Run one at most every few weeks — the daily loop is the default engine.
+
+## When to Trigger a Sprint
+
+- New domain to enter fast (e.g. "learn enough Rust to build X")
+- Deadline wall (exam, hackathon, application deadline cluster)
+- Infrastructure debt (docs/tests/notes rotted; system needs a rebuild)
+
+## Sprint Contract (fill before starting — 15 min)
+
+- Sprint name:
+- Dates (72h window):
+- **Definition of Done** (3-5 verifiable statements — "X runs", "Y pages exist", "Z submitted"):
+- What is explicitly OUT of scope:
+- Calendar cleared? Meals planned? Sleep protected? (sprints fail on logistics, not willpower)
 
 ## Rules of Execution
 
-- Every 90-minute block must produce a file, template, script, or commit
-- No passive consumption without output
-- Every output must include a reuse instruction
+1. Every 90-minute block ends with a file, commit, or submission — no exceptions
+2. No passive consumption: reading/watching must convert to a note or it didn't happen
+3. Blocks are pre-planned the night before; mornings never start with "what should I do"
+4. One 20-minute review per day: cut scope, never extend hours
+5. Sleep is in-scope; all-nighters are a scope failure, not dedication
 
-## Day 1: Foundation + Core Systems
+## Structure That Worked (Sprint 1 actuals)
 
-- Set up vault structure and index pages
-- Build prompt library v1
-- Build coding library skeleton + 5 core implementations
-- Build academic toolkit templates
+| Day | Theme | Pattern |
+|-----|-------|---------|
+| 1 | Foundation | Skeletons + indexes first, so every later output has a home |
+| 2 | Depth | Fill the 2-3 highest-leverage areas with real content |
+| 3 | Integration | Wire systems together, validate everything runs, write the manifest |
 
-Deliverables:
+Key lesson from Sprint 1: **generation without validation is fake progress** — everything claimed "done" must be executed/tested on Day 3.
 
-- Obsidian map of content
-- 20+ reusable prompts
-- Runnable algorithm CLI
-- Semester and assignment systems
+## Daily Minimums
 
-## Day 2: Security + Research + Developer Ops
+- 1 artifact shipped (code/script/template)
+- 1 vault note with Details filled
+- 1 commit pushed
+- 1 line in the sprint log below
 
-- Build cybersecurity cheat sheets and methodology
-- Build research workflow templates and trackers
-- Build developer templates (README, PR, issues, ADR)
-- Add automation scripts and CI templates
+## Sprint Log Template
 
-Deliverables:
+```
+### Day N — YYYY-MM-DD
+Blocks completed: /4
+Shipped:
+Cut from scope:
+Tomorrow's first block:
+```
 
-- Security field manual v1
-- Research operating workflow
-- Repo quality templates
-- Daily automation scripts
+## Post-Sprint (mandatory, 30 min)
 
-## Day 3: AI + Career + Integration
+1. Run the Definition of Done checklist — score honestly
+2. Promote anything reusable into the right toolkit folder + Asset-Manifest
+3. Write 5 lines in Weekly-Review: what the sprint proved/disproved
+4. Tag it: `git tag sprint-<name> && git push --tags`
 
-- Build AI toolkit docs (RAG, evals, deployment)
-- Build career toolkit (resume bullets, outreach, tracker)
-- Connect all systems via command center dashboards
-- Dry-run full weekly review
+## Sprint History
 
-Deliverables:
-
-- AI project playbook
-- Career acceleration kit
-- Integrated Engineering OS v1
-
-## Daily Minimum Output
-
-- 1 script
-- 1 template
-- 1 technical note
-- 1 code artifact
-- 1 review update
-
-## Definition of Done
-
-- All folders have starter assets
-- At least one automation script runs successfully
-- At least one coding library module is executable
-- All templates are copy-ready
+| Sprint | Dates | DoD met? | Key output |
+|--------|-------|----------|------------|
+| engineering-os-v1 | 2026-08 | Yes | This repository, 126 assets, all validated |

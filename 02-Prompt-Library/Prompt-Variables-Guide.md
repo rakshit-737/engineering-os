@@ -17,10 +17,29 @@ Use this variable system to keep prompts reusable.
 - Ask for test plan and validation
 - Ask for reusable artifacts (templates/scripts/docs)
 
+## Worked Example — bad vs good fill
+
+Prompt 2 (Debug Partner), variable `{bug_description}`:
+
+- Bad: `my API is slow`
+- Good: `FastAPI /items endpoint p95 went 80ms -> 2.1s after adding the search filter; SQLite backend, 50k rows, EXPLAIN shows full table scan; only filtered queries are slow`
+
+The good fill contains: symptom, magnitude, trigger change, environment, evidence already gathered. Every variable fill should carry those five when debugging.
+
+## Output Failure → Fix Table
+
+| Output problem | Fix in prompt |
+|----------------|---------------|
+| Generic advice | Add real artifact (code/log/spec) + "reference specific lines" |
+| Too long, no structure | Specify exact output format + max length per section |
+| Confidently wrong | Add "state assumptions first; mark uncertain claims" |
+| Ignores constraints | Move constraints to the END of the prompt + number them |
+| Solves the wrong problem | Add one example of desired output shape |
+
 ## Prompt Evolution Workflow
 
-1. Track where prompt failed
+1. Track where prompt failed (inline `> vN note:` under the prompt)
 2. Add explicit constraints
 3. Add better examples
 4. Version prompts as `v1`, `v2`, `v3`
-5. Keep changelog of improvements
+5. Delete prompts that fail twice unedited

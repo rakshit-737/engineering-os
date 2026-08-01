@@ -1,34 +1,47 @@
 # Novelty Checklist
 
-Use this before claiming contribution.
+Run this BEFORE building (to kill weak ideas cheaply) and AGAIN before writing the intro (to phrase the claim you can actually defend). A novelty claim is a sentence of the form: *"Unlike [closest work], we [delta], which matters because [measured consequence]."* Every check below feeds one part of that sentence.
 
-## Problem Novelty
+## Check 1 — Closest 3 Papers and Explicit Delta
 
-- Is the problem under-explored?
-- Is practical impact clear?
-- Is baseline gap measurable?
+Find the 3 papers a hostile reviewer would say already did your work (search your own title's keywords — that's what the reviewer will do). For each, state the delta in one concrete sentence. "They didn't try X" is not a delta unless you can say why X changes the outcome.
 
-## Method Novelty
+| Closest paper | What it already does | Explicit delta (what we do that it cannot) | Why the delta should matter |
+|---------------|----------------------|--------------------------------------------|------------------------------|
+| 1. | | | |
+| 2. | | | |
+| 3. | | | |
 
-- Is the method materially different?
-- Is improvement more than parameter tuning?
-- Is ablation proving contribution of each component?
+- [ ] All 3 deltas survive this test: if the closest paper's authors read my delta sentence, they could not reply "we already do that in Section N"
+- [ ] The delta is the SAME across all 3 rows (if each row needs a different delta, the contribution is unfocused — narrow the claim)
+- [ ] The 3 papers appear in my related work with these exact deltas stated — hiding the closest work is the fastest route to rejection by its authors as reviewers
 
-## Evaluation Rigor
+## Check 2 — Ablation Proves the Delta Matters
 
-- Are baselines strong and up-to-date?
-- Are comparisons fair and reproducible?
-- Is statistical significance reported?
+The delta must be causally linked to the improvement, not just co-present with it.
 
-## Reproducibility
+- [ ] There is a run that is **full method minus only the delta** — if this ablation matches the full method, the novelty is decoration
+- [ ] If the delta has multiple components, each has its own ablation row (remove one at a time, not all at once)
+- [ ] Ablation uses the same seeds/data/budget as the main results table — an ablation under a different setup proves nothing
+- [ ] The ablation gap is larger than seed noise (report mean±std over ≥3 seeds; a 0.2 gap with ±0.4 std is a null result)
+- [ ] I can state the mechanism: WHY does removing the delta hurt, and does the failure-case analysis show errors consistent with that mechanism?
 
-- Data and code availability plan
-- Deterministic settings logged
-- Hardware and runtime documented
+## Check 3 — Baseline Fairness
 
-## Writing Quality
+An unfair baseline comparison converts real novelty into an unreviewable claim. A baseline is fair when it got the same chances your method did:
 
-- Problem statement crisp
-- Related work positioned accurately
-- Limitations disclosed
-- Future work realistic
+- [ ] Baselines include the strongest published method for this exact problem from the last ~2 years (not just the classic everyone beats)
+- [ ] Same dataset, same splits, same preprocessing, same evaluation script for every method
+- [ ] Same tuning budget: if my method got 20 hyperparameter trials, each baseline gets 20 — logged, not estimated
+- [ ] Same compute/parameter budget, or the difference is reported in a table column (a 10x bigger model "winning" is a scaling result, not a method result)
+- [ ] Re-ran baselines myself where feasible; quoted numbers are marked "(reported in [cite])" and never mixed silently with re-run numbers in one table
+- [ ] If my re-run of a baseline underperforms its paper's number, I say so and use the HIGHER of the two in comparisons
+- [ ] Statistical claim matches evidence: "outperforms" requires mean±std over multiple seeds and a gap exceeding the noise, not a single lucky run
+
+## Verdict
+
+- Claim sentence (fill it): "Unlike ____, we ____, which matters because ____."
+- [ ] All three checks pass → proceed to `Publication-Checklist.md`
+- [ ] Check 1 fails → this is incremental work; either find a new angle or reframe honestly as a reproduction/analysis paper (those are publishable too)
+- [ ] Check 2 fails → you have a result but not YOUR result; more ablations before more writing
+- [ ] Check 3 fails → fix the comparison before drawing any conclusion; reviewers find this and it poisons the whole paper

@@ -13,13 +13,13 @@ This repository is designed as your personal operating system for learning, buil
 ## Structure
 
 - `00-Command-Center` - Mission dashboard, weekly reviews, and execution plan
-- `01-Obsidian-Vault` - Linked knowledge base for core CS, cybersecurity, AI/ML, and research
+- `01-Obsidian-Vault` - 56 filled concept notes across CS core, cybersecurity, AI/ML, interview patterns + 6 hub indexes
 - `02-Prompt-Library` - Reusable prompt packs for coding, research, interviews, writing, and review
-- `03-Coding-Library` - Reusable implementations with notes and complexity references
+- `03-Coding-Library` - Python + Java + C++ algorithm libraries, 362 tests, complexity + interview notes
 - `04-Academic-Toolkit` - Assignment, lab, project, and semester planning templates
 - `05-Research-Toolkit` - Literature review, experiment logs, novelty checks, publication pipeline
-- `06-Cybersecurity-Toolkit` - Cheat sheets, methodology, and practical checklists
-- `07-Developer-Toolkit` - README, PR, issue, API doc, architecture, and debugging templates
+- `06-Cybersecurity-Toolkit` - Career roadmap, SOC playbook, home lab + CTF guides, interview questions, 5 cheat sheets, IR playbook
+- `07-Developer-Toolkit` - README/PR/issue/API/ADR templates + Git, Python stdlib, SQL cheat sheets
 - `08-Automation-Toolkit` - Python + PowerShell scripts and CI workflow templates
 - `09-AI-Toolkit` - Prompt engineering, RAG, evaluation, and deployment playbooks
 - `10-Career-Toolkit` - Resume, outreach, application tracker, interview system

@@ -1,49 +1,72 @@
 # Weekly Review
 
-Week of: 
+Sunday, 60 minutes, calendar-blocked. Copy to `Weekly/YYYY-Wnn.md`. The review exists to answer one question: **is the system compounding or just consuming time?**
 
-## 1) Outcomes
+Week of:
 
-- Biggest win:
-- Most reusable output:
-- Most valuable learning:
+## 1) Collect (10 min — pull data, don't remember it)
 
-## 2) Metrics
+```bash
+cd f:/Engineering-OS
+git log --since="7 days ago" --oneline          # commits this week
+git diff --stat HEAD@{7.days.ago} 2>/dev/null   # what actually changed
+```
 
-- Hours deep work:
-- Artifacts created (scripts/templates/docs):
-- Git commits:
-- Interview prep sessions:
-- Research papers summarized:
+- Commits:
+- Daily dashboards completed: /7
+- Scorecard average: /8
 
-## 3) Engineering Quality Audit
+## 2) Outcomes (evidence required)
 
-- Did each new project include README + run instructions?
-- Were bugs documented with root cause and fix?
-- Were repeated tasks automated?
-- Were tests added for critical logic?
+- Biggest win (link the artifact):
+- Most reusable thing created (will future-you use it? honestly?):
+- Most valuable thing learned (which vault note holds it?):
+- Money question: **what did I create this week that makes next week easier?**
 
-## 4) Knowledge Compounding
+## 3) Metrics
 
-- Notes promoted to cheat sheets:
-- Cheat sheets promoted to automation:
-- Automation promoted to templates:
+| Metric | This week | Last week | Trend |
+|--------|-----------|-----------|-------|
+| Deep work hours | | | |
+| Artifacts shipped | | | |
+| Vault notes filled (not created — filled) | | | |
+| Problems solved under time | | | |
+| Applications sent | | | |
+| Papers summarized | | | |
 
-## 5) Career Progress
+## 4) Quality Audit — yes/no, no partial credit
 
-- Applications sent:
-- Referrals requested:
-- Interview rounds:
-- STAR stories improved:
+- [ ] Every new project has README + run instructions
+- [ ] Every bug hit this week has a root-cause note somewhere findable
+- [ ] Anything done 3+ times manually got a script/checklist
+- [ ] Tests exist for logic I'd be scared to refactor
+- [ ] Tracker CSVs are current (applications, CGPA)
 
-## 6) Next Week Top 3 Outcomes
+Each unchecked box = one concrete task in next week's plan. That's the compounding mechanism — skipping this line kills the system.
 
-1. 
-2. 
-3. 
+## 5) Career Pipeline
+
+- Applications sent: · Responses: · Interviews scheduled:
+- STAR stories added/sharpened:
+- One networking action taken (referral ask, cold email, meetup):
+
+## 6) Next Week — exactly 3 outcomes
+
+Outcome = shippable noun, not activity. "48 tests green on graph module" not "practice graphs".
+
+1.
+2.
+3.
 
 ## 7) Kill / Keep / Start
 
-- Kill:
-- Keep:
-- Start:
+- **Kill** (consumed time, produced nothing twice in a row):
+- **Keep** (working, don't touch):
+- **Start** (one experiment max — new habit, tool, or time slot):
+
+## 8) Close
+
+```bash
+git add -A && git commit -m "chore: week $(date +%V) review" && git push
+git tag week-$(date +%Y-%m-%d) && git push --tags
+```

@@ -4,6 +4,16 @@ __pycache__/
 .venv/
 .pytest_cache/
 
+# Java
+*.class
+03-Coding-Library/java/out/
+
+# C++
+*.o
+*.obj
+*.exe
+03-Coding-Library/cpp/test_main
+
 # Logs and temp
 *.log
 *.tmp
@@ -11,3 +21,4 @@ __pycache__/
 # OS
 .DS_Store
 Thumbs.db
+.opencode

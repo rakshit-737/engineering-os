@@ -14,7 +14,7 @@ python src/main.py --demo
 python -m unittest discover -s tests -v
 ```
 
-48 tests, stdlib only — no pytest required.
+135 tests, stdlib only — no pytest required.
 
 ## Structure
 
@@ -23,6 +23,12 @@ python -m unittest discover -s tests -v
 - `src/algos/graphs.py` - graph traversal and shortest path
 - `src/algos/data_structures.py` - MinStack, DisjointSet, Trie, LRUCache
 - `src/algos/dp.py` - fib, coin change, LIS, knapsack, edit distance
+- `src/algos/strings.py` - KMP, Rabin-Karp, Z-function, palindromes, anagrams
+- `src/algos/trees.py` - traversals, level order, LCA, BST validation, serialize/deserialize
+- `src/algos/linked_lists.py` - reverse, Floyd cycle detection, merge, palindrome in O(1) space
+- `src/algos/heaps_intervals.py` - top-K, k-way merge, merge/insert intervals, meeting rooms
+- `src/algos/bit_math.py` - bit tricks, gcd/lcm, sieve, modular fast power, bitmask subsets
+- `src/algos/security_utils.py` - defensive crypto: SHA-256, HMAC, PBKDF2 password hashing, secure tokens
 - `src/main.py` - small CLI for quick demos
 - `tests/` - unittest suite (one file per module)
 
