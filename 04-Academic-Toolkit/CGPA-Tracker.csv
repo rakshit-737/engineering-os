@@ -1,0 +1,11 @@
+Semester,Course,Credits,GradePoint,WeightedPoints
+1,,,,
+1,,,,
+1,,,,
+2,,,,
+2,,,,
+2,,,,
+
+# Instructions: WeightedPoints = Credits * GradePoint
+# SGPA = SUM(WeightedPoints for semester)/SUM(Credits for semester)
+# CGPA = SUM(all WeightedPoints)/SUM(all Credits)

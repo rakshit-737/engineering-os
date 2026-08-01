@@ -1,0 +1,18 @@
+services:
+  worker:
+    build: .
+    restart: unless-stopped
+    stop_grace_period: 30s
+    environment:
+      LOG_LEVEL: INFO
+      POLL_INTERVAL_SECONDS: "2"
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+  # Typical companion queue:
+  # redis:
+  #   image: redis:7-alpine
+  #   healthcheck:
+  #     test: ["CMD", "redis-cli", "ping"]
+  #     interval: 5s
