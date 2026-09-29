@@ -1,6 +1,20 @@
+---
+title: Daily Dashboard
+description: Morning plan and evening shutdown template built around one reusable artifact per day.
+domain: command-center
+category: loop
+type: template
+difficulty: beginner
+status: evergreen
+tags: [daily, focus, planning]
+prerequisites: [Command-Center-Index]
+related: [Weekly-Review, Goals-Framework, Metrics-Definitions, Engineering-Journal-Template]
+order: 10
+---
+
 # Daily Dashboard
 
-Copy this file to `Daily/YYYY-MM-DD.md` each morning (or use Obsidian daily-notes plugin pointed at this template). Fill the top in 5 minutes. Review the bottom in 5 minutes before stopping.
+The live version of this page is `/today` in the web app (state is kept in your browser). The Markdown template below is for Obsidian or plain-file users. Copy this file to `Daily/YYYY-MM-DD.md` each morning (or use Obsidian daily-notes plugin pointed at this template). Fill the top in 5 minutes. Review the bottom in 5 minutes before stopping.
 
 **The one rule:** the day is a success if one reusable artifact exists at the end that did not exist in the morning. Everything else is optional.
 
@@ -58,3 +72,16 @@ Phone in another room. One block = one target. If a block dies, write why in Blo
 | Consistency | | Streak unbroken, review done |
 
 Total: /8 · Streak: __ days · A 5+/8 day repeated for a semester beats any 8/8 heroic day.
+
+## 7) Checklist (tick as you go)
+
+- [ ] Mission targets written before the first block
+- [ ] Each target traces to a weekly objective in [[Goals-Framework]]
+- [ ] Block A done
+- [ ] Block B done
+- [ ] Block C done
+- [ ] Artifact logged with file path or commit hash
+- [ ] Short entry in the [[Engineering-Journal-Template|engineering journal]]
+- [ ] Shutdown review done and tomorrow's Block A decided
+
+Metric definitions (what Focus, Output, Reusability and Consistency mean and why): [[Metrics-Definitions]]. Rolls up into [[Weekly-Review]].

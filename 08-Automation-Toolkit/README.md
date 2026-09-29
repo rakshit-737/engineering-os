@@ -1,3 +1,17 @@
+---
+title: Automation Toolkit
+slug: automation-toolkit
+description: Scripts and CI workflow templates that remove repeated manual work.
+domain: automation
+category: overview
+type: index
+difficulty: beginner
+status: evergreen
+tags: [automation, ci]
+prerequisites: []
+related: [Checklist-Deployment]
+order: 1
+---
 # Automation Toolkit
 
 This folder contains scripts and workflows that reduce repeated manual work.

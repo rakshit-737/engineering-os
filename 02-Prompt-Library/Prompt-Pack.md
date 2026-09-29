@@ -1,3 +1,16 @@
+---
+title: Prompt Pack
+description: Twenty reusable, variable-driven prompts for review, debugging, design, research, and career work.
+domain: prompts
+category: prompt-pack
+type: template
+difficulty: intermediate
+status: evergreen
+tags: [prompts, llm]
+prerequisites: []
+related: [Prompt-Variables-Guide]
+order: 10
+---
 # Prompt Pack
 
 ## 1) Senior Code Reviewer

@@ -1,6 +1,20 @@
+---
+title: Prompt Library
+slug: prompt-library
+description: "Entry point to the prompt library: fast picker, usage rules, and when not to use a prompt."
+domain: prompts
+category: overview
+type: index
+difficulty: beginner
+status: evergreen
+tags: [prompts]
+prerequisites: []
+related: [Prompt-Pack, Prompt-Variables-Guide]
+order: 1
+---
 # Prompt Library
 
-Reusable operating procedures for AI work, not one-time requests. The pack ([Prompt-Pack.md](Prompt-Pack.md)) holds 20 prompts; this file is how to run them well.
+Reusable operating procedures for AI work, not one-time requests. The pack ([[Prompt-Pack]]) holds 20 prompts; this file is how to run them well.
 
 ## Fast Picker
 
@@ -30,6 +44,6 @@ Reusable operating procedures for AI work, not one-time requests. The pack ([Pro
 
 ## Improving the Pack
 
-When a prompt underperforms: note the failure inline under the prompt (`> v2 note: add X constraint`), fix it, keep the version note. A prompt that failed twice unedited gets deleted — dead prompts hide good ones.
+Versioning, failure notes, and the fix table live in [[Prompt-Variables-Guide]] (single source; not repeated here).
 
-Deep theory: `09-AI-Toolkit/Prompt-Engineering-Guide.md`. Variable conventions: [Prompt-Variables-Guide.md](Prompt-Variables-Guide.md).
+Deep theory: `09-AI-Toolkit/Prompt-Engineering-Guide.md`.

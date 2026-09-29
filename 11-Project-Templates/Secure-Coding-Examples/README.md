@@ -1,3 +1,17 @@
+---
+title: Secure Coding Examples
+slug: secure-coding-examples
+description: Runnable stdlib Python examples of defensive coding mapped to STRIDE and OWASP.
+domain: projects
+category: templates
+type: template
+difficulty: intermediate
+status: evergreen
+tags: [security, python, owasp]
+prerequisites: []
+related: [Pattern-Input-Validation-at-Boundaries]
+order: 30
+---
 # Secure Coding Examples (Python, stdlib only)
 
 Runnable defensive patterns. Each file: the threat, the wrong way (marked, never for use), the right way, and a self-verifying demo.

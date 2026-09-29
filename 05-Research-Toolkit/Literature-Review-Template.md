@@ -1,6 +1,20 @@
+---
+title: Literature Review Template
+description: Structured literature review with search strategy, snowballing, screening log, synthesis matrix, and gaps.
+domain: research
+category: literature
+type: template
+difficulty: intermediate
+status: evergreen
+tags: [literature-review, search, synthesis]
+prerequisites: [How-to-Read-a-Paper]
+related: [Paper-Note-Template, Novelty-Checklist, Research-Workflow]
+order: 30
+---
+
 # Literature Review Template
 
-A literature review answers one question: **what is known, what is contested, and what gap does my work fill?** It is an argument, not a summary pile. Budget: 15-25 papers screened, 8-12 read properly (Paper-Summary-Template each), 2 weeks max for a student project.
+A literature review answers one question: **what is known, what is contested, and what gap does my work fill?** It is an argument, not a summary pile. Budget: 15-25 papers screened, 8-12 read properly ([[Paper-Note-Template]] each; see [[How-to-Read-a-Paper]]), 2 weeks max for a student project.
 
 ## Research Topic
 
@@ -126,4 +140,4 @@ Read the matrix two ways:
 
 ## Proposed Direction
 
-Thesis sentence: "Existing work does X but fails at Y under condition Z; we propose W." Run it through `Novelty-Checklist.md` before committing a semester to it.
+Thesis sentence: "Existing work does X but fails at Y under condition Z; we propose W." Run it through [[Novelty-Checklist]] before committing a semester to it.

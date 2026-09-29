@@ -1,3 +1,17 @@
+---
+title: Reviewer Response Template
+description: Point-by-point rebuttal structure with tone rules, phrase bank, and a worked example.
+domain: research
+category: publishing
+type: template
+difficulty: advanced
+status: evergreen
+tags: [rebuttal, peer-review]
+prerequisites: [Publication-Checklist]
+related: [Research-OS-Index]
+order: 90
+---
+
 # Reviewer Response Template
 
 Goal of a response: make it EASY for the reviewer to raise their score. Every point gets three parts — restate, respond, act. Never skip a point, never merge two points, never reply to a criticism with only prose when an experiment or edit is possible.
@@ -86,3 +100,5 @@ Paper #___ — "<title>" (venue, cycle) <!-- e.g. Paper #142 — "…" (ICSE 202
 ## Closing Statement
 
 We thank the reviewers for their time and specific suggestions; the added [experiments/clarifications] have materially improved the paper, and we believe all raised concerns are addressed above.
+
+Related: [[Publication-Checklist]] · [[Research-Workflow]] · [[Research-OS-Index]]

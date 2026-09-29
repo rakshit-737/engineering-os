@@ -1,3 +1,17 @@
+---
+title: Novelty Checklist
+description: Checks that a contribution has an explicit delta over the closest work, an ablation proving it, and fair baselines.
+domain: research
+category: validation
+type: checklist
+difficulty: advanced
+status: evergreen
+tags: [novelty, baselines, ablation]
+prerequisites: [Literature-Review-Template]
+related: [Ablation-Study-Guide, Datasets-and-Baselines-Guide, Publication-Checklist]
+order: 70
+---
+
 # Novelty Checklist
 
 Run this BEFORE building (to kill weak ideas cheaply) and AGAIN before writing the intro (to phrase the claim you can actually defend). A novelty claim is a sentence of the form: *"Unlike [closest work], we [delta], which matters because [measured consequence]."* Every check below feeds one part of that sentence.
@@ -38,10 +52,20 @@ An unfair baseline comparison converts real novelty into an unreviewable claim. 
 - [ ] If my re-run of a baseline underperforms its paper's number, I say so and use the HIGHER of the two in comparisons
 - [ ] Statistical claim matches evidence: "outperforms" requires mean±std over multiple seeds and a gap exceeding the noise, not a single lucky run
 
+## Check 4 — Prior-Art Search Was Actually Done
+
+- [ ] Searched at least 3 phrasings of my own claim (method name, problem name, reported effect) on Google Scholar plus one field database; queries logged in [[Literature-Review-Template]]
+- [ ] Checked the last 6-12 months of arXiv and recent proceedings of the main venues (scoop risk comes from recent work)
+- [ ] Checked adjacent fields that solve the same problem under a different name
+- [ ] Asked one person in the area "has someone done this?" before building
+- [ ] Re-ran the search right before submission, not only at idea time
+
 ## Verdict
 
 - Claim sentence (fill it): "Unlike ____, we ____, which matters because ____."
-- [ ] All three checks pass → proceed to `Publication-Checklist.md`
+- [ ] All three checks pass → proceed to [[Publication-Checklist]]
 - [ ] Check 1 fails → this is incremental work; either find a new angle or reframe honestly as a reproduction/analysis paper (those are publishable too)
 - [ ] Check 2 fails → you have a result but not YOUR result; more ablations before more writing
 - [ ] Check 3 fails → fix the comparison before drawing any conclusion; reviewers find this and it poisons the whole paper
+
+Related: [[Ablation-Study-Guide]] (Check 2) · [[Datasets-and-Baselines-Guide]] (Check 3) · [[Research-Ideas-Backlog-Template]] (where killed ideas go).

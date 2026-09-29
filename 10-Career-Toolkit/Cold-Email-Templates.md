@@ -1,3 +1,16 @@
+---
+title: Cold Email Templates
+description: Five short outreach templates (professor, referral, recruiter, event, thank-you) with the rules that make them work.
+domain: career
+category: applications
+type: template
+difficulty: beginner
+status: evergreen
+tags: [outreach, referrals, email]
+related: [Application-Tracker-Guide, Resume-Engine, Career-Index]
+order: 20
+---
+
 # Cold Email Templates
 
 Five templates for the outreach situations that matter most in an engineering job search. Fill every `{{slot}}` before sending — an unfilled slot is an instant delete.
@@ -68,7 +81,7 @@ Five templates for the outreach situations that matter most in an engineering jo
 >
 > I applied for {{role}} on {{date}} and wanted to briefly flag two things since my application:
 >
-> 1. {{new_signal — e.g. "shipped v2 of my IDS project, now detecting X with 94% precision"}}
+> 1. {{new_signal — e.g. "shipped v2 of my IDS project, now evaluated on {{dataset}} at {{your_measured_metric}}"}}
 > 2. {{fit_point — e.g. "the posting's Kubernetes requirement matches my internship work at Y"}}
 >
 > I remain very interested and can interview any time in the next {{timeframe}}. Is there anything else you need from me to move my application forward?
@@ -122,10 +135,13 @@ Five templates for the outreach situations that matter most in an engineering jo
 > Best,
 > {{YourName}}
 
-**Why this works:** Sent the same day, it lands before the interviewer writes their feedback. Referencing a specific exchange proves engagement; the one-line "addendum" turns your weakest moment into evidence of reflection — interviewers consistently rate candidates who self-correct higher. No new ask: the only goal is a positive final impression.
+**Why this works:** Sent the same day, it lands before the interviewer writes their feedback. Referencing a specific exchange proves engagement; the one-line "addendum" turns your weakest moment into evidence of reflection — it shows reflection, which is exactly what interviewers try to assess. No new ask: the only goal is a positive final impression.
 
 ---
 
 ## Follow-Up Rule
 
-One follow-up per thread, 5-7 days later, max 3 sentences: restate the ask, add one new piece of information, stop. No reply after that means no — move on and log it in `Internship-Application-Tracker.csv`.
+One follow-up per thread, 5-7 days later, max 3 sentences: restate the ask, add one new piece of information, stop. No reply after that means no — move on and log it in `Internship-Application-Tracker.csv` (offline fallback; see [[Application-Tracker-Guide]]).
+
+
+See also: [[Career-Index]]

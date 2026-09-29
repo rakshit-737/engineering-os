@@ -1,3 +1,16 @@
+---
+title: C++ STL Cheat Sheet
+description: STL containers and algorithms used in contests and interviews (C++17).
+domain: developer
+category: cheat-sheets
+type: cheatsheet
+difficulty: intermediate
+status: evergreen
+tags: [cpp, dsa]
+prerequisites: []
+related: [Java-Cheat-Sheet, Python-Stdlib-Cheat-Sheet]
+order: 10
+---
 # C++ STL Cheat Sheet — Containers & Algorithms
 
 The STL you actually use in contests and interviews.

@@ -1,3 +1,17 @@
+---
+title: Academic Research Project Template
+description: Semester or final-year project plan with verifiable objectives, risk-first phases, evaluation, and risk register.
+domain: academic
+category: projects
+type: template
+difficulty: intermediate
+status: evergreen
+tags: [projects, research, final-year]
+prerequisites: []
+related: [Research-OS-Index, Experiment-Tracker, Publication-Checklist, Paper-Note-Template]
+order: 90
+---
+
 # Academic / Research Project Template
 
 For semester projects, final-year projects, and faculty research work. Fill Overview + Scope in week 1 and get the guide to sign off on Scope — undefined scope is how projects eat semesters.
@@ -28,7 +42,7 @@ For semester projects, final-year projects, and faculty research work. Fill Over
 
 ## Literature Snapshot
 
-<!-- 5-8 papers max at start. Use Paper-Summary-Template per paper;
+<!-- 5-8 papers max at start. Use [[Paper-Note-Template]] per paper;
      link summaries here. One line each: what they did + the gap left. -->
 
 | Paper | Approach | Gap this project addresses |
@@ -54,7 +68,7 @@ For semester projects, final-year projects, and faculty research work. Fill Over
 - Metric(s) + why appropriate:
 - Baseline(s):
 - Dataset / testbed:
-- Reproduce command: `python run_experiments.py` (make this true from week 2 — see `05-Research-Toolkit/Experiment-Tracker.md`)
+- Reproduce command: `python run_experiments.py` (make this true from week 2 — see [[Experiment-Tracker]] and [[Reproducibility-Checklist]])
 
 ## Risk Register
 
@@ -71,10 +85,24 @@ For semester projects, final-year projects, and faculty research work. Fill Over
 - [ ] Report (use department format; draft sections as you go, not at the end)
 - [ ] Demo script — rehearsed, offline-safe, with backup recording
 - [ ] Test cases for core logic
-- [ ] Future work section (feeds next semester / paper attempt — see `05-Research-Toolkit/Publication-Checklist.md`)
+- [ ] Future work section (feeds next semester / paper attempt — see [[Publication-Checklist]])
+
+## Milestone Checklist
+
+- [ ] Week 1: problem, objectives, scope signed off by guide
+- [ ] Week 2: literature snapshot (5-8 papers) done; gap written in one sentence
+- [ ] Week 3: hypothesis written with [[Hypothesis-Template]]
+- [ ] Week 4: riskiest component spiked; go / pivot decision recorded
+- [ ] Mid-term: baseline number reproduced with a single command
+- [ ] Mid-term review slides / demo ready
+- [ ] Main results over 3+ seeds; one ablation per component ([[Ablation-Study-Guide]])
+- [ ] Report draft complete two weeks before the deadline
+- [ ] Final demo rehearsed twice
 
 ## Meeting Log
 
 | Date | Decisions | Actions before next meeting |
 |------|-----------|------------------------------|
 | | | |
+
+Workflow reference: [[Research-Workflow]]. Course-side tracking: [[Semester-Dashboard-Template]].

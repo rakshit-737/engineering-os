@@ -1,3 +1,16 @@
+---
+title: STAR Story Template
+description: Skeleton, filled example and story bank matrix for building 4-6 reusable behavioral stories.
+domain: career
+category: interviews
+type: template
+difficulty: beginner
+status: evergreen
+tags: [behavioral, star, interviews]
+related: [Behavioral-STAR-Method, Interview-Behavioral-Question-Bank, Career-Index]
+order: 60
+---
+
 # STAR Story Template
 
 A STAR story is a 90-second structured answer to a behavioral question. Build 4-6 stories before interview season, map them to common questions (see the Story Bank Matrix below), and rehearse them out loud until each lands in under 2 minutes.
@@ -49,6 +62,8 @@ A STAR story is a 90-second structured answer to a behavioral question. Build 4-
 
 ## Filled Example: "The Silent 500s" (production bug during internship)
 
+> Illustrative example. Every number in your own stories must be real and defensible -- never invent metrics.
+
 **Story Title:** The Silent 500s
 
 **Situation:** During my summer internship on a 5-person backend team, our internal file-upload service started returning intermittent 500 errors — roughly 3% of requests — two days before a company-wide demo. No alerts had fired because the errors were below the alerting threshold.
@@ -80,4 +95,7 @@ Rows are the 8 questions you are most likely to get. Fill in the columns with yo
 
 **Maintenance rule:** After every project, internship milestone, or hackathon, draft one new story within a week while details (and numbers) are fresh. Review the matrix before each interview and pick 3 stories to rehearse against the specific job description.
 
-Related: [[Behavioral-STAR-Method]] · Practice cadence lives in `Technical-Interview-Roadmap.md`.
+Related: [[Behavioral-STAR-Method]] · Practice cadence lives in [[Technical-Interview-Roadmap]]. More prompts: [[Interview-Behavioral-Question-Bank]].
+
+
+See also: [[Career-Index]]

@@ -1,13 +1,27 @@
+---
+title: Weekly Review
+description: 60-minute Sunday review that checks whether the system is compounding and sets exactly three outcomes.
+domain: command-center
+category: loop
+type: template
+difficulty: beginner
+status: evergreen
+tags: [weekly, review, planning]
+prerequisites: [Daily-Dashboard]
+related: [Monthly-Review, Goals-Framework, Metrics-Definitions]
+order: 20
+---
+
 # Weekly Review
 
-Sunday, 60 minutes, calendar-blocked. Copy to `Weekly/YYYY-Wnn.md`. The review exists to answer one question: **is the system compounding or just consuming time?**
+Live state for the week lives in the web app at `/command-center` (stored in your browser); this file is the plain-Markdown version. Sunday, 60 minutes, calendar-blocked. Copy to `Weekly/YYYY-Wnn.md`. The review exists to answer one question: **is the system compounding or just consuming time?**
 
 Week of:
 
 ## 1) Collect (10 min — pull data, don't remember it)
 
 ```bash
-cd f:/Engineering-OS
+cd /path/to/Engineering-OS
 git log --since="7 days ago" --oneline          # commits this week
 git diff --stat HEAD@{7.days.ago} 2>/dev/null   # what actually changed
 ```
@@ -50,6 +64,13 @@ Each unchecked box = one concrete task in next week's plan. That's the compoundi
 - STAR stories added/sharpened:
 - One networking action taken (referral ask, cold email, meetup):
 
+## 5b) Goal Alignment
+
+- [ ] Each of last week's 3 outcomes marked done / partial / dropped, with a reason
+- [ ] Each of next week's outcomes maps to a milestone in [[Goals-Framework]]
+- [ ] Decisions made this week recorded in the [[Decision-Log-Template|decision log]]
+- [ ] Wins worth remembering copied to the [[Achievement-Log-Template|achievement log]]
+
 ## 6) Next Week — exactly 3 outcomes
 
 Outcome = shippable noun, not activity. "48 tests green on graph module" not "practice graphs".
@@ -70,3 +91,5 @@ Outcome = shippable noun, not activity. "48 tests green on graph module" not "pr
 git add -A && git commit -m "chore: week $(date +%V) review" && git push
 git tag week-$(date +%Y-%m-%d) && git push --tags
 ```
+
+Last review of the month? Also run [[Monthly-Review]]. Metric meanings: [[Metrics-Definitions]].

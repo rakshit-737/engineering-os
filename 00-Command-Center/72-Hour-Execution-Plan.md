@@ -1,6 +1,20 @@
+---
+title: 72-Hour Sprint Playbook
+description: Reusable playbook for 72-hour sprints that stand up a new system, with sprint contract, rules, and log.
+domain: command-center
+category: planning
+type: playbook
+difficulty: intermediate
+status: evergreen
+tags: [sprint, planning, execution]
+prerequisites: []
+related: [Command-Center-Index, Weekly-Review, Asset-Manifest]
+order: 60
+---
+
 # 72-Hour Sprint Playbook
 
-Status: **Sprint 1 completed** (2026-08-01) — produced this Engineering OS: 126 assets, tested coding library, project templates, vault note pack. This file is now the reusable playbook for future sprints.
+Status: **Sprint 1 completed** (2026-08-01) — produced Engineering OS v1 (asset counts from that sprint are historical; see the note in [[Asset-Manifest]]). This file is now the reusable playbook for future sprints.
 
 A 72-hour sprint is for standing up a SYSTEM (new skill area, project, exam push), not for routine work. Run one at most every few weeks — the daily loop is the default engine.
 
@@ -56,12 +70,12 @@ Tomorrow's first block:
 ## Post-Sprint (mandatory, 30 min)
 
 1. Run the Definition of Done checklist — score honestly
-2. Promote anything reusable into the right toolkit folder + Asset-Manifest
-3. Write 5 lines in Weekly-Review: what the sprint proved/disproved
+2. Promote anything reusable into the right toolkit folder + [[Asset-Manifest]]
+3. Write 5 lines in [[Weekly-Review]]: what the sprint proved/disproved
 4. Tag it: `git tag sprint-<name> && git push --tags`
 
 ## Sprint History
 
 | Sprint | Dates | DoD met? | Key output |
 |--------|-------|----------|------------|
-| engineering-os-v1 | 2026-08 | Yes | This repository, 126 assets, all validated |
+| engineering-os-v1 | 2026-08 | Yes | Initial repository (v1 asset count is historical, not current) |

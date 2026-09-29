@@ -1,3 +1,16 @@
+---
+title: API Documentation Template
+description: Copy-paste-testable API documentation template for a service.
+domain: developer
+category: templates
+type: template
+difficulty: intermediate
+status: evergreen
+tags: [api, docs]
+prerequisites: []
+related: [README-Template]
+order: 10
+---
 # {{Service Name}} API Documentation
 
 <!-- Golden rule: every endpoint documented here must be copy-paste testable. If a reader

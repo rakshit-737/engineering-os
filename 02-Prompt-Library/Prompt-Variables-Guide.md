@@ -1,6 +1,19 @@
+---
+title: Prompt Variables Guide
+description: Variable conventions, fill quality, failure-to-fix table, and versioning workflow for the prompt pack.
+domain: prompts
+category: prompt-pack
+type: guide
+difficulty: beginner
+status: evergreen
+tags: [prompts, llm]
+prerequisites: []
+related: [Prompt-Pack]
+order: 20
+---
 # Prompt Variables Guide
 
-Use this variable system to keep prompts reusable.
+Use this variable system to keep the prompts in [[Prompt-Pack]] reusable. This is the canonical home for variable conventions and prompt versioning.
 
 ## Core Variables
 

@@ -1,3 +1,17 @@
+---
+title: FastAPI Service Template
+slug: fastapi-service-template
+description: Production-shaped FastAPI REST service starter with Docker, settings, and tests.
+domain: projects
+category: templates
+type: template
+difficulty: intermediate
+status: evergreen
+tags: [python, api, docker]
+prerequisites: []
+related: [Project-Template-Backend, Docker-Microservice-Template]
+order: 10
+---
 # FastAPI Service Template
 
 Production-shaped starting point for any REST API project. Copy the folder, rename, and build.

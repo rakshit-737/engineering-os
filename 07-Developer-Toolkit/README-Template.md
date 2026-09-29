@@ -1,3 +1,16 @@
+---
+title: README Template
+description: Project README template that shows the project working above the fold.
+domain: developer
+category: templates
+type: template
+difficulty: beginner
+status: evergreen
+tags: [github, docs]
+prerequisites: []
+related: [Checklist-Production-README]
+order: 40
+---
 # {{Project Name}}
 
 <!-- The first screen decides whether anyone keeps reading. Overview + a way to see it

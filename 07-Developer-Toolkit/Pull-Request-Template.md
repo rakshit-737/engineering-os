@@ -1,3 +1,16 @@
+---
+title: Pull Request Template
+description: "Reviewer-optimized pull request template: summary, problem, change, testing, risk."
+domain: developer
+category: templates
+type: template
+difficulty: beginner
+status: evergreen
+tags: [github, workflow]
+prerequisites: []
+related: [Issue-Template]
+order: 30
+---
 # {{PR title: imperative, <70 chars, e.g. "Move session storage to Redis"}}
 
 <!-- A reviewer should understand WHAT changed and WHY from the Summary + Problem alone,

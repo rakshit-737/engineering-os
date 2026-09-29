@@ -1,3 +1,16 @@
+---
+title: Issue Template
+description: Searchable, reproducible issue template for bugs, features, and refactors.
+domain: developer
+category: templates
+type: template
+difficulty: beginner
+status: evergreen
+tags: [github, workflow]
+prerequisites: []
+related: [Pull-Request-Template]
+order: 20
+---
 # {{Concise, searchable title}}
 
 <!-- Title test: could someone find this issue by searching the error message or feature name?

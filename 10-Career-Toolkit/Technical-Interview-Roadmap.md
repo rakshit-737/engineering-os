@@ -1,3 +1,17 @@
+---
+title: Technical Interview Roadmap (12 Weeks)
+description: Pattern-first 12-week plan combining DSA, system design, mocks and application timeline.
+domain: career
+category: interviews
+type: roadmap
+difficulty: intermediate
+status: evergreen
+tags: [dsa, mock-interviews, planning]
+related: [Interview-Engine-Index, Interview-DSA-Strategy, Application-Tracker-Guide]
+order: 5
+role: "Software Engineer (intern / new grad)"
+---
+
 # Technical Interview Roadmap (12 Weeks)
 
 A pattern-first plan: each week owns one problem pattern, links to its vault note, and ends with a measurable milestone. Total volume: ~130 problems, 10+ mocks, applications running in parallel from Week 5.
@@ -37,13 +51,13 @@ A pattern-first plan: each week owns one problem pattern, links to its vault not
 | 9-11 | Weekly | Alternate: coding mock / system-design mock; record and review |
 | 12 | Twice | Full onsite simulation (see Week 12 milestone) |
 
-After every mock, log 3 things in the vault: the pattern that failed, the explanation that was unclear, the fix for next time. Behavioral answers come from the story bank in `STAR-Story-Template.md`.
+After every mock, log 3 things in the vault: the pattern that failed, the explanation that was unclear, the fix for next time. Behavioral answers come from the story bank in [[STAR-Story-Template]].
 
-## Application Timeline (tracked in `Internship-Application-Tracker.csv`)
+## Application Timeline (tracked in the web app at `/career`, or offline in `Internship-Application-Tracker.csv`; see [[Application-Tracker-Guide]])
 
 | Weeks | Action | Tracker discipline |
 |-------|--------|--------------------|
-| 1-4 | Build target list (20-30 companies), tailor resume, line up referrals via `Cold-Email-Templates.md` | Add rows with Company, Role, Referral contact; Status = "Researching" |
+| 1-4 | Build target list (20-30 companies), tailor resume, line up referrals via [[Cold-Email-Templates]] | Add rows with Company, Role, Referral contact; Status = "Researching" |
 | 5-8 | Apply in batches of 5-8/week, referral-first | Set ApplicationDate, Status = "Applied"; NextAction = follow-up date (+7 days) |
 | 9-11 | Interviews land here — schedule them *after* the relevant pattern week where possible | Update Round after every contact; Notes = questions asked (feed back into prep) |
 | 12+ | Follow-ups, thank-you emails, offer comparison | Weekly pass over every row: anything with a stale NextActionDate gets acted on or closed |
@@ -57,3 +71,6 @@ After every mock, log 3 things in the vault: the pattern that failed, the explan
 3. Which resume project needs deeper metrics?
 4. Which communication habits need improvement (from mock recordings)?
 5. Is the tracker current — every active application with a NextActionDate?
+
+
+See also: [[Career-Index]]

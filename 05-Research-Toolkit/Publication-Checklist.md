@@ -1,10 +1,24 @@
+---
+title: Publication Checklist
+description: Venue selection, desk-reject prevention, writing pass, artifact release, and camera-ready checks.
+domain: research
+category: publishing
+type: checklist
+difficulty: advanced
+status: evergreen
+tags: [publishing, submission, camera-ready]
+prerequisites: [Novelty-Checklist]
+related: [Reproducibility-Checklist, Reviewer-Response-Template]
+order: 80
+---
+
 # Publication Checklist
 
 Work through top to bottom. Venue selection happens BEFORE the final writing push — page limits, formatting, and anonymity rules shape the paper.
 
 ## Venue Selection
 
-- [ ] Listed 3 candidate venues by checking where my closest-3 papers (from `Novelty-Checklist.md`) were published — that's where this community reads
+- [ ] Listed 3 candidate venues by checking where my closest-3 papers (from [[Novelty-Checklist]]) were published — that's where this community reads
 - [ ] Matched tier to contribution honestly: workshop = early/partial results and first papers; conference = complete contribution with strong evaluation; journal = extended/mature work, slower turnaround
 - [ ] Checked deadline, page limit, and anonymization policy (double-blind = scrub names, acks, "our prior work [cite]" self-references, GitHub links)
 - [ ] Checked scope: my keywords appear in the venue's last 2 years of accepted titles (if not, it's out of scope regardless of quality)
@@ -16,9 +30,9 @@ Work through top to bottom. Venue selection happens BEFORE the final writing pus
 
 - [ ] Novelty claim sentence appears verbatim in abstract and intro ("Unlike X, we Y, which matters because Z")
 - [ ] Every claim in the abstract is backed by a specific table/figure in the paper
-- [ ] Strongest recent baseline included; comparison passes the fairness checks in `Novelty-Checklist.md`
+- [ ] Strongest recent baseline included; comparison passes the fairness checks in [[Novelty-Checklist]]
 - [ ] Ablation table present; every component of the claimed contribution has a row
-- [ ] Error analysis: at least one paragraph on WHERE the method fails, with examples from `Experiment-Tracker.md` failure cases
+- [ ] Error analysis: at least one paragraph on WHERE the method fails, with examples from [[Experiment-Tracker]] failure cases
 - [ ] Limitations section written by me before a reviewer writes it for me
 - [ ] All numbers traceable to a run ID in the experiment tracker
 
@@ -43,6 +57,9 @@ Work through top to bottom. Venue selection happens BEFORE the final writing pus
 
 ## Artifact / Code Release
 
+Run the full [[Reproducibility-Checklist]] first; the items below are the release-specific extras.
+
+
 - [ ] Repo has: `README` with install + one-command reproduction per table ("Table 2: `bash scripts/table2.sh`"), `LICENSE`, pinned dependencies (`requirements.txt` with versions or lockfile)
 - [ ] Fresh-clone test: cloned into a clean env on another machine (or container) and reproduced one headline number — the README lies until this passes
 - [ ] Data: included, scripted download, or clearly documented access procedure; redistribution rights verified for anything bundled
@@ -61,6 +78,6 @@ Work through top to bottom. Venue selection happens BEFORE the final writing pus
 
 ## Post-Submission
 
-- [ ] Reviewer-response skeleton created from `Reviewer-Response-Template.md` on submission day, not when reviews land
+- [ ] Reviewer-response skeleton created from [[Reviewer-Response-Template]] on submission day, not when reviews land
 - [ ] Improvement backlog: everything cut for the deadline, logged while memory is fresh
 - [ ] Replication archive: submitted PDF + source + exact repo commit + tracker file, zipped and stored

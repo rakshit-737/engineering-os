@@ -1,3 +1,16 @@
+---
+title: Git Cheat Sheet
+description: Git commands for daily flow, undo scenarios, and disaster recovery.
+domain: developer
+category: cheat-sheets
+type: cheatsheet
+difficulty: beginner
+status: evergreen
+tags: [git]
+prerequisites: []
+related: [Pull-Request-Template]
+order: 40
+---
 # Git Cheat Sheet — Commands Under Pressure
 
 Fast retrieval for daily flow, undo scenarios, and disaster recovery. Everything here is safe

@@ -1,3 +1,17 @@
+---
+title: Docker Microservice Template
+slug: docker-microservice-template
+description: Stdlib-only containerized background worker with graceful shutdown and JSON logs.
+domain: projects
+category: templates
+type: template
+difficulty: intermediate
+status: evergreen
+tags: [docker, python]
+prerequisites: []
+related: [FastAPI-Service-Template]
+order: 20
+---
 # Docker Microservice Template (Worker Pattern)
 
 Minimal background-worker service: no web framework, stdlib only. Use for queue consumers, schedulers, file processors, scrapers, and pipeline stages.

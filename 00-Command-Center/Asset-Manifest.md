@@ -1,4 +1,20 @@
+---
+title: Asset Manifest
+description: Map of the main assets in the repository by area; counts need refresh after the v2 restructure.
+domain: command-center
+category: navigation
+type: index
+difficulty: beginner
+status: draft
+tags: [navigation, inventory]
+prerequisites: []
+related: [Command-Center-Index]
+order: 90
+---
+
 # Asset Manifest
+
+> TODO: Needs refresh. This manifest was written for Engineering OS v1 (2026-08). Folder layout, file names and all counts below (tests, modules, notes) are historical and have not been re-verified after the v2 content restructure. Regenerate counts from the repo (file listing, test runner output) before quoting them. For current navigation use [[Command-Center-Index]], [[Research-OS-Index]] and [[Academic-Index]].
 
 ## Core Navigation
 
@@ -20,10 +36,10 @@
 
 ## Code Systems
 
-Three-language library overview: `../03-Coding-Library/README.md` (362 tests total)
-- Python (11 modules, 135 tests): `../03-Coding-Library/python/` — widest set, incl. `security_utils.py` defensive crypto
-- Java (6 modules + TestRunner, 111 tests): `../03-Coding-Library/java/` — campus placement idioms
-- C++ (header-only, 116 tests): `../03-Coding-Library/cpp/` — STL idioms, zero-warning build
+Three-language library overview: `../03-Coding-Library/README.md` (test count: TODO refresh)
+- Python (v1: 11 modules; test count TODO refresh): `../03-Coding-Library/python/` — widest set, incl. `security_utils.py` defensive crypto
+- Java (v1: 6 modules + TestRunner; test count TODO refresh): `../03-Coding-Library/java/` — campus placement idioms
+- C++ (header-only; test count TODO refresh): `../03-Coding-Library/cpp/` — STL idioms, zero-warning build
 - Python CLI demo of every module: `../03-Coding-Library/python/src/main.py`
 
 ## Academic Systems
@@ -58,7 +74,7 @@ Reference:
 
 - README template: `../07-Developer-Toolkit/README-Template.md`
 - PR template: `../07-Developer-Toolkit/Pull-Request-Template.md`
-- ADR template: `../07-Developer-Toolkit/ADR-Template.md`
+- ADR template: `../15-Decision-Records/ADR-Template.md`
 - Issue template: `../07-Developer-Toolkit/Issue-Template.md`
 - API doc template: `../07-Developer-Toolkit/API-Documentation-Template.md`
 - Git cheat sheet: `../07-Developer-Toolkit/Git-Cheat-Sheet.md`
@@ -92,7 +108,7 @@ Reference:
 
 ## Vault Note Pack
 
-- 56 filled, prelinked concept notes: `../01-Obsidian-Vault/10-CS-Core/` (15), `20-Cybersecurity/` (17), `30-AI-ML/` (8), `40-Interview-Prep/` (16)
+- Prelinked concept notes (v1 counts historical, TODO refresh): `../01-Obsidian-Vault/10-CS-Core/`, `20-Cybersecurity/`, `30-AI-ML/`, `40-Interview-Prep/`
 - All notes are `status: evergreen` — Core Idea, Details with examples, Interview Angle, Related links filled
 - Hub indexes: `../01-Obsidian-Vault/00-Indexes/` (all 6 hubs from Home, each with practice loop + planned-notes queue)
 - Extend with new seeds: `python ../08-Automation-Toolkit/scripts/generate_note_pack.py`

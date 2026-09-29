@@ -1,3 +1,16 @@
+---
+title: Java Cheat Sheet
+description: Java collections and interview essentials (Java 17+).
+domain: developer
+category: cheat-sheets
+type: cheatsheet
+difficulty: intermediate
+status: evergreen
+tags: [java, dsa]
+prerequisites: []
+related: [Cpp-STL-Cheat-Sheet]
+order: 20
+---
 # Java Cheat Sheet — Collections & Interview Essentials
 
 The patterns you reach for in every DSA problem and code review.

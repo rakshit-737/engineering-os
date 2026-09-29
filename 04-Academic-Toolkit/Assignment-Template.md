@@ -1,3 +1,17 @@
+---
+title: Assignment Template
+description: Per-assignment write-up template covering requirements, approach, results, and viva prep.
+domain: academic
+category: coursework
+type: template
+difficulty: beginner
+status: evergreen
+tags: [assignments, viva]
+prerequisites: []
+related: [Assignment-Tracker-Template, Course-Template, Semester-Planner]
+order: 40
+---
+
 # Assignment Template
 
 Copy per assignment into the course folder. Workflow that prevents deadline panic: **decompose the day it's assigned (15 min), implement in 2-3 blocks, write up same day as implementation** — write-up from memory two days later takes 3x longer.
@@ -65,6 +79,15 @@ Own words:
 | What breaks it? | |
 | Extend it to handle Y? | |
 | Explain line/section Z | |
+
+## Pre-Submission Checklist
+
+- [ ] Every "must" requirement has evidence in the write-up
+- [ ] Code runs from a clean checkout / fresh notebook kernel
+- [ ] References and AI-use disclosure per course policy
+- [ ] File name and format match the submission instructions
+- [ ] Submitted before the deadline; confirmation saved
+- [ ] Status updated in [[Assignment-Tracker-Template]]
 
 ## Post-Submission (2 min)
 

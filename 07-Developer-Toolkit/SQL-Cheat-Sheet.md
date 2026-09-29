@@ -1,3 +1,16 @@
+---
+title: SQL Cheat Sheet
+description: Joins, window functions, and interview classic SQL queries.
+domain: developer
+category: cheat-sheets
+type: cheatsheet
+difficulty: intermediate
+status: evergreen
+tags: [sql, database]
+prerequisites: []
+related: [Checklist-Database-Design]
+order: 50
+---
 # SQL Cheat Sheet — Joins, Windows, and Interview Classics
 
 Standard SQL; notes flag PostgreSQL/MySQL differences where they bite.

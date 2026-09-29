@@ -1,3 +1,17 @@
+---
+title: Lab Record Template
+description: Per-experiment lab record with prediction before running, raw observations, and error analysis.
+domain: academic
+category: coursework
+type: template
+difficulty: beginner
+status: evergreen
+tags: [labs, records, viva]
+prerequisites: []
+related: [Lab-Tracker, Course-Template]
+order: 50
+---
+
 # Lab Record Template
 
 Fill Aim/Theory BEFORE the lab session (10 min prep = smooth session), Observations DURING (raw, ugly, honest), the rest same evening while memory is fresh.
@@ -66,3 +80,10 @@ Predicted result:
 1.
 2.
 3.
+
+## Submission Checklist
+
+- [ ] Aim, theory and prediction written before the session
+- [ ] Raw observations signed/dated by the instructor if required
+- [ ] Output labelled; error analysis quantified
+- [ ] Record submitted; status updated in [[Lab-Tracker]]

@@ -1,3 +1,16 @@
+---
+title: Python Stdlib Cheat Sheet
+description: Python standard library power tools most people reinstall from PyPI.
+domain: developer
+category: cheat-sheets
+type: cheatsheet
+difficulty: intermediate
+status: evergreen
+tags: [python]
+prerequisites: []
+related: [Java-Cheat-Sheet]
+order: 30
+---
 # Python Stdlib Cheat Sheet — Power Tools
 
 The batteries most people reinstall from PyPI without realizing they're built in.

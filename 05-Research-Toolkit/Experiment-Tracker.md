@@ -1,3 +1,17 @@
+---
+title: Experiment Tracker
+description: Per-campaign experiment log with falsifiable hypotheses, fixed configuration, run table, and failure cases.
+domain: research
+category: experiments
+type: tracker
+difficulty: intermediate
+status: evergreen
+tags: [experiments, reproducibility, ml]
+prerequisites: [Hypothesis-Template]
+related: [Experiment-Tracking-Guide, Reproducibility-Checklist, Ablation-Study-Guide]
+order: 50
+---
+
 # Experiment Tracker
 
 One file per experimental campaign (not per run — runs are rows). The discipline that makes results publishable: **change one thing per run, log before looking at results, never delete failed runs.**
@@ -39,6 +53,21 @@ A run is reproducible when someone else can regenerate the metric to within seed
 - [ ] **Config file** archived verbatim to `results/<run-id>/config.yaml` (not reconstructed from memory)
 - [ ] **Exact command** logged, including all flags — copy-paste from shell history, don't retype
 
+## Versions and Config Registry
+
+Record every moving part once per campaign; runs then reference these instead of repeating them. Guidance: [[Experiment-Tracking-Guide]].
+
+| Item | ID / value | How pinned |
+|------|------------|------------|
+| Code | `git rev-parse --short HEAD` = | tag `exp/<campaign>-start` |
+| Data | name + version / checksum = | `sha256sum` of files, or DVC tag |
+| Environment | Python / framework / CUDA = | `pip freeze > env.txt` or lockfile hash |
+| Base config | `configs/base.yaml` hash = | committed; never edited mid-campaign (copy to a new file instead) |
+| Seeds | e.g. 0, 1, 2 | set for Python `random`, numpy, framework, dataloader workers |
+
+- [ ] Registry filled before the first run
+- [ ] Baseline re-run under this registry (not copied from an older campaign)
+
 ## Experiment Log
 
 Run ID convention: `YYYYMMDD-nn`. Config delta = ONLY what differs from Fixed Configuration. Hypothesis column = which numbered hypothesis this run tests. Fill Conclusion the moment the run ends, before starting the next.
@@ -76,3 +105,7 @@ Run ID convention: `YYYYMMDD-nn`. Config delta = ONLY what differs from Fixed Co
 3. Log to this table the moment the run finishes, before interpreting
 4. Archive raw outputs: `results/<run-id>/` — disk is cheaper than re-running
 5. One config delta per run; if you changed two things, you learned nothing attributable
+
+## Related
+
+[[Hypothesis-Template]] · [[Reproducibility-Checklist]] · [[Ablation-Study-Guide]] · [[Datasets-and-Baselines-Guide]]
