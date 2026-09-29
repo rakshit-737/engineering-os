@@ -29,3 +29,8 @@ dist/
 public/content/
 *.tsbuildinfo
 coverage/
+
+# Secrets
+.env
+.env.*
+*.pem

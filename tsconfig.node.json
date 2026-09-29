@@ -14,5 +14,5 @@
     "noEmit": true,
     "types": ["node"]
   },
-  "include": ["vite.config.ts", "scripts/build-content.ts"]
+  "include": ["vite.config.ts", "scripts/build-content.ts", "scripts/search-quality.test.ts"]
 }

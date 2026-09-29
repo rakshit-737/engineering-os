@@ -1,7 +1,8 @@
 /**
  * Content pipeline: numbered Markdown folders -> public/content/*.json
  * Usage: tsx scripts/build-content.ts [--check]
- *   --check  exit non-zero on unresolved wikilinks or broken relative .md links
+ *   --check  exit non-zero on unresolved wikilinks, broken relative .md links,
+ *            or frontmatter prerequisites/related that match no note
  */
 import { mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { join, relative, resolve } from 'node:path';
@@ -68,11 +69,15 @@ if (r.brokenMdLinks.length) {
   console.warn(`  ${r.brokenMdLinks.length} broken relative .md link(s):`);
   for (const b of r.brokenMdLinks) console.warn(`    ${b.from} -> ${b.href}`);
 }
+if (r.unresolvedRefs.length) {
+  console.warn(`  ${r.unresolvedRefs.length} unresolved frontmatter reference(s):`);
+  for (const u of r.unresolvedRefs) console.warn(`    ${u.from} -> ${u.field}: ${u.target}`);
+}
 if (r.errors.length) {
   for (const e of r.errors) console.error(`  ERROR: ${e}`);
   process.exit(1);
 }
-if (check && (r.unresolvedWikilinks.length || r.brokenMdLinks.length)) {
+if (check && (r.unresolvedWikilinks.length || r.brokenMdLinks.length || r.unresolvedRefs.length)) {
   console.error('check:links failed');
   process.exit(1);
 }

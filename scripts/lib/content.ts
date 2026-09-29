@@ -26,6 +26,18 @@ export interface BuildResult {
   warnings: string[];
   unresolvedWikilinks: { from: string; target: string }[];
   brokenMdLinks: { from: string; href: string }[];
+  /** frontmatter prerequisites/related entries that match no note (dropped from output) */
+  unresolvedRefs: { from: string; field: 'prerequisites' | 'related'; target: string }[];
+}
+
+/** Files above this are almost certainly accidental (logs, dumps) and would bloat the payload. */
+export const MAX_SOURCE_BYTES = 1_000_000;
+/** Body text kept per doc in search.json (headings/title/tags are indexed separately). */
+export const SEARCH_TEXT_LIMIT = 1200;
+
+/** Strip a UTF-8 BOM and normalise CRLF / CR line endings to LF. */
+export function normalizeSource(raw: string): string {
+  return (raw.charCodeAt(0) === 0xfeff ? raw.slice(1) : raw).replace(/\r\n?/g, '\n');
 }
 
 const FENCE_RE = /^(```|~~~)[\s\S]*?^\1[^\n]*$/gm;
@@ -156,6 +168,18 @@ export function lenientFrontmatter(raw: string): { data: Record<string, unknown>
     const kv = line.match(/^([A-Za-z_][\w-]*):\s*(.*)$/);
     if (!kv) continue;
     let v = (kv[2] ?? '').replace(/\s+#.*$/, '').trim();
+    if (v === '') {
+      // YAML block list: `key:` followed by `  - item` lines (tabs tolerated)
+      const items: string[] = [];
+      const lines = (m[1] ?? '').split('\n');
+      for (let i = lines.indexOf(line) + 1; i < lines.length; i++) {
+        const it = lines[i]!.match(/^[ \t]+-[ \t]+(.*)$/);
+        if (!it) break;
+        items.push((it[1] ?? '').trim().replace(/^["']|["']$/g, ''));
+      }
+      data[kv[1]!] = items.length ? items : '';
+      continue;
+    }
     if (/^\[.*\]$/.test(v)) {
       data[kv[1]!] = v.slice(1, -1).split(',').map((s) => s.trim().replace(/^["']|["']$/g, '')).filter(Boolean);
       continue;
@@ -168,15 +192,17 @@ export function lenientFrontmatter(raw: string): { data: Record<string, unknown>
 
 export function parseDoc(file: SourceFile): ParsedDoc {
   const warnings: string[] = [];
+  const raw = normalizeSource(file.raw);
+  if (!raw.trim()) warnings.push(`${file.path}: empty file`);
   let data: Record<string, unknown> = {};
-  let body = file.raw;
+  let body = raw;
   try {
     // gray-matter caches by input string; pass a fresh options object to disable cache side effects
-    const parsed = matter(file.raw, {});
+    const parsed = matter(raw, {});
     data = (parsed.data ?? {}) as Record<string, unknown>;
     body = parsed.content;
   } catch (e) {
-    const lenient = lenientFrontmatter(file.raw);
+    const lenient = lenientFrontmatter(raw);
     data = lenient.data;
     body = lenient.body;
     warnings.push(
@@ -232,7 +258,15 @@ function resolveRelative(fromPath: string, href: string): string {
 export function buildContent(files: SourceFile[]): BuildResult {
   const errors: string[] = [];
   const warnings: string[] = [];
-  const parsed = files.map(parseDoc);
+  const parsed: ParsedDoc[] = [];
+  for (const f of files) {
+    const bytes = new TextEncoder().encode(f.raw).length;
+    if (bytes > MAX_SOURCE_BYTES) {
+      errors.push(`${f.path}: ${bytes} bytes exceeds MAX_SOURCE_BYTES (${MAX_SOURCE_BYTES}); split the note`);
+      continue;
+    }
+    parsed.push(parseDoc(f));
+  }
   const bySlug = new Map<string, ParsedDoc>();
   const byPath = new Map<string, string>();
   const byTitle = new Map<string, string>();
@@ -251,6 +285,7 @@ export function buildContent(files: SourceFile[]): BuildResult {
   const resolve = (slug: string) => (bySlug.has(slug) ? slug : byTitle.get(slug));
   const unresolvedWikilinks: BuildResult['unresolvedWikilinks'] = [];
   const brokenMdLinks: BuildResult['brokenMdLinks'] = [];
+  const unresolvedRefs: BuildResult['unresolvedRefs'] = [];
   const outgoing = new Map<string, Set<string>>();
   const linkMaps = new Map<string, Record<string, string>>();
   const edges: GraphEdge[] = [];
@@ -280,11 +315,12 @@ export function buildContent(files: SourceFile[]): BuildResult {
     }
     linkMaps.set(p.meta.slug, linkMap);
     for (const kind of ['prerequisites', 'related'] as const) {
-      p.meta[kind] = p.meta[kind].map((s) => {
+      p.meta[kind] = p.meta[kind].flatMap((s) => {
         const r = resolve(s);
-        if (!r) warnings.push(`${p.meta.path}: ${kind} entry "${s}" does not match any note`);
-        return r ?? s;
+        if (!r) unresolvedRefs.push({ from: p.meta.path, field: kind, target: s });
+        return r && r !== p.meta.slug ? [r] : [];
       });
+      p.meta[kind] = [...new Set(p.meta[kind])];
       for (const s of p.meta[kind]) if (bySlug.has(s)) addEdge(p.meta.slug, s, kind === 'prerequisites' ? 'prerequisite' : 'related');
     }
     for (const t of out) addEdge(p.meta.slug, t, 'link');
@@ -314,12 +350,14 @@ export function buildContent(files: SourceFile[]): BuildResult {
     docs.push({ ...meta, body: p.body, linkMap: linkMaps.get(p.meta.slug) ?? {} });
     search.push({
       slug: meta.slug, title: meta.title, description: meta.description, tags: meta.tags,
-      domain: meta.domain, type: meta.type, text: stripMarkdown(p.body, 2000),
+      domain: meta.domain, type: meta.type,
+      headings: meta.headings.map((h) => h.text.replace(/[*_`]/g, '')),
+      text: stripMarkdown(p.body, SEARCH_TEXT_LIMIT),
     });
   }
   const graph: GraphData = {
     nodes: index.map((d) => ({ id: d.slug, title: d.title, domain: d.domain, type: d.type })),
     edges,
   };
-  return { docs, index, search, graph, errors, warnings, unresolvedWikilinks, brokenMdLinks };
+  return { docs, index, search, graph, errors, warnings, unresolvedWikilinks, brokenMdLinks, unresolvedRefs };
 }

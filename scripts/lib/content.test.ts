@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { buildContent, extractWikilinks, lenientFrontmatter, parseDoc, slugFor, stripMarkdown } from './content';
+import { buildContent, extractWikilinks, lenientFrontmatter, MAX_SOURCE_BYTES, normalizeSource, parseDoc, SEARCH_TEXT_LIMIT, slugFor, stripMarkdown } from './content';
 import { inferDomain } from '../../src/lib/domains';
 
 const fm = (o: Record<string, string>) => `---\n${Object.entries(o).map(([k, v]) => `${k}: ${v}`).join('\n')}\n---\n`;
@@ -127,5 +127,60 @@ describe('stripMarkdown', () => {
     const s = stripMarkdown('# Title\n\nSome **bold** [link](http://x) and [[Note|label]].\n```js\nsecret()\n```', 1000);
     expect(s).toBe('Title Some bold link and label.');
     expect(stripMarkdown('word '.repeat(100), 50).length).toBeLessThanOrEqual(50);
+  });
+});
+
+const BOM = String.fromCharCode(0xfeff);
+
+describe('pipeline edge cases', () => {
+  it('handles BOM + CRLF frontmatter', () => {
+    const p = parseDoc({ path: '12-System-Design/Caching.md', raw: BOM + '---\r\ntitle: Caching\r\ntags: [cache]\r\n---\r\n# Caching\r\n\r\n## Eviction\r\n' });
+    expect(p.warnings).toEqual([]);
+    expect(p.meta.title).toBe('Caching');
+    expect(p.meta.tags).toEqual(['cache']);
+    expect(p.meta.headings.map((h) => h.text)).toEqual(['Eviction']);
+    expect(p.body).not.toContain('\r');
+  });
+
+  it('parses tab-indented block lists leniently', () => {
+    const p = parseDoc({ path: '12-System-Design/Raft.md', raw: '---\ntitle: Raft: consensus\ntags:\n\t- raft\n\t- consensus\n---\nbody' });
+    expect(p.meta.title).toBe('Raft: consensus');
+    expect(p.meta.tags).toEqual(['raft', 'consensus']);
+  });
+
+  it('warns on empty files but still produces a doc', () => {
+    const p = parseDoc({ path: '14-Checklists/Empty-Note.md', raw: '' });
+    expect(p.meta.title).toBe('Empty Note');
+    expect(p.warnings.some((w) => /empty file/.test(w))).toBe(true);
+  });
+
+  it('rejects oversized files as build errors', () => {
+    const r = buildContent([{ path: '14-Checklists/Huge.md', raw: 'x'.repeat(MAX_SOURCE_BYTES + 1) }]);
+    expect(r.docs).toHaveLength(0);
+    expect(r.errors[0]).toMatch(/MAX_SOURCE_BYTES/);
+  });
+
+  it('reports and drops unresolved prerequisites/related, keeps resolved ones', () => {
+    const r = buildContent([
+      { path: '12-System-Design/A.md', raw: '---\nrelated: [B, Nope]\nprerequisites: [Missing]\n---\n# A\n' },
+      { path: '12-System-Design/B.md', raw: '# B\n' },
+    ]);
+    expect(r.unresolvedRefs).toEqual([
+      { from: '12-System-Design/A.md', field: 'prerequisites', target: 'missing' },
+      { from: '12-System-Design/A.md', field: 'related', target: 'nope' },
+    ]);
+    const a = r.index.find((d) => d.slug === 'a')!;
+    expect(a.related).toEqual(['b']);
+    expect(a.prerequisites).toEqual([]);
+  });
+
+  it('indexes headings for search and caps body text', () => {
+    const r = buildContent([{ path: '12-System-Design/A.md', raw: `# A\n\n## Token **Bucket**\n\n${'word '.repeat(2000)}` }]);
+    expect(r.search[0]!.headings).toEqual(['Token Bucket']);
+    expect(r.search[0]!.text.length).toBeLessThanOrEqual(SEARCH_TEXT_LIMIT);
+  });
+
+  it('normalizeSource strips BOM and CR', () => {
+    expect(normalizeSource(BOM + 'a\r\nb\rc')).toBe('a\nb\nc');
   });
 });

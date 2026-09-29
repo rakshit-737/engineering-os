@@ -15,10 +15,11 @@ Please report vulnerabilities privately via **GitHub Security Advisories** ("Rep
 
 ## Security model
 
-- Markdown is rendered client-side and sanitized; raw HTML scripts, event handlers and `javascript:` URLs are stripped.
+- Markdown is rendered client-side and sanitized (`src/lib/sanitize.ts`); raw HTML scripts, event handlers and `javascript:`/`data:` URLs are stripped. Mermaid SVG is sanitized a second time.
+- Production builds ship a Content-Security-Policy `<meta>` (scripts: same-origin + one hashed inline bootstrap; `style-src 'unsafe-inline'` is required by mermaid). GitHub Pages cannot send headers, so `frame-ancestors` is unavailable.
 - External links open with `rel="noopener noreferrer"`.
-- Imported JSON is schema-validated before it touches state.
+- Imported JSON is size-capped (5 MB), version-checked and schema-validated before it touches state.
 - No secrets exist in this repository. Never commit API keys; use environment variables and `.env` files that are git-ignored.
-- Dependencies are kept minimal; `npm audit` runs in CI.
+- Dependencies are kept minimal; `npm audit --audit-level=high` gates CI; GitHub Actions are pinned to commit SHAs and updated by Dependabot.
 
 Offensive-security content in `06-Cybersecurity-Toolkit` is for authorized testing, labs and CTFs only.

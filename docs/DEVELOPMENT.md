@@ -10,7 +10,7 @@ npm run dev          # builds content, starts Vite at http://localhost:5173
 | Command | What it does |
 |---|---|
 | `npm run content` | Regenerate `public/content/` from the Markdown folders (prints warnings) |
-| `npm run check:links` | Fail on unresolved wikilinks or broken relative `.md` links (no files written) |
+| `npm run check:links` | Fail on unresolved wikilinks, broken relative `.md` links, or frontmatter `prerequisites`/`related` that match no note (no files written) |
 | `npm run lint` | ESLint (TypeScript, React hooks, jsx-a11y) |
 | `npm run typecheck` | `tsc -b` in strict mode |
 | `npm test` | Vitest (jsdom) |
@@ -26,7 +26,7 @@ Follow `docs/CONTENT-SCHEMA.md`. Quote any frontmatter value that contains `: ` 
 ```
 scripts/build-content.ts     CLI: walk folders, write JSON
 scripts/lib/content.ts       pure parsing functions (+ tests)
-src/lib/                     markdown, search, storage, store, progress, graph layout, domains
+src/lib/                     markdown, sanitize (single DOMPurify config), search, storage, store, progress, graph layout, domains
 src/components/              Layout, CommandPalette, CrudTable, Markdown, ui primitives
 src/pages/                   one lazy-loaded component per route
 src/styles/app.css           design tokens + all styles
