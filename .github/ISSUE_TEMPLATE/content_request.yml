@@ -1,0 +1,12 @@
+name: Content request / correction
+description: Missing topic, inaccurate explanation, or broken link
+labels: [content]
+body:
+  - type: input
+    id: page
+    attributes: { label: Page or topic }
+    validations: { required: true }
+  - type: textarea
+    id: details
+    attributes: { label: What should change?, description: Cite sources for factual corrections. }
+    validations: { required: true }
