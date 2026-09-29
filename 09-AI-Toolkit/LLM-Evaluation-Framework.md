@@ -1,6 +1,34 @@
+---
+title: LLM Evaluation Framework
+description: What to measure for LLM systems - eval datasets, scoring types, rubrics, LLM-as-judge calibration, and operational metrics.
+domain: ai
+category: production-ai
+type: guide
+difficulty: intermediate
+status: evergreen
+tags: [evaluation, llm-as-judge, rubrics, golden-set, production-ai]
+prerequisites: [Evaluation-Metrics-ML, Prompt-Engineering-Guide]
+related: [LLM-Evaluation-Pipelines, AI-Evaluation-Template, Model-Comparison-Template, RAG-Playbook, Hallucination-Mitigation, LLM-Observability]
+order: 30
+---
+
 # LLM Evaluation Framework
 
-How to measure whether an LLM system (prompt + model + retrieval + config) actually works, and how to keep it working when you change things. The core discipline: no prompt or model change ships without a before/after comparison on a fixed eval set.
+Hub: [[AI-Engineering-Index]]
+
+How to measure whether an LLM system (prompt + model + retrieval + config) actually works. The core discipline: no prompt or model change ships without a before/after comparison on a fixed eval set.
+
+**Scope:** this note defines *what* to measure - datasets, scorers, rubrics, judges, metrics. *How* to run it continuously (CI gates, regression runs, online eval, sampling, infra) lives in [[LLM-Evaluation-Pipelines]]. A fill-in plan: [[AI-Evaluation-Template]].
+
+```mermaid
+flowchart LR
+  G[Golden set] --> R[Run system]
+  R --> P[Programmatic checks]
+  P -->|fail| F[Fail case]
+  P -->|pass| S[Quality scorer: exact / rubric / judge / human]
+  S --> A[Per-case results + aggregates]
+  A --> D[Ship decision]
+```
 
 ---
 
@@ -114,7 +142,7 @@ The workflow that prevents "improved one case, silently broke four":
    - Regressed (pass → fail): read every one of these outputs. This is the step everyone skips and the whole reason the workflow exists.
    - Flapping (inconsistent across runs): mark as unstable; don't count as fixed or regressed.
 6. **Decide**: ship if targeted cases fixed and regressions are zero or understood-and-accepted (documented). Otherwise iterate at step 3.
-7. **Commit together**: prompt version + eval results + delta summary (see `Prompt-Engineering-Guide.md` on prompt versioning). Add any new production failures to the set for next time.
+7. **Commit together**: prompt version + eval results + delta summary (see [[Prompt-Engineering-Guide]] on prompt versioning; automation in [[LLM-Evaluation-Pipelines]]). Add any new production failures to the set for next time.
 
 Same workflow applies to model upgrades and RAG pipeline changes — anything upstream of the output is a "prompt change" as far as the eval is concerned.
 
@@ -143,11 +171,91 @@ Quality metrics above; also track per variant, because they gate deployment deci
 
 | Variant (prompt+model) | Pass rate | Faithfulness | False refusals | Format fails | Latency p95 | Cost/1k req | Notes |
 |---|---:|---:|---:|---:|---:|---:|---|
-| v4 + model-A | 39/48 | 0.92 | 1/48 | 0 | 2.1s | $4.10 | baseline |
-| v5 + model-A | 43/48 | 0.94 | 3/48 | 0 | 2.2s | $4.30 | over-refuses; not shipped |
+| v4 + model-A (illustrative) | 39/48 | 0.92 | 1/48 | 0 | 2.1s | $4.10 | baseline |
+| v5 + model-A (illustrative) | 43/48 | 0.94 | 3/48 | 0 | 2.2s | $4.30 | over-refuses; not shipped |
 
 One row per variant, per-case detail linked separately. A single aggregate number is never sufficient to make a ship decision — the per-case delta is.
 
 ## Minimum Viable Start
 
 Day one, before any tooling: 20 real inputs in a spreadsheet, expected outcome per row, run the prompt, mark pass/fail by hand. That already beats eyeballing chat outputs, and every practice above is an incremental upgrade from there.
+
+---
+
+## What to Measure by System Type
+
+| System | Core metrics | Notes |
+|---|---|---|
+| Classification / extraction | Accuracy, per-field exact match, precision/recall per label | Programmatic; see [[Evaluation-Metrics-ML]] |
+| Structured output | Schema-valid rate, field-level correctness | Gate before quality scoring ([[Structured-Output]]) |
+| RAG | Retrieval hit rate@k, MRR; faithfulness, answer relevance, correct refusal rate | Score retrieval and generation separately ([[RAG-Playbook]]) |
+| Agents | Task success rate, steps/tool calls per task, invalid tool-call rate, unsafe-action rate, cost per task | Evaluate trajectories, not just final answers ([[AI-Agents]]) |
+| Chat / assistants | Rubric pass rate, false-refusal rate, safety-violation rate | Pairwise judges for "which is better" |
+| Security | Injection success rate on an attack set, data-leak probes | [[Prompt-Injection]], [[AI-Security-Checklist]] |
+
+## Python: Judge Calibration and Pass-Rate Confidence
+
+```python
+import math
+from collections import Counter
+
+def agreement(human: list[str], judge: list[str]) -> float:
+    """Raw agreement between human and judge PASS/FAIL labels."""
+    return sum(h == j for h, j in zip(human, judge)) / len(human)
+
+def cohens_kappa(human: list[str], judge: list[str]) -> float:
+    """Agreement corrected for chance; more honest when one label dominates."""
+    n = len(human)
+    po = agreement(human, judge)
+    ch, cj = Counter(human), Counter(judge)
+    pe = sum((ch[k] / n) * (cj[k] / n) for k in set(ch) | set(cj))
+    return (po - pe) / (1 - pe) if pe < 1 else 1.0
+
+def wilson_interval(passes: int, n: int, z: float = 1.96) -> tuple[float, float]:
+    """95% interval for a pass rate - small eval sets have wide intervals."""
+    if n == 0:
+        return (0.0, 1.0)
+    p = passes / n
+    denom = 1 + z**2 / n
+    center = (p + z**2 / (2 * n)) / denom
+    half = z * math.sqrt(p * (1 - p) / n + z**2 / (4 * n**2)) / denom
+    return (center - half, center + half)
+
+human = ["PASS", "PASS", "FAIL", "PASS", "FAIL", "PASS"]
+judge = ["PASS", "PASS", "FAIL", "PASS", "PASS", "PASS"]
+print(round(agreement(human, judge), 2), round(cohens_kappa(human, judge), 2))
+print([round(x, 2) for x in wilson_interval(43, 48)])
+```
+
+The interval matters: on a 48-case set, a few cases of difference between two variants can be within noise. Read per-case deltas instead of trusting small aggregate moves.
+
+## Failure Modes of Evaluation Itself
+
+- **Eval set drift from production**: the set stops representing real traffic; refresh from sampled logs ([[LLM-Observability]]).
+- **Overfitting to the eval set**: prompt tuned until the golden set passes; keep a held-out slice you rarely look at.
+- **Uncalibrated judges**: judge scores trusted without human agreement checks.
+- **Aggregate-only reporting**: equal fixes and regressions cancel out in the mean.
+- **Temperature mismatch**: evaluated at 0, deployed higher - run multiple samples.
+- **Contamination**: public benchmark items may appear in training data; prefer private task-specific sets.
+- **Missing negative cases**: no should-refuse or unanswerable cases, so over-answering is never penalized.
+- **Rubric or judge change mid-comparison**: scores become incomparable; version both.
+
+## Interview Questions
+
+1. **How do you evaluate an LLM feature before launch?** Build a golden set from real inputs including hard and should-refuse cases, pick the cheapest scorer that measures the task, gate on format checks, compare per case against baseline, track latency/cost.
+2. **What are the known biases of LLM-as-judge?** Position, verbosity, self-preference, anchoring, leniency; mitigate with both orderings, binary per-criterion rubrics, different-family judges, and human calibration.
+3. **Binary criteria vs 1-5 scale?** Binary per criterion is more consistent between scorers and forces concrete criteria.
+4. **How big should the eval set be?** Start small (tens of cases) so it runs on every change; grow from production failures; use confidence intervals to know what differences are meaningful.
+5. **How do you evaluate a RAG system?** Separately: retrieval hit rate@k/MRR and generation faithfulness/relevance/refusal.
+6. **Public benchmarks vs your eval?** Benchmarks indicate general capability; only a task-specific set tells you if your system works.
+7. **What is the difference between this framework and an eval pipeline?** Framework = what and how to score; pipeline = automation, CI gates, online sampling ([[LLM-Evaluation-Pipelines]]).
+
+## Related
+
+- [[LLM-Evaluation-Pipelines]]
+- [[AI-Evaluation-Template]]
+- [[Model-Comparison-Template]]
+- [[Evaluation-Metrics-ML]]
+- [[RAG-Playbook]]
+- [[Hallucination-Mitigation]]
+- [[LLM-Observability]]

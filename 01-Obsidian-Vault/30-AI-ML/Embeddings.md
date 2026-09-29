@@ -1,61 +1,121 @@
 ---
-tags: [concept, ai-ml]
-created: 2026-08-01
+title: Embeddings
+description: Dense vector representations that turn semantic similarity into geometric closeness - the basis of semantic search and RAG.
+domain: ai
+category: deep-learning
+type: concept
+difficulty: intermediate
 status: evergreen
+tags: [embeddings, vectors, semantic-search, rag, deep-learning]
+prerequisites: [Linear-Algebra-for-ML, Neural-Networks-and-Backprop]
+related: [Attention-Mechanism, Vector-Databases, Hybrid-Search-and-Reranking, Chunking-Strategies, RAG-Playbook, Tokenization]
+order: 40
 ---
 
 # Embeddings
 
-Hub: [[AI-ML-Index]]
+Hub: [[AI-Engineering-Index]]
 
 ## Core Idea
 
-An embedding maps a discrete object (word, sentence, image, user) to a dense float vector — typically 256 to 3072 dims — such that semantic similarity becomes geometric closeness. They are learned, not hand-designed: a model trained on co-occurrence or contrastive objectives places related things near each other. Embeddings are the interface between raw content and math: once everything is a vector, search, clustering, and classification become geometry.
+An embedding maps a discrete object (token, sentence, image, user, product) to a dense float vector such that semantic similarity becomes geometric closeness. Embeddings are learned, not hand-designed: a model trained on co-occurrence, next-token, or contrastive objectives places related things near each other. Once everything is a vector, search, clustering, deduplication, and classification become geometry.
 
-## Details
+## How it works
 
-- **Token embeddings**: a lookup table of shape (vocab_size, d_model), row per token id; the first layer of every transformer. Trained end-to-end with the rest of the network.
-- **Sentence/document embeddings**: a dedicated model (e.g. contrastively trained bi-encoder) pools token states into one vector per text. This is what RAG and semantic search use — do not average raw LLM token embeddings and expect good retrieval.
-- **Training signal**: contrastive learning — pull (query, relevant doc) pairs together, push random negatives apart. Quality depends heavily on the pair data, which is why domain mismatch (e.g. legal or code text on a web-trained model) degrades retrieval.
+- **Token embeddings**: a lookup table of shape (vocab_size, $d_{model}$), one row per token id ([[Tokenization]]); the first layer of every transformer, trained end-to-end.
+- **Contextual embeddings**: hidden states after attention layers - the vector for "bank" depends on the sentence. Static embeddings (word2vec-style) give one vector per word regardless of context.
+- **Sentence / document embeddings**: a dedicated encoder pools token states into one vector per text. This is what semantic search and RAG use - naively averaging a generative LLM's token states usually retrieves poorly.
+- **Training signal (contrastive)**: pull (query, relevant doc) pairs together and push negatives apart. A common loss (InfoNCE) for a batch with in-batch negatives:
+
+$$\mathcal{L} = -\log \frac{\exp(\text{sim}(q, d^+)/\tau)}{\sum_{j}\exp(\text{sim}(q, d_j)/\tau)}$$
+
+Quality depends heavily on pair data - domain mismatch (legal, code, medical text on a web-trained model) degrades retrieval.
 
 Similarity math:
+
+$$\cos(a,b) = \frac{a\cdot b}{\lVert a\rVert\,\lVert b\rVert}, \qquad \lVert a-b\rVert^2 = 2 - 2\,a\cdot b \ \text{ when } \lVert a\rVert=\lVert b\rVert=1$$
+
+So for L2-normalized vectors, ranking by cosine, dot product, and Euclidean distance is identical.
+
+```mermaid
+flowchart LR
+  D[Documents] --> C[Chunk] --> E1[Embed offline] --> I[(Vector index)]
+  Q[Query] --> E2[Embed online] --> S[ANN top-k]
+  I --> S --> R[Rerank] --> LLM[LLM / results]
+```
+
+## Python code
+
+Brute-force semantic search with normalized vectors (the `embed` function stands in for any embedding model):
 
 ```python
 import numpy as np
 
-def cosine(a, b):
-    return a @ b / (np.linalg.norm(a) * np.linalg.norm(b))
+def normalize(M):
+    return M / np.linalg.norm(M, axis=-1, keepdims=True)
 
-# If vectors are L2-normalized, cosine == dot product,
-# and ranking by dot product == ranking by Euclidean distance:
-# ||a-b||^2 = 2 - 2*(a@b)  when ||a||=||b||=1
+def top_k(query_vec, doc_matrix, k=3):
+    q = normalize(query_vec[None, :])[0]
+    D = normalize(doc_matrix)
+    scores = D @ q                         # cosine similarity
+    idx = np.argsort(-scores)[:k]
+    return list(zip(idx.tolist(), scores[idx].round(3).tolist()))
+
+# toy "embeddings" to show mechanics
+docs = np.array([[0.9, 0.1, 0.0],    # overfitting note
+                 [0.1, 0.9, 0.1],    # SQL note
+                 [0.8, 0.2, 0.1]])   # regularization note
+query = np.array([1.0, 0.1, 0.05])   # "stop my model memorizing data"
+print(top_k(query, docs, k=2))       # -> docs 0 and 2
 ```
 
-Cosine measures angle only, ignoring magnitude — right for text, where vector length often tracks frequency/length rather than meaning. Most embedding APIs return pre-normalized vectors so a plain dot product suffices; know which your model does before picking a vector-DB metric.
+Worked example: embed every note chunk once; embed the query "how do I stop my model memorizing training data"; the overfitting note surfaces even though it never contains "memorizing" - keyword search would miss it, embedding search matches meaning.
 
-Worked example — semantic search over notes:
-1. Embed every note chunk once, store (vector, text) pairs.
-2. Embed the query "how do I stop my model memorizing training data".
-3. Rank by cosine; the overfitting note surfaces even though it never contains the word "memorizing" — keyword search would miss it, embedding search matches meaning.
+## Tradeoffs
 
-Scaling and pitfalls:
-- Exact top-k over N vectors is O(N·d) per query. Beyond ~1M vectors use ANN indexes (HNSW, IVF) trading a little recall for large speedups.
-- **Anisotropy**: raw model vectors can bunch into a narrow cone, so *everything* has cosine ~0.8. Compare similarities relatively, never against an absolute threshold from another model.
-- Embeddings from different models (or versions) live in incompatible spaces — never mix them in one index; re-embed the corpus on model upgrade.
-- Long inputs get truncated at the embedding model's own token limit and pooling dilutes meaning — chunk first (see [[RAG-Retrieval-Augmented-Generation]]).
-- Embeddings inherit training-data bias, and vectors can partially reconstruct the original text — treat a vector store with the same access control as the documents themselves.
+| Choice | Gain | Cost |
+|---|---|---|
+| Higher dimension | More capacity to separate meanings | Storage, memory, slower search |
+| Bi-encoder (embed separately) | Precompute docs, fast ANN search | Less accurate than joint scoring |
+| Cross-encoder (score pair jointly) | Much more accurate relevance | $O(N)$ model calls per query - only for reranking ([[Hybrid-Search-and-Reranking]]) |
+| Exact search | Perfect recall | $O(N \cdot d)$ per query |
+| ANN (HNSW, IVF) | Sub-linear queries at scale | Some recall loss, index build and memory ([[Vector-Databases]]) |
+| Dense only | Paraphrase matching | Misses exact IDs, error codes, rare names - add BM25 |
+| Vector quantization (int8, PQ) | Smaller index | Some similarity precision loss |
 
-## Interview Angle
+## Failure modes
 
-- Standard probe: "why cosine over Euclidean for text?" — magnitude carries little semantic signal; and state the normalized-vector equivalence (cosine = dot = monotone in Euclidean) to show you know when the choice stops mattering.
-- "How does semantic search work end to end?" — embed corpus offline, embed query online, ANN top-k, optionally rerank with a cross-encoder. Name the bi-encoder (fast, separate encodings) vs cross-encoder (accurate, joint encoding, O(N) per query) tradeoff — that split is a favorite follow-up.
-- "Word2Vec vs contextual embeddings?" — static: one vector per word ("bank" is one point); contextual: vector depends on the sentence. Transformers made embeddings contextual.
-- The king − man + woman ≈ queen analogy shows linear structure in the space; use it as intuition, and note it is a property of the training objective, not magic.
-- Practical question for AI-eng roles: "your retrieval quality is bad — what do you check?" — chunking, domain mismatch of the embedding model, metric mismatch with the index, missing reranker, stale index after re-embedding.
+- **Anisotropy**: vectors bunch into a narrow cone so everything has high cosine; compare relatively, never use an absolute threshold borrowed from another model.
+- **Mixed spaces**: vectors from different models or versions are incompatible - never mix them in one index; re-embed on upgrade.
+- **Truncation**: inputs longer than the encoder's limit are silently cut; pooling over long text dilutes meaning. Chunk first ([[Chunking-Strategies]]).
+- **Query/document asymmetry**: short questions vs long passages; use models or prefixes designed for asymmetric retrieval.
+- **Metric mismatch**: index configured for L2 while the model expects cosine on unnormalized vectors.
+- **Privacy**: embeddings can leak information about the source text (inversion attacks are an active research area); protect the vector store like the documents ([[AI-Data-Leakage-and-Privacy]]).
+- **Bias**: embeddings inherit training-data associations.
+
+## Production notes
+
+- Store raw text and metadata next to each vector; you need them for prompts, filters, and citations.
+- Version the embedding model in index metadata; plan re-embedding as a batch job.
+- Apply tenant / ACL filters inside the vector store, before similarity ranking ([[Least-Privilege]]).
+- Cache query embeddings for repeated queries; batch document embedding for throughput.
+
+## Interview questions
+
+1. **Why cosine over Euclidean for text?** Magnitude often tracks length or frequency rather than meaning; and for normalized vectors the choice does not change ranking.
+2. **How does semantic search work end to end?** Embed corpus offline, embed query online, ANN top-k, optionally rerank with a cross-encoder, return or feed to an LLM.
+3. **Bi-encoder vs cross-encoder?** Bi-encoder: independent encodings, precomputable, fast, less accurate. Cross-encoder: joint encoding, accurate, too slow for full corpus - use for reranking.
+4. **Static vs contextual embeddings?** Static: one vector per word ("bank" is one point). Contextual: depends on surrounding tokens.
+5. **Retrieval quality is bad - what do you check?** Chunking, domain mismatch of the encoder, metric mismatch, missing hybrid/keyword search, missing reranker, stale or mixed-version index.
+6. **How are sentence embedding models trained?** Contrastive learning on positive pairs with in-batch or hard negatives; hard negatives matter most.
+7. **What does king - man + woman approx queen show?** Linear structure emerging from the training objective; useful intuition, not a guarantee.
 
 ## Related
 
 - [[Attention-Mechanism]]
-- [[RAG-Retrieval-Augmented-Generation]]
 - [[Transformer-Architecture]]
-- [[Hash-Tables]]
+- [[Vector-Databases]]
+- [[Hybrid-Search-and-Reranking]]
+- [[Chunking-Strategies]]
+- [[RAG-Playbook]]
+- [[Clustering]]

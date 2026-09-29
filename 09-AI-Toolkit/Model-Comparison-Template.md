@@ -1,6 +1,22 @@
+---
+title: Model Comparison Template
+description: Fill-in template for choosing an LLM for a specific task on your own eval set - quality floor, failure types, cost, latency, rollout.
+domain: ai
+category: templates
+type: template
+difficulty: intermediate
+status: evergreen
+tags: [template, model-selection, evaluation, cost, llm]
+prerequisites: [LLM-Evaluation-Framework]
+related: [AI-Evaluation-Template, LLM-Cost-Optimization, LLM-Latency-Optimization, AI-Project-Template, AI-App-Launch-Checklist]
+order: 30
+---
+
 # Model Comparison Template
 
-Structured template for choosing a model for a specific task. Rule one: compare on *your* task with *your* prompts — leaderboard rank does not transfer. Run every candidate through the same eval set (see `LLM-Evaluation-Framework.md`) before filling the table.
+Hub: [[AI-Engineering-Index]]
+
+Structured template for choosing a model for a specific task. Rule one: compare on *your* task with *your* prompts — leaderboard rank does not transfer. Run every candidate through the same eval set (see [[LLM-Evaluation-Framework]]) before filling the table.
 
 ## Use Case
 
@@ -51,6 +67,18 @@ Worth a line each in the decision record even though they don't fit the table:
 - **Data handling**: retention policy, training-on-your-data opt-out, region requirements
 - **Deprecation cadence**: how often the provider retires model versions, and whether you can pin one
 
+## Cost Calculator
+
+```python
+def monthly_cost(req_per_day, in_tok, out_tok, price_in_per_1m, price_out_per_1m, days=30):
+    per_req = in_tok / 1e6 * price_in_per_1m + out_tok / 1e6 * price_out_per_1m
+    return per_req * req_per_day * days
+
+# fill with YOUR measured token counts and CURRENT provider prices
+print(round(monthly_cost(req_per_day=10_000, in_tok=1_200, out_tok=150,
+                         price_in_per_1m=0.80, price_out_per_1m=4.00), 2))
+```
+
 ## Common Pitfalls
 
 - **Comparing on different prompts.** Each model gets the *same* prompt, or each gets its own best-tuned prompt — but be consistent and say which. A tuned prompt on model A vs. a default prompt on model B measures your tuning effort, not the models.
@@ -60,6 +88,9 @@ Worth a line each in the decision record even though they don't fit the table:
 - **One aggregate score across tasks.** Keep per-task rows; averaging a coding score with a summarization score produces a number that predicts nothing.
 
 ## Decision Record
+
+- **Date**: <YYYY-MM-DD>
+- **Owner**: <name>
 
 - **Chosen**: <model + prompt version>
 - **Why**: <2–3 sentences tied to the criteria above>
@@ -77,3 +108,12 @@ Worth a line each in the decision record even though they don't fit the table:
 - Track eval pass rate on a weekly sampled-traffic slice (models and traffic both drift)
 - Alert on: format-failure rate, refusal rate, latency p95, cost/day vs. projection
 - Provider model updates = rerun the full comparison eval before accepting the new version
+
+## Related
+
+- [[LLM-Evaluation-Framework]]
+- [[AI-Evaluation-Template]]
+- [[LLM-Cost-Optimization]]
+- [[LLM-Latency-Optimization]]
+- [[LLM-Inference-and-Serving]]
+- [[AI-App-Launch-Checklist]]
