@@ -1,0 +1,11 @@
+{
+  "name": "Engineering OS",
+  "short_name": "EngOS",
+  "description": "A reusable engineering knowledge, learning, cybersecurity, AI, system design, research, and career operating system.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0e0e11",
+  "theme_color": "#0e0e11",
+  "icons": [{ "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}
