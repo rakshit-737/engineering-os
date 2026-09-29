@@ -1,12 +1,19 @@
 ---
-tags: [concept, interview]
-created: 2026-08-01
+title: Two Pointer Pattern
+description: Converging, fast/slow and reader/writer pointers replace O(n^2) pair scans with one pass.
+domain: dsa
+category: two-pointers
+type: pattern
+difficulty: beginner
 status: evergreen
+tags: [two-pointers, arrays]
+prerequisites: [Arrays-and-Hashing-Pattern]
+related: [Sliding-Window-Pattern, Linked-List-Pattern]
 ---
 
 # Two Pointer Pattern
 
-Hub: [[Interview-Prep-Index]]
+Hub: [[Interview-Prep-Index]] | Roadmap: [[DSA-Index]]
 
 ## Core Idea
 
@@ -63,6 +70,14 @@ def has_cycle(head):
 - Two Sum family follow-up chain is standard: unsorted (hash map, O(n) space) → sorted (two pointers, O(1) space) → 3Sum → 4Sum. Know the whole ladder.
 - For Floyd's cycle: be ready for the follow-up "find the cycle *start*" (reset one pointer to head, advance both by 1) and sketch why it works.
 - If the interviewer bans extra space, that's a broad hint toward two pointers or reader/writer in place.
+
+## Practice Problems
+
+- [[Three-Sum]]
+- [[Container-With-Most-Water]]
+- [[Trapping-Rain-Water]]
+- [[Linked-List-Cycle]]
+- [[Sort-Colors]]
 
 ## Related
 

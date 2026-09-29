@@ -1,12 +1,19 @@
 ---
-tags: [concept, cs-core]
-created: 2026-08-01
+title: Recursion and Stack Frames
+description: "How calls use the stack, why deep recursion overflows, and how to convert to iteration."
+domain: cs-core
+category: algorithms
+type: concept
+difficulty: beginner
 status: evergreen
+tags: [cs-core, algorithms]
+prerequisites: []
+related: [Dynamic-Programming, Algorithms-Overview]
 ---
 
 # Recursion and Stack Frames
 
-Hub: [[CS-Core-Index]]
+Hub: [[CS-Core-Index]] · [[CS-Core-Curriculum]]
 
 ## Core Idea
 

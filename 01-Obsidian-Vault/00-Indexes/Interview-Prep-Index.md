@@ -1,8 +1,23 @@
+---
+title: Interview Prep Index
+description: "Hub for coding patterns, language/OOP essentials, system design, and behavioral prep."
+domain: career
+category: indexes
+type: index
+difficulty: beginner
+status: evergreen
+tags: [index, career]
+prerequisites: []
+related: [Home]
+---
+
 # Interview Prep Index
 
 Hub for interview patterns. House rule: a pattern isn't learned until you can produce its template from memory and name the problem cue that triggers it.
 
-## Pattern Notes (exist — drill until automatic)
+## Pattern Notes (drill until automatic)
+
+CS fundamentals interviewers probe alongside coding: [[CS-Core-Curriculum]].
 
 **Array & String**
 - [[Two-Pointer-Pattern]] — sorted arrays, pairs, in-place partitioning

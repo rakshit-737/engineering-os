@@ -1,12 +1,19 @@
 ---
-tags: [concept, interview]
-created: 2026-08-01
+title: Heap Pattern
+description: Priority queues for top-K, K-way merge, scheduling and streaming medians.
+domain: dsa
+category: heap
+type: pattern
+difficulty: intermediate
 status: evergreen
+tags: [heap, priority-queue]
+prerequisites: []
+related: [Shortest-Path-Pattern, Sorting-and-Searching-Pattern]
 ---
 
 # Heap Pattern
 
-Hub: [[Interview-Prep-Index]]
+Hub: [[Interview-Prep-Index]] | Roadmap: [[DSA-Index]]
 
 ## Core Idea
 
@@ -63,6 +70,13 @@ def kth_largest(nums, k):
 - Be ready to explain *why* the array encoding works: children of index i at 2i+1, 2i+2; sift-up on push, sift-down on pop.
 - Streaming/"data doesn't fit in memory" framing is a hint toward heaps — a size-K heap uses O(k) memory over an unbounded stream.
 - For scheduler-style questions, say what the priority key is before coding ("heap keyed on end time").
+
+## Practice Problems
+
+- [[Kth-Largest-Element-in-an-Array]]
+- [[Merge-K-Sorted-Lists]]
+- [[Top-K-Frequent-Elements]]
+- [[Network-Delay-Time]]
 
 ## Related
 

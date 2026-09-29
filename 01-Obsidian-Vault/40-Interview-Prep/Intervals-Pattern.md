@@ -1,12 +1,19 @@
 ---
-tags: [concept, interview]
-created: 2026-08-01
+title: Intervals Pattern
+description: Sort by start to merge, sort by end to select; then sweep once.
+domain: dsa
+category: intervals
+type: pattern
+difficulty: intermediate
 status: evergreen
+tags: [intervals, sorting, greedy]
+prerequisites: []
+related: [Greedy-Pattern, Sorting-and-Searching-Pattern]
 ---
 
 # Intervals Pattern
 
-Hub: [[Interview-Prep-Index]]
+Hub: [[Interview-Prep-Index]] | Roadmap: [[DSA-Index]]
 
 ## Core Idea
 
@@ -51,6 +58,10 @@ Complexity: O(n log n) sort dominates; the sweep is O(n). Heap variant is O(n lo
 ## Interview Angle
 
 Trigger words: meetings, calendar, merge ranges, minimum rooms/platforms, remove to make non-overlapping. Announce the sort key and why. State the boundary convention explicitly — it's the most common off-by-one interviewers watch for. If asked for a follow-up, sweep line generalizes (max concurrent load, skyline-style problems).
+
+## Practice Problems
+
+- [[Merge-Intervals]]
 
 ## Related
 

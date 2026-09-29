@@ -1,3 +1,16 @@
+---
+title: AI ML Index
+description: "Hub for machine learning and LLM concept notes."
+domain: ai
+category: indexes
+type: index
+difficulty: beginner
+status: evergreen
+tags: [index, ai]
+prerequisites: []
+related: [Home]
+---
+
 # AI ML Index
 
 Hub for machine learning and LLM knowledge. House rule: every note answers *when would I actually use this* — theory without a decision it informs gets archived.
@@ -18,13 +31,13 @@ Hub for machine learning and LLM knowledge. House rule: every note answers *when
 - [[Fine-Tuning-vs-Prompting]] — the build-vs-buy decision of LLM work
 - [[RAG-Retrieval-Augmented-Generation]] — grounding LLMs in your data
 
-## Planned Notes (create with Concept-Note-Template when studied)
+## Planned Notes (not yet written; link once created)
 
-- [[Gradient-Descent-and-Backprop]] — how models actually learn
-- [[Tokenization]] — why LLMs can't spell and other artifacts
-- [[LoRA-and-PEFT]] — fine-tuning without the GPU bill
-- [[LLM-Agents-and-Tool-Use]] — loops, tools, and where they fail
-- [[Vector-Databases]] — ANN indexes (HNSW), filtering, hybrid search
+- Gradient-Descent-and-Backprop — how models actually learn
+- Tokenization — why LLMs can't spell and other artifacts
+- LoRA-and-PEFT — fine-tuning without the GPU bill
+- LLM-Agents-and-Tool-Use — loops, tools, and where they fail
+- Vector-Databases — ANN indexes (HNSW), filtering, hybrid search
 
 ## Toolkit Companions
 

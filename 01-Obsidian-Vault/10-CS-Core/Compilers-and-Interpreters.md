@@ -1,12 +1,19 @@
 ---
-tags: [concept, cs-core]
-created: 2026-08-01
+title: Compilers and Interpreters
+description: "How source code becomes execution: lexing, parsing, IR, optimization, codegen, JITs."
+domain: cs-core
+category: compilers
+type: concept
+difficulty: intermediate
 status: evergreen
+tags: [cs-core, compilers]
+prerequisites: [Trees-and-BSTs]
+related: [Lexing-and-Parsing, Finite-Automata-and-Regular-Languages, Computer-Architecture]
 ---
 
 # Compilers and Interpreters
 
-Hub: [[CS-Core-Index]]
+Hub: [[CS-Core-Index]] · [[CS-Core-Curriculum]]
 
 ## Core Idea
 
@@ -52,6 +59,42 @@ print(ast.dump(ast.parse("x = y + 42")))
 - "Compiler phases?" — name lex → parse → semantic analysis → optimize → codegen, and one error type caught at each phase. That mapping (phase → error class) is what's really being tested.
 - "Why is Java 'write once, run anywhere'?" — bytecode targets the JVM, not the hardware; the JVM per platform absorbs the differences.
 - Recursion shows up here concretely: parsers and AST walks are recursive by nature — deep expressions can hit recursion limits.
+
+## Roadmap
+
+1. [[Finite-Automata-and-Regular-Languages]] — the theory behind lexers
+2. [[Lexing-and-Parsing]] — tokens, context-free grammars, recursive descent, LL vs LR
+3. Semantic analysis — symbol tables, scopes, type checking
+4. Intermediate representations — ASTs, three-address code, SSA
+5. Optimization — constant folding, dead-code elimination, inlining, loop-invariant code motion
+6. Code generation — instruction selection, register allocation; see [[Computer-Architecture]]
+7. Runtimes — stack frames ([[Recursion-and-Stack-Frames]]), garbage collection, JIT
+8. Capstone: arithmetic-expression interpreter, then compile the same AST to stack-machine bytecode
+
+## Key Concepts
+
+Token · lexeme · grammar ambiguity · precedence and associativity · AST vs parse tree · symbol table · SSA · basic block · control-flow graph · register allocation as graph coloring · tail-call optimization
+
+## More Interview Questions (with answers)
+
+- **Parse tree vs AST?** — A parse tree mirrors every grammar rule (parentheses, helper nonterminals); an AST keeps only the semantically relevant structure.
+- **Why is left recursion a problem for recursive descent?** — `E -> E + T` makes the parser call itself without consuming input, recursing forever; rewrite as `E -> T ('+' T)*`.
+- **What is SSA?** — Static single assignment: each variable is assigned exactly once, with φ-functions at control-flow merges; data flow becomes explicit, which simplifies many optimizations.
+- **How does a tracing GC find live objects?** — It starts from roots (stacks, globals, registers) and marks everything reachable; the rest is garbage. Reference counting frees at zero instead but needs extra handling for cycles.
+
+## Coding Exercises
+
+- [ ] Tokenizer for arithmetic with identifiers and numbers
+- [ ] Recursive-descent parser producing an AST with correct precedence
+- [ ] Tree-walking evaluator, then a constant-folding pass
+- [ ] Compile the AST to stack bytecode and write the VM loop
+- [ ] Inspect a real pipeline with Python's `ast` and `dis` modules
+
+## Connections
+
+- **System design** — SQL planners, template engines, and rule engines are small compilers; separating parse → validate → execute makes DSLs safe to expose.
+- **Cybersecurity** — injection happens when data is parsed as code; parser differentials enable request smuggling; stack canaries and CFI are compiler mitigations; [[Reverse-Engineering-Basics]] starts from compiled output.
+- **AI** — ML compilers (XLA, TVM, Triton, `torch.compile`) lower computation graphs to kernels through the same IR → optimize → codegen pipeline; LLM tokenizers are lexers with a learned vocabulary.
 
 ## Related
 

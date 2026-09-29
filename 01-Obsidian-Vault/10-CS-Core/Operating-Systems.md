@@ -1,12 +1,19 @@
 ---
-tags: [concept, cs-core]
-created: 2026-08-01
+title: Operating Systems
+description: "Subject hub: processes, threads, scheduling, synchronization, memory, file systems."
+domain: cs-core
+category: operating-systems
+type: index
+difficulty: intermediate
 status: evergreen
+tags: [cs-core, operating-systems]
+prerequisites: []
+related: [Processes-and-Threads, CPU-Scheduling, Virtual-Memory-and-Paging, Deadlocks]
 ---
 
 # Operating Systems
 
-Hub: [[CS-Core-Index]]
+Hub: [[CS-Core-Index]] · [[CS-Core-Curriculum]]
 
 ## Core Idea
 
@@ -61,6 +68,42 @@ Handling: **prevent** (break one condition — most practical: acquire locks in 
 - "What is virtual memory for?" — isolation between processes, more apparent memory than physical RAM, and simple linear addressing for programs.
 - "How do you prevent deadlock?" — the expected answer is lock ordering; be ready to state all four Coffman conditions and which one ordering breaks.
 - Scheduling questions usually probe tradeoffs: round-robin fairness vs context-switch overhead, priority vs starvation.
+
+## Roadmap
+
+1. [[Processes-and-Threads]] — address spaces, PCB, fork/exec, user vs kernel threads
+2. [[CPU-Scheduling]] — FCFS, SJF, RR, MLFQ, CFS/EEVDF; metrics (turnaround, response, throughput)
+3. [[Synchronization-Primitives]] — races, mutexes, semaphores, condition variables, atomics
+4. [[Deadlocks]] — Coffman conditions, lock ordering, Banker's algorithm, detection
+5. [[Virtual-Memory-and-Paging]] — page tables, TLB, page faults, replacement (LRU, Clock)
+6. [[File-Systems]] — inodes, directories, journaling, page cache, fsync
+7. Capstone: explain `fork()` + copy-on-write + `exec()` end to end, then write a bounded producer-consumer queue
+
+## Key Concepts
+
+Kernel vs user mode · syscall trap · context switch · PCB · copy-on-write · critical section · spurious wakeup · priority inversion · thrashing · working set · inode · journaling · memory-mapped files
+
+## More Interview Questions (with answers)
+
+- **What happens on `fork()`?** — The kernel creates a child with a copy of the parent's PCB and a *copy-on-write* mapping of its pages: both share physical pages marked read-only, and a write triggers a fault that copies just that page. `fork()` returns the child PID to the parent and 0 to the child.
+- **Mutex vs semaphore?** — A mutex has an owner and protects a critical section (lock/unlock by the same thread). A counting semaphore is a counter of available units with no owner; it is used for signaling and resource pools.
+- **What is thrashing?** — The combined working sets exceed physical RAM, so the system spends most of its time servicing page faults. Fix: reduce multiprogramming, add RAM, improve locality.
+- **Can a single-threaded program deadlock?** — Yes: re-acquiring a non-reentrant lock it already holds, or blocking on a pipe/condition that only it would ever signal.
+- **What does `fsync` guarantee?** — That the file's written data and metadata have been pushed to stable storage (as far as the device honors flushes); `write()` alone only reaches the page cache.
+
+## Coding Exercises
+
+- [ ] Bounded blocking queue with one mutex + two condition variables (Python `threading`, Java `ReentrantLock`, or C++ `std::condition_variable`)
+- [ ] Dining philosophers without deadlock (resource ordering)
+- [ ] Simulate FCFS / SJF / RR on a job list and compute average waiting time
+- [ ] LRU page-replacement simulator; count faults for a reference string and compare with FIFO (reproduce Belady's anomaly with `1 2 3 4 1 2 5 1 2 3 4 5` at 3 vs 4 frames)
+- [ ] Mini shell: `fork` + `execvp` + `waitpid`, with one pipe
+
+## Connections
+
+- **System design** — thread pools, connection pools, and async event loops are scheduling decisions made in user space; `fsync` semantics decide database durability; memory limits and the OOM killer shape container sizing.
+- **Cybersecurity** — privilege separation relies on process isolation and kernel/user mode; ASLR and NX are virtual-memory features; TOCTOU races are synchronization bugs with security impact. See [[Memory-Safety]] and [[Least-Privilege]].
+- **AI** — data loaders use multiple processes to sidestep Python's GIL; model weights are often `mmap`-ed so pages load lazily; out-of-memory errors from oversized batches are a memory-management story.
 
 ## Related
 

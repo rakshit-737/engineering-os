@@ -1,12 +1,19 @@
 ---
-tags: [concept, cs-core]
-created: 2026-08-01
+title: Dynamic Programming
+description: "Optimal substructure plus overlapping subproblems: state, recurrence, base case."
+domain: cs-core
+category: algorithms
+type: concept
+difficulty: intermediate
 status: evergreen
+tags: [cs-core, algorithms]
+prerequisites: [Recursion-and-Stack-Frames]
+related: [DP-Pattern, Algorithms-Overview]
 ---
 
 # Dynamic Programming
 
-Hub: [[CS-Core-Index]]
+Hub: [[CS-Core-Index]] · [[CS-Core-Curriculum]]
 
 ## Core Idea
 

@@ -1,3 +1,16 @@
+---
+title: Cybersecurity Index
+description: "Hub for security concepts, defenses, and the cyber career toolkit."
+domain: cybersecurity
+category: indexes
+type: index
+difficulty: beginner
+status: evergreen
+tags: [index, cybersecurity]
+prerequisites: []
+related: [Home]
+---
+
 # Cybersecurity Index
 
 Hub for security knowledge. House rule: every note pairs a concept with a **defense** and, where possible, runnable code or a lab reference. Attack knowledge is context for defense, practiced only in authorized labs/CTFs.
@@ -33,10 +46,10 @@ Hub for security knowledge. House rule: every note pairs a concept with a **defe
 - [[Applied-Cryptography]] — symmetric/asymmetric, signatures, key exchange, common misuse
 - [[Reverse-Engineering-Basics]] — disassembly, debugging, CTF workflow (lab only)
 
-## Planned Notes (create with Concept-Note-Template when studied)
+## Planned Notes (not yet written; link once created)
 
-- [[Active-Directory-Security]] — Kerberos, common attack paths, hardening
-- [[Digital-Forensics-Basics]] — evidence handling, disk/memory analysis workflow
+- Active-Directory-Security — Kerberos, common attack paths, hardening
+- Digital-Forensics-Basics — evidence handling, disk/memory analysis workflow
 
 ## Toolkit Companions
 

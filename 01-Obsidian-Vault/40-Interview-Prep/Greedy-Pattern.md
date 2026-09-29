@@ -1,12 +1,19 @@
 ---
-tags: [concept, interview]
-created: 2026-08-01
+title: Greedy Pattern
+description: Locally optimal choices proven globally optimal with an exchange argument.
+domain: dsa
+category: greedy
+type: pattern
+difficulty: intermediate
 status: evergreen
+tags: [greedy, sorting]
+prerequisites: []
+related: [Intervals-Pattern, DP-Pattern]
 ---
 
 # Greedy Pattern
 
-Hub: [[Interview-Prep-Index]]
+Hub: [[Interview-Prep-Index]] | Roadmap: [[DSA-Index]]
 
 ## Core Idea
 
@@ -52,6 +59,12 @@ Counterexample drill (run before trusting any greedy rule):
 ## Interview Angle
 
 Trigger words: "maximum number of...", "minimum removals", "earliest finish", scheduling, intervals, "can you reach". Say out loud *why* greedy is safe ("sort by end time; taking the earliest-finishing interval leaves the most room, exchange argument makes any optimal solution match it") — interviewers probe for the justification, not the loop. If pressed and unsure, state the DP formulation and show it degenerates to greedy.
+
+## Practice Problems
+
+- [[Jump-Game]]
+- [[Gas-Station]]
+- [[Container-With-Most-Water]]
 
 ## Related
 

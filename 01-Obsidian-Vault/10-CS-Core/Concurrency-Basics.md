@@ -1,12 +1,19 @@
 ---
-tags: [concept, cs-core]
-created: 2026-08-01
+title: Concurrency Basics
+description: "Threads vs processes vs async, race conditions, and the primitives that tame them."
+domain: cs-core
+category: operating-systems
+type: concept
+difficulty: intermediate
 status: evergreen
+tags: [cs-core, operating-systems]
+prerequisites: []
+related: [Synchronization-Primitives, Processes-and-Threads, Deadlocks]
 ---
 
 # Concurrency Basics
 
-Hub: [[CS-Core-Index]]
+Hub: [[CS-Core-Index]] · [[CS-Core-Curriculum]]
 
 ## Core Idea
 

@@ -1,12 +1,19 @@
 ---
-tags: [concept, interview]
-created: 2026-08-01
+title: Binary Search Pattern
+description: Find the boundary of any monotonic predicate, including binary search on the answer.
+domain: dsa
+category: binary-search
+type: pattern
+difficulty: intermediate
 status: evergreen
+tags: [binary-search, searching]
+prerequisites: []
+related: [Sorting-and-Searching-Pattern, Binary-Search]
 ---
 
 # Binary Search Pattern
 
-Hub: [[Interview-Prep-Index]]
+Hub: [[Interview-Prep-Index]] | Roadmap: [[DSA-Index]]
 
 ## Core Idea
 
@@ -58,6 +65,12 @@ def binary_search_answer(lo, hi, check):
 - Know `bisect_left` / `bisect_right` in Python and what each returns; hand-roll only when asked.
 - Rotated array questions test whether you can decide which half is sorted at each step — practice stating that condition cleanly.
 - If you find a bug, fix it via the invariant, not by shuffling `+1`s until tests pass — interviewers notice the difference.
+
+## Practice Problems
+
+- [[Search-in-Rotated-Sorted-Array]]
+- [[Koko-Eating-Bananas]]
+- [[Longest-Increasing-Subsequence]]
 
 ## Related
 

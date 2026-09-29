@@ -1,3 +1,16 @@
+---
+slug: python-library
+title: Python Coding Library
+description: Python algorithm library with unit tests, run instructions and module map.
+domain: dsa
+category: libraries
+type: guide
+difficulty: beginner
+status: evergreen
+tags: [code, library]
+prerequisites: []
+related: [DSA-Index]
+---
 # Python Coding Library
 
 Reusable algorithms and patterns for interview prep and practical engineering tasks.

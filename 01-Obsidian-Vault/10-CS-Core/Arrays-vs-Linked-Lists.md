@@ -1,12 +1,19 @@
 ---
-tags: [concept, cs-core]
-created: 2026-08-01
+title: Arrays vs Linked Lists
+description: "Contiguous vs pointer-linked storage: access cost, cache behavior, and when each wins."
+domain: cs-core
+category: data-structures
+type: concept
+difficulty: beginner
 status: evergreen
+tags: [cs-core, data-structures]
+prerequisites: [Big-O-Notation]
+related: [Hash-Tables, CPU-Caches-and-Memory-Hierarchy, Data-Structures-Overview]
 ---
 
 # Arrays vs Linked Lists
 
-Hub: [[CS-Core-Index]]
+Hub: [[CS-Core-Index]] · [[CS-Core-Curriculum]]
 
 ## Core Idea
 

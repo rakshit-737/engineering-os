@@ -1,12 +1,19 @@
 ---
-tags: [concept, cs-core]
-created: 2026-08-01
+title: Graph Traversal BFS DFS
+description: "Breadth-first and depth-first traversal, their invariants, and what each answers."
+domain: cs-core
+category: algorithms
+type: concept
+difficulty: intermediate
 status: evergreen
+tags: [cs-core, algorithms]
+prerequisites: [Arrays-vs-Linked-Lists]
+related: [BFS-DFS-Pattern, Union-Find-Pattern, Algorithms-Overview]
 ---
 
 # Graph Traversal BFS DFS
 
-Hub: [[CS-Core-Index]]
+Hub: [[CS-Core-Index]] · [[CS-Core-Curriculum]]
 
 ## Core Idea
 

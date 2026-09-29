@@ -1,12 +1,19 @@
 ---
-tags: [concept, cs-core]
-created: 2026-08-01
+title: Sorting Algorithms
+description: "Comparison-sort bounds, stability, and what production sorts actually do."
+domain: cs-core
+category: algorithms
+type: concept
+difficulty: beginner
 status: evergreen
+tags: [cs-core, algorithms]
+prerequisites: [Big-O-Notation]
+related: [Binary-Search, Algorithms-Overview]
 ---
 
 # Sorting Algorithms
 
-Hub: [[CS-Core-Index]]
+Hub: [[CS-Core-Index]] · [[CS-Core-Curriculum]]
 
 ## Core Idea
 

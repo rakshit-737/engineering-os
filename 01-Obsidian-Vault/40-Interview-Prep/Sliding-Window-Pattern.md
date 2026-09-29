@@ -1,12 +1,19 @@
 ---
-tags: [concept, interview]
-created: 2026-08-01
+title: Sliding Window Pattern
+description: Maintain a contiguous window with an invariant to turn O(n^2) subarray scans into O(n).
+domain: dsa
+category: sliding-window
+type: pattern
+difficulty: intermediate
 status: evergreen
+tags: [sliding-window, arrays, strings]
+prerequisites: [Two-Pointer-Pattern]
+related: [Two-Pointer-Pattern, Prefix-Sum-Pattern, Queue-and-Deque-Pattern]
 ---
 
 # Sliding Window Pattern
 
-Hub: [[Interview-Prep-Index]]
+Hub: [[Interview-Prep-Index]] | Roadmap: [[DSA-Index]]
 
 ## Core Idea
 
@@ -57,6 +64,12 @@ For *shortest* valid window (e.g. Minimum Window Substring), invert it: shrink `
 - Expect the probe "why is this O(n) when there's a nested while loop?" — answer with the amortized argument: each element is added once and removed once.
 - Expect the negative-numbers probe on sum problems — pre-empt it.
 - State the fixed vs variable window distinction; fixed-size windows don't need the while loop, just add-one/remove-one per step.
+
+## Practice Problems
+
+- [[Longest-Substring-Without-Repeating-Characters]]
+- [[Minimum-Window-Substring]]
+- [[Sliding-Window-Maximum]]
 
 ## Related
 

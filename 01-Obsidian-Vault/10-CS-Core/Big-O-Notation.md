@@ -1,12 +1,19 @@
 ---
-tags: [concept, cs-core]
-created: 2026-08-01
+title: Big O Notation
+description: "Asymptotic growth vocabulary for time and space, and where it misleads."
+domain: cs-core
+category: algorithms
+type: concept
+difficulty: beginner
 status: evergreen
+tags: [cs-core, algorithms]
+prerequisites: []
+related: [Sorting-Algorithms, Algorithms-Overview]
 ---
 
 # Big O Notation
 
-Hub: [[CS-Core-Index]]
+Hub: [[CS-Core-Index]] · [[CS-Core-Curriculum]]
 
 ## Core Idea
 

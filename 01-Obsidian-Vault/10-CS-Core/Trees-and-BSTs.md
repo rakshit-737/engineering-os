@@ -1,12 +1,19 @@
 ---
-tags: [concept, cs-core]
-created: 2026-08-01
+title: Trees and BSTs
+description: "Tree invariants, traversals, and balanced search trees."
+domain: cs-core
+category: data-structures
+type: concept
+difficulty: intermediate
 status: evergreen
+tags: [cs-core, data-structures]
+prerequisites: [Recursion-and-Stack-Frames]
+related: [Database-Indexing, Data-Structures-Overview]
 ---
 
 # Trees and BSTs
 
-Hub: [[CS-Core-Index]]
+Hub: [[CS-Core-Index]] · [[CS-Core-Curriculum]]
 
 ## Core Idea
 

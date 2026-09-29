@@ -1,12 +1,19 @@
 ---
-tags: [concept, interview]
-created: 2026-08-01
+title: Bit Manipulation Pattern
+description: Use bitwise operators for parity, set membership, counting and subset enumeration.
+domain: dsa
+category: bit-manipulation
+type: pattern
+difficulty: intermediate
 status: evergreen
+tags: [bits, math]
+prerequisites: []
+related: [Math-Pattern, DP-Pattern]
 ---
 
 # Bit Manipulation Pattern
 
-Hub: [[Interview-Prep-Index]]
+Hub: [[Interview-Prep-Index]] | Roadmap: [[DSA-Index]]
 
 ## Core Idea
 
@@ -56,6 +63,12 @@ Complexity: single-int ops are O(1) for fixed-width values (O(word count) for Py
 ## Interview Angle
 
 Trigger words: "without extra space", "appears once/twice", "count set bits", parity, "O(1) space", subset enumeration. State the idiom by name ("clear lowest set bit") before using it — it signals fluency. If the interviewer's solution assumes 32-bit ints, proactively mention the Python masking caveat; it's a cheap way to look language-aware.
+
+## Practice Problems
+
+- [[Single-Number]]
+- [[Counting-Bits]]
+- [[Subsets]]
 
 ## Related
 

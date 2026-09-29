@@ -1,12 +1,19 @@
 ---
-tags: [concept, interview]
-created: 2026-08-01
+title: Union-Find Pattern
+description: Disjoint set union with path compression and union by rank for near-constant connectivity queries.
+domain: dsa
+category: union-find
+type: pattern
+difficulty: intermediate
 status: evergreen
+tags: [graphs, dsu]
+prerequisites: [BFS-DFS-Pattern]
+related: [BFS-DFS-Pattern, Greedy-Pattern]
 ---
 
 # Union-Find Pattern
 
-Hub: [[Interview-Prep-Index]]
+Hub: [[Interview-Prep-Index]] | Roadmap: [[DSA-Index]]
 
 ## Core Idea
 
@@ -63,6 +70,11 @@ vs BFS/DFS tradeoff: for a **static** graph given up front, [[BFS-DFS-Pattern]] 
 ## Interview Angle
 
 Trigger words: connected components, "merge accounts", "redundant edge", dynamic connectivity, "friend circles". Write the DSU class from memory in under two minutes — it's a known quantity and hesitation shows. Name-drop α(n) correctly ("amortized inverse Ackermann, effectively constant") and be ready to justify union by rank with the tree-height argument.
+
+## Practice Problems
+
+- [[Number-of-Provinces]]
+- [[Redundant-Connection]]
 
 ## Related
 

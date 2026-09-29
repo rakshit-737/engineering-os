@@ -1,12 +1,19 @@
 ---
-tags: [concept, cs-core]
-created: 2026-08-01
+title: Computer Networks
+description: "Subject hub: layered stack, TCP/UDP, routing, congestion control, DNS, HTTP."
+domain: cs-core
+category: computer-networks
+type: index
+difficulty: intermediate
 status: evergreen
+tags: [cs-core, computer-networks]
+prerequisites: []
+related: [TCP-vs-UDP, DNS, HTTP-Evolution, IP-Routing, TCP-Congestion-Control]
 ---
 
 # Computer Networks
 
-Hub: [[CS-Core-Index]]
+Hub: [[CS-Core-Index]] · [[CS-Core-Curriculum]]
 
 ## Core Idea
 
@@ -75,6 +82,42 @@ Each step is a follow-up question in disguise — know one level deeper than you
 - "Why is HTTP/3 on UDP?" — because TCP's in-kernel, in-order delivery causes head-of-line blocking that HTTP/2 multiplexing can't escape; QUIC reimplements reliability per-stream in user space.
 - "Where does TLS sit?" — between transport and application: on top of TCP, below HTTP.
 - Know port numbers on sight: 80 HTTP, 443 HTTPS, 53 DNS, 22 SSH.
+
+## Roadmap
+
+1. Layering: link → IP → transport → application; encapsulation
+2. [[TCP-vs-UDP]] — handshake, reliability, flow control, ports, sockets
+3. [[IP-Routing]] — addressing, CIDR, longest-prefix match, link-state vs distance-vector, BGP
+4. [[TCP-Congestion-Control]] — slow start, AIMD, fast retransmit, CUBIC, BBR
+5. [[DNS]] — recursive vs authoritative, record types, caching and TTL
+6. [[HTTP-Evolution]] — HTTP/1.1 → 2 → 3 (QUIC), head-of-line blocking
+7. [[TLS-Handshake]] — where encryption sits
+8. Capstone: narrate "what happens when you type a URL" at three depths (30 s, 3 min, 15 min)
+
+## Key Concepts
+
+Encapsulation · MTU and fragmentation · NAT · CIDR · ARP · three-way handshake · TIME_WAIT · sliding window · RTT · bandwidth-delay product · head-of-line blocking · anycast · TTL (IP hop limit vs DNS cache lifetime)
+
+## More Interview Questions (with answers)
+
+- **Flow control vs congestion control?** — Flow control protects the *receiver* (advertised window `rwnd`); congestion control protects the *network* (sender-side `cwnd`). The sender keeps at most `min(rwnd, cwnd)` unacknowledged bytes in flight.
+- **Why does TIME_WAIT exist?** — The side that closes first waits 2×MSL so delayed segments from the old connection expire and a lost final ACK can be re-sent.
+- **What does NAT break?** — End-to-end addressability: inbound connections need port forwarding or hole punching (STUN/TURN), and protocols that embed IPs in payloads need helpers.
+- **What is the bandwidth-delay product?** — Bandwidth × RTT = bytes that must be in flight to keep the link full; a smaller window underutilizes it.
+
+## Coding Exercises
+
+- [ ] TCP echo server + client with sockets; then serve many clients (threads, then `select`/`asyncio`)
+- [ ] UDP ping with timeouts and loss measurement
+- [ ] Decode a DNS response by hand (header, question, answer) and check against `dig`
+- [ ] Minimal HTTP/1.1 client over a raw socket: status line, headers, `Content-Length`
+- [ ] Longest-prefix-match lookup using a binary trie
+
+## Connections
+
+- **System design** — L4 vs L7 load balancers, CDNs and anycast, keep-alive and connection pooling, timeouts and retries all rest on these mechanics.
+- **Cybersecurity** — SYN floods, DNS cache poisoning, BGP hijacks, and TLS downgrades each attack a specific layer; see [[Network-Security]] and [[TLS-Handshake]].
+- **AI** — distributed training is frequently network-bound (collective operations like all-reduce); streaming LLM responses ride on chunked HTTP or server-sent events.
 
 ## Related
 

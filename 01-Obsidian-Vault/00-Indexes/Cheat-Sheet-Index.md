@@ -1,3 +1,16 @@
+---
+title: Cheat Sheet Index
+description: "Fast-retrieval command and syntax reference sheets across the repo."
+domain: developer
+category: indexes
+type: index
+difficulty: beginner
+status: evergreen
+tags: [index, developer]
+prerequisites: []
+related: [Home]
+---
+
 # Cheat Sheet Index
 
 Fast-retrieval reference sheets. House rule: a cheat sheet earns its place by being faster than searching the web — exact commands, exact syntax, the traps marked. Promote hard-won knowledge here weekly.

@@ -1,3 +1,16 @@
+---
+slug: coding-library
+title: Coding Library
+description: Tested algorithm implementations in Python, Java and C++ with complexity notes.
+domain: dsa
+category: libraries
+type: guide
+difficulty: beginner
+status: evergreen
+tags: [code, library]
+prerequisites: []
+related: [DSA-Index]
+---
 # Coding Library
 
 Reusable algorithm implementations in three languages, all dependency-free, all with self-contained test suites and complexity + interview notes on every function.

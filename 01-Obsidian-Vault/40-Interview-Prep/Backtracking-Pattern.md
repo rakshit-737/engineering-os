@@ -1,12 +1,19 @@
 ---
-tags: [concept, interview]
-created: 2026-08-01
+title: Backtracking Pattern
+description: "Choose, explore, unchoose: exhaustive search over a decision tree with pruning."
+domain: dsa
+category: backtracking
+type: pattern
+difficulty: intermediate
 status: evergreen
+tags: [backtracking, recursion]
+prerequisites: [Recursion-Pattern]
+related: [DP-Pattern, Recursion-Pattern]
 ---
 
 # Backtracking Pattern
 
-Hub: [[Interview-Prep-Index]]
+Hub: [[Interview-Prep-Index]] | Roadmap: [[DSA-Index]]
 
 ## Core Idea
 
@@ -55,6 +62,13 @@ Complexity reality: exponential by nature — O(2^n) for subsets, O(n·n!) for p
 ## Interview Angle
 
 Trigger words: "all possible", "generate every", "return combinations", N-Queens, sudoku, word search. Recite the three beats — choose, explore, unchoose — while coding, and state the branching-factor complexity unprompted (interviewers expect you to admit it's exponential and then show a prune). Mention duplicates handling: sort first, skip `nums[i] == nums[i-1]` at the same tree depth.
+
+## Practice Problems
+
+- [[Subsets]]
+- [[Permutations]]
+- [[Generate-Parentheses]]
+- [[Word-Search-II]]
 
 ## Related
 

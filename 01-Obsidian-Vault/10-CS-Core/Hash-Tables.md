@@ -1,12 +1,19 @@
 ---
-tags: [concept, cs-core]
-created: 2026-08-01
+title: Hash Tables
+description: "Average O(1) lookup via hashing: collisions, load factor, resizing, and attacks."
+domain: cs-core
+category: data-structures
+type: concept
+difficulty: beginner
 status: evergreen
+tags: [cs-core, data-structures]
+prerequisites: [Arrays-vs-Linked-Lists]
+related: [Data-Structures-Overview, Database-Indexing]
 ---
 
 # Hash Tables
 
-Hub: [[CS-Core-Index]]
+Hub: [[CS-Core-Index]] · [[CS-Core-Curriculum]]
 
 ## Core Idea
 

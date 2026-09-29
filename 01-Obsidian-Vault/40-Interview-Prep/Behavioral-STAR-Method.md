@@ -1,7 +1,14 @@
 ---
-tags: [concept, interview]
-created: 2026-08-01
+title: Behavioral STAR Method
+description: Situation-Task-Action-Result structure for behavioral answers, with mechanics, mistakes and a worked example.
+domain: career
+category: interviews
+type: concept
+difficulty: beginner
 status: evergreen
+tags: [interview, behavioral, star]
+related: [STAR-Story-Template, Interview-Behavioral-Question-Bank, HR-Round-Guide, Interview-Prep-Index]
+order: 50
 ---
 
 # Behavioral STAR Method
@@ -10,7 +17,7 @@ Hub: [[Interview-Prep-Index]]
 
 ## Core Idea
 
-Situation, Task, Action, Result — a fixed structure that turns a rambling anecdote into a tight, outcome-focused story. Rough time split: ~30s Situation, ~60s Task+context, ~90s Action, ~30s Result. The Action section carries the interview signal; the Result must be quantified.
+Situation, Task, Action, Result — a fixed structure that turns a rambling anecdote into a tight, outcome-focused story. Rough time split: ~30s Situation, ~60s Task+context, ~90s Action, ~30s Result. The Action section carries the interview signal; the Result should be quantified with real numbers -- if you have none, use an honest before/after contrast.
 
 ## Details
 
@@ -25,7 +32,7 @@ Situation, Task, Action, Result — a fixed structure that turns a rambling anec
 
 **Mechanics:**
 - Say "I", not "we", throughout Action. Interviewers score individual contribution; "we" reads as hiding.
-- Result needs a number: latency dropped 40%, saved 6 hours/week, grade went from B to A, 200 users onboarded. If you have no metric, use before/after contrast.
+- Result needs a number: latency dropped 40%, saved 6 hours/week, grade went from B to A, 200 users onboarded. If you have no metric, use before/after contrast. Never invent numbers; follow-ups expose them.
 - End with a one-line lesson or what you'd do differently — this converts a story into evidence of growth.
 - Prepare 6-8 banked stories covering the standard axes: conflict, failure, leadership, ambiguity, deadline pressure, technical disagreement, initiative. Each story should be reusable across 2-3 question types.
 
@@ -54,9 +61,12 @@ Situation, Task, Action, Result — a fixed structure that turns a rambling anec
 - Behavioral rounds at big tech (Amazon LPs especially) map each question to a value; know which story maps to which value before walking in.
 - If asked something you have no story for, adapt the closest banked story honestly rather than inventing — follow-ups expose fabrication fast.
 - Deliver Result unprompted. Many candidates stop after Action and lose the easiest points.
-- Full story bank lives in 10-Career-Toolkit/STAR-Story-Template.md; keep every Result line quantified there.
+- Full story bank lives in [[STAR-Story-Template]]; question prompts in [[Interview-Behavioral-Question-Bank]].
 
 ## Related
 
 - [[System-Design-Basics]]
 - [[Interview-Prep-Index]]
+- [[Interview-Engine-Index]]
+- [[HR-Round-Guide]]
+- [[Project-Defense-Guide]]

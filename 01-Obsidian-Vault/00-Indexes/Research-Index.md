@@ -1,3 +1,16 @@
+---
+title: Research Index
+description: "Hub for paper summaries, experiment discipline, and reading heuristics."
+domain: research
+category: indexes
+type: index
+difficulty: beginner
+status: evergreen
+tags: [index, research]
+prerequisites: []
+related: [Home]
+---
+
 # Research Index
 
 Hub for paper summaries and experiment notes. House rule: a paper isn't "read" until its summary can answer *what's the delta over prior work, and would it survive my use case*.
@@ -12,7 +25,7 @@ Hub for paper summaries and experiment notes. House rule: a paper isn't "read" u
 
 ## Papers
 
-Add summaries as `[[Paper-YYYY-FirstAuthor-ShortTitle]]` notes, grouped by theme:
+Add summaries as `Paper-YYYY-FirstAuthor-ShortTitle` notes, grouped by theme:
 
 **Theme: (name it)**
 - (first paper summary goes here)

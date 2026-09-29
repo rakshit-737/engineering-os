@@ -1,12 +1,19 @@
 ---
-tags: [concept, interview]
-created: 2026-08-01
+title: DP Pattern
+description: Classify into a DP family (knapsack, LIS, edit distance, interval, grid) to get state and recurrence.
+domain: dsa
+category: dynamic-programming
+type: pattern
+difficulty: advanced
 status: evergreen
+tags: [dp, recursion]
+prerequisites: [Recursion-Pattern]
+related: [Greedy-Pattern, Backtracking-Pattern, Dynamic-Programming]
 ---
 
 # DP Pattern
 
-Hub: [[Interview-Prep-Index]]
+Hub: [[Interview-Prep-Index]] | Roadmap: [[DSA-Index]]
 
 ## Core Idea
 
@@ -65,6 +72,14 @@ def coin_change(coins, amount):          # min coins to make amount
 - Offer top-down first (faster to write correctly), mention the bottom-up conversion and space optimization as follow-ups.
 - If stuck, write the brute-force recursion, then point at the repeated calls and memoize — that path is legitimate and interviewers respect it.
 - Reference implementations live in 03-Coding-Library.
+
+## Practice Problems
+
+- [[Climbing-Stairs]]
+- [[Coin-Change]]
+- [[Longest-Common-Subsequence]]
+- [[Partition-Equal-Subset-Sum]]
+- [[Longest-Increasing-Subsequence]]
 
 ## Related
 

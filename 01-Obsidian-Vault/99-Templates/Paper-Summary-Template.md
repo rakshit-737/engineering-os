@@ -1,7 +1,14 @@
 ---
-tags: [research, paper]
-created: {{date}}
-read-depth: pass-1
+title: Paper Summary Template
+description: "Three-pass paper summary skeleton: problem, key idea, method, evidence, limitations."
+domain: developer
+category: research
+type: template
+difficulty: beginner
+status: evergreen
+tags: [template, research]
+prerequisites: []
+related: []
 ---
 
 # {{Paper Title}}
@@ -62,4 +69,4 @@ read-depth: pass-1
 ## Related
 
 - [[Research-Index]]
-- [[]]
+- `[[Related-Note]]`

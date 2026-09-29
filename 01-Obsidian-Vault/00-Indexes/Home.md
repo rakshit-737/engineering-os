@@ -1,3 +1,16 @@
+---
+title: Home
+description: "Vault entry point: mission, knowledge hubs, capture flow, and quality bar."
+domain: command-center
+category: indexes
+type: index
+difficulty: beginner
+status: evergreen
+tags: [index, command-center]
+prerequisites: []
+related: [Home]
+---
+
 # Home
 
 ## Mission
@@ -6,7 +19,9 @@ Build a permanent technical knowledge graph that compounds over years. Every not
 
 ## Knowledge Hubs
 
-- [[CS-Core-Index]] — 15 notes: fundamentals + systems deep dives
+> Note counts below are approximate and drift as content is added.
+
+- [[CS-Core-Index]] — 11 subject hubs + concept notes; start with [[CS-Core-Curriculum]]
 - [[Cybersecurity-Index]] — 17 notes: principles, web, crypto, operations, defense in depth
 - [[AI-ML-Index]] — 8 notes: foundations, transformers/LLMs, applied decisions
 - [[Interview-Prep-Index]] — 16 notes: coding patterns + languages/OOP + system design + behavioral

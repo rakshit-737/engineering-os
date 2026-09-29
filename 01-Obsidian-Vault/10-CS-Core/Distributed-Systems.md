@@ -1,12 +1,19 @@
 ---
-tags: [concept, cs-core]
-created: 2026-08-01
+title: Distributed Systems
+description: "Subject hub: failure models, replication, consistency, consensus, clocks."
+domain: cs-core
+category: distributed-systems
+type: index
+difficulty: advanced
 status: evergreen
+tags: [cs-core, distributed-systems]
+prerequisites: [Computer-Networks]
+related: [Clocks-and-Ordering, DBMS, System-Design-Basics]
 ---
 
 # Distributed Systems
 
-Hub: [[CS-Core-Index]]
+Hub: [[CS-Core-Index]] · [[CS-Core-Curriculum]]
 
 ## Core Idea
 
@@ -50,6 +57,41 @@ Every machine's clock drifts, and NTP sync leaves millisecond-level error — so
 - "Strong vs eventual consistency?" — define both in one sentence each, then name the cost of strong (coordination latency, unavailability under partition).
 - "Why not order events by timestamp?" — clock skew; explain Lamport clocks in two sentences.
 - System design tie-in: say which consistency model each component actually needs — a cart can be eventual, a payment ledger cannot. That judgment is what's evaluated.
+
+## Roadmap
+
+1. Failure models: crash-stop, crash-recovery, omission, Byzantine; partial failure
+2. [[Clocks-and-Ordering]] — physical clocks, Lamport and vector clocks, happens-before
+3. Replication: leader/follower, multi-leader, leaderless quorums
+4. Consistency models: linearizable, sequential, causal, eventual
+5. Consensus: Raft/Paxos, leader election, log replication
+6. Partitioning: hash vs range, consistent hashing, rebalancing
+7. Distributed transactions: 2PC and its blocking problem, sagas
+8. Capstone: design a replicated key-value store; state its consistency guarantee and its behavior during a partition
+
+## Key Concepts
+
+Partial failure · timeout ≠ failure · FLP impossibility · quorum intersection · split brain · fencing token · idempotency · at-least-once delivery · consistent hashing · 2PC coordinator blocking
+
+## More Interview Questions (with answers)
+
+- **Why is 2PC called blocking?** — If the coordinator crashes after participants voted "yes", they must hold locks until it recovers; none can safely decide alone.
+- **What is a fencing token?** — A monotonically increasing number issued with a lock or lease; storage rejects writes carrying an older token, so a paused former holder cannot corrupt data.
+- **Raft in three sentences?** — Nodes elect a leader using randomized timeouts and term numbers. The leader appends client commands to its log and replicates them. An entry commits once a majority stores it, and only candidates with an up-to-date log can win elections.
+- **Why consistent hashing?** — Adding or removing a node moves roughly 1/N of keys instead of remapping almost all of them.
+
+## Coding Exercises
+
+- [ ] Lamport and vector clocks for three simulated processes; detect concurrent events
+- [ ] Consistent-hash ring with virtual nodes; measure key movement when a node joins
+- [ ] N/R/W quorum store simulation with injected node failures
+- [ ] Idempotent payment endpoint backed by an idempotency-key table
+
+## Connections
+
+- **System design** — every HLD answer about replication, sharding, caching, or queues is applied distributed systems; see [[System-Design-Basics]].
+- **Cybersecurity** — Byzantine faults model malicious nodes; mTLS between services, replay protection with nonces, and secret distribution are distributed problems.
+- **AI** — data/model/pipeline-parallel training, all-reduce, and serving many replicas pinned to a consistent model version.
 
 ## Related
 

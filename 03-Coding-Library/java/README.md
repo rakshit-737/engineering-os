@@ -1,3 +1,16 @@
+---
+slug: java-library
+title: Java Coding Library
+description: JDK-only Java algorithm library with a plain test runner.
+domain: dsa
+category: libraries
+type: guide
+difficulty: beginner
+status: evergreen
+tags: [code, library]
+prerequisites: []
+related: [DSA-Index]
+---
 # Java Coding Library
 
 Reusable algorithms and patterns for interview prep and practical engineering tasks — the Java sibling of `../python`.
@@ -5,7 +18,7 @@ Reusable algorithms and patterns for interview prep and practical engineering ta
 ## Run (compile + test)
 
 ```bash
-cd f:/Engineering-OS/03-Coding-Library/java && javac -d out src/*.java tests/*.java && java -cp out TestRunner
+cd 03-Coding-Library/java && javac -d out src/*.java tests/*.java && java -cp out TestRunner
 ```
 
 111 checks, JDK only — no JUnit, no Maven/Gradle. The harness prints `N passed, M failed` and exits non-zero on any failure. All classes live in the default package so the one-line `javac` works.

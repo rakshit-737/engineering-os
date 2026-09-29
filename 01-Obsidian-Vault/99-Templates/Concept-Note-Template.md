@@ -1,12 +1,36 @@
 ---
-tags: [concept]
-created: {{date}}
-status: seed
+title: Concept Note Template
+description: "Skeleton for a concept note: core idea, mechanism, example, tradeoffs, security, interview Qs."
+domain: developer
+category: notes
+type: template
+difficulty: beginner
+status: evergreen
+tags: [template, concept]
+prerequisites: []
+related: []
 ---
 
 # {{Concept Name}}
 
-Hub: [[<index this belongs to>]]
+> Copy this frontmatter into the new note (see `docs/CONTENT-SCHEMA.md`):
+>
+> ```yaml
+> ---
+> title: Concept Name
+> description: "One-line summary used in cards and search."
+> domain: cs-core
+> category: operating-systems
+> type: concept
+> difficulty: intermediate
+> status: draft
+> tags: [cs-core]
+> prerequisites: []
+> related: []
+> ---
+> ```
+
+Hub: `[[<Index-This-Belongs-To>]]`
 
 ## Core Idea
 
@@ -55,8 +79,8 @@ Hub: [[<index this belongs to>]]
 
 ## Related
 
-- [[]]
-- [[]]
+- `[[Related-Note]]`
+- `[[Related-Note]]`
 
-<!-- Status ladder: seed → growing (Details+Example filled) → evergreen
-     (used it in a project/interview and it held up). Update frontmatter. -->
+<!-- Status ladder (frontmatter `status`): todo → draft (Details + Example filled)
+     → evergreen (used it in a project/interview and it held up). -->

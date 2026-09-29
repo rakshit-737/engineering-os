@@ -1,3 +1,16 @@
+---
+slug: cpp-library
+title: C++ Coding Library
+description: Header-only C++17 STL algorithm library with a plain test harness.
+domain: dsa
+category: libraries
+type: guide
+difficulty: beginner
+status: evergreen
+tags: [code, library]
+prerequisites: []
+related: [DSA-Index]
+---
 # C++ Coding Library
 
 Reusable algorithms and patterns for interview prep and practical engineering tasks.
@@ -8,7 +21,7 @@ interview notes inline.
 ## Run
 
 ```bash
-cd f:/Engineering-OS/03-Coding-Library/cpp && g++ -std=c++17 -Wall -Wextra -O2 tests/test_main.cpp -I include -o test_main && ./test_main
+cd 03-Coding-Library/cpp && g++ -std=c++17 -Wall -Wextra -O2 tests/test_main.cpp -I include -o test_main && ./test_main
 ```
 
 Compiles with zero warnings under `-Wall -Wextra`. No test framework — a plain `main()`

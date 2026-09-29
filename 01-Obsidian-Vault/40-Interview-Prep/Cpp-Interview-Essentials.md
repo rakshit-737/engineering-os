@@ -1,12 +1,19 @@
 ---
-tags: [concept, interview]
-created: 2026-08-02
+title: C++ Interview Essentials
+description: RAII, ownership, smart pointers, move semantics and STL answers for C++ interview rounds.
+domain: dsa
+category: language-essentials
+type: cheatsheet
+difficulty: intermediate
 status: evergreen
+tags: [cpp, interview]
+prerequisites: []
+related: [Java-Interview-Essentials, cpp-library, Cpp-STL-Cheat-Sheet]
 ---
 
 # Cpp Interview Essentials
 
-Hub: [[Interview-Prep-Index]]
+Hub: [[Interview-Prep-Index]] | Roadmap: [[DSA-Index]]
 
 ## Core Idea
 

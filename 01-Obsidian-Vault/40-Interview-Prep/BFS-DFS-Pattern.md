@@ -1,12 +1,19 @@
 ---
-tags: [concept, interview]
-created: 2026-08-01
+title: BFS DFS Pattern
+description: Model problems as state graphs; BFS for fewest steps, DFS for exhaustive exploration.
+domain: dsa
+category: bfs-dfs
+type: pattern
+difficulty: intermediate
 status: evergreen
+tags: [graphs, bfs, dfs]
+prerequisites: []
+related: [Shortest-Path-Pattern, Topological-Sort-Pattern, Union-Find-Pattern, Graph-Traversal-BFS-DFS]
 ---
 
 # BFS DFS Pattern
 
-Hub: [[Interview-Prep-Index]]
+Hub: [[Interview-Prep-Index]] | Roadmap: [[DSA-Index]]
 
 ## Core Idea
 
@@ -61,6 +68,13 @@ def dfs(node, seen, neighbors):
 - Know multi-source BFS (start with several nodes in the queue) and bidirectional BFS (Word Ladder optimization) as name-drops.
 - For topological sort, be ready to state both versions: Kahn's algorithm (BFS on in-degree 0 nodes) and DFS postorder reversed; cycle ⇒ no valid order.
 - State the recursion-depth caveat for DFS in Python before the interviewer asks.
+
+## Practice Problems
+
+- [[Number-of-Islands]]
+- [[Rotting-Oranges]]
+- [[Course-Schedule]]
+- [[Word-Search-II]]
 
 ## Related
 

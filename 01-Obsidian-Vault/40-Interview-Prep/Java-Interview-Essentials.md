@@ -1,12 +1,19 @@
 ---
-tags: [concept, interview]
-created: 2026-08-02
+title: Java Interview Essentials
+description: JVM, Strings, equality, Collections, exceptions and threading answers for Java interview rounds.
+domain: dsa
+category: language-essentials
+type: cheatsheet
+difficulty: beginner
 status: evergreen
+tags: [java, interview]
+prerequisites: []
+related: [Cpp-Interview-Essentials, java-library, Java-Cheat-Sheet]
 ---
 
 # Java Interview Essentials
 
-Hub: [[Interview-Prep-Index]]
+Hub: [[Interview-Prep-Index]] | Roadmap: [[DSA-Index]]
 
 ## Core Idea
 
