@@ -14,6 +14,8 @@ order: 140
 
 # Authentication vs Authorization
 
+> Scope: the conceptual distinction and where each fails. Implementation hardening (password storage, MFA, sessions, JWT, OAuth pitfalls) is in [[Authentication-Security]].
+
 Hub: [[Cybersecurity-Index]] | Engineering OS: [[Security-Engineering-OS]]
 
 > **Concept overview.** Implementation pitfalls (sessions, JWT, OAuth) are in Authentication Security; enterprise identity in Identity Security and Active Directory Security.

@@ -39,6 +39,16 @@ order: 50
 - [ ] Code review exercise practice: find bugs in a 200-line snippet in 30 minutes
 - [ ] Interview prep ([[Interview-Cybersecurity-Round]])
 
+## How this differs from neighbouring roles
+- vs [[Roadmap-Security-Engineer]]: you mostly read and review code you did not write, across many languages and teams.
+- vs penetration testing: you fix and prevent (SAST rules, secure defaults, training), not just report.
+- The deciding skill: finding an auth/authz or injection bug in unfamiliar code within an hour and proposing a patch developers accept.
+
+## Readiness test (do these cold before applying)
+- [ ] Review a 500-line PR in an unfamiliar web framework and find the IDOR / missing authz check.
+- [ ] Write a Semgrep rule that catches a real risky pattern with zero false positives on a clean repo, plus a failing test case.
+- [ ] Explain SSRF, XSS contexts, and CSRF defences with the exact header/encoding that fixes each.
+
 ## Portfolio projects
 
 | Project | Scope | What it proves |

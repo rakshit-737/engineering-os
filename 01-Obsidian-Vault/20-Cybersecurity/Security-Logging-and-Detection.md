@@ -14,6 +14,8 @@ order: 50
 
 # Security Logging and Detection
 
+> Scope: the concept overview (why log, what to log, detection vs prevention). Operational depth: [[Log-Analysis]] (reading events), [[SIEM-Fundamentals]] (pipeline and queries), [[Detection-Engineering]] (rule lifecycle, Sigma, testing).
+
 Hub: [[Cybersecurity-Index]] | Engineering OS: [[Security-Engineering-OS]]
 
 > **Overview note.** Deeper, non-overlapping follow-ups: Log Analysis (event IDs and queries), Detection Engineering (writing/testing rules), SIEM Fundamentals (the platform), Threat Hunting (proactive search), Security Monitoring (program design).

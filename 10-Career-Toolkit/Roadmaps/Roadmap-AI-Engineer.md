@@ -40,6 +40,16 @@ order: 80
 - [ ] Model comparison write-up ([[Model-Comparison-Template]])
 - [ ] Coding interview readiness ([[Interview-DSA-Strategy]])
 
+## How this differs from neighbouring roles
+- vs [[Roadmap-ML-Engineer]]: you mostly consume foundation models through APIs; you rarely train. Your hard problems are retrieval quality, evaluation, latency and cost.
+- vs [[Roadmap-Research-Engineer]]: you optimise a product metric, not a paper result.
+- The deciding skill: proving with an eval set that a prompt/retrieval change made the system better, not just different.
+
+## Readiness test (do these cold before applying)
+- [ ] Build a RAG pipeline and report retrieval recall@k and answer accuracy on 50+ labelled questions, before and after one change.
+- [ ] Estimate cost and p95 latency per request for your app and cut one of them by 30% with a measured change (caching, smaller model, shorter context).
+- [ ] Demonstrate one prompt-injection attack on your own app and the mitigation that stopped it.
+
 ## Portfolio projects
 
 | Project | Scope | What it proves |

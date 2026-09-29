@@ -56,7 +56,7 @@ rng = np.random.default_rng(1)
 w, b = rng.normal(size=20), 0.0
 x = rng.normal(size=20)
 y = int(sigmoid(w @ x + b) > 0.5)          # use the model's own label
-for eps in (0.0, 0.1, 0.3):
+for eps in (0.0, 0.1, 0.3, 0.5):
     p = sigmoid(w @ fgsm_logreg(w, b, x, y, eps) + b)
     print(eps, round(float(p), 3), "flipped" if int(p > 0.5) != y else "same")
 ```
@@ -66,7 +66,7 @@ for eps in (0.0, 0.1, 0.3):
 ```python
 import unicodedata, re
 
-ZERO_WIDTH = re.compile(r"[​-‏⁠﻿]")
+ZERO_WIDTH = re.compile(r"[\u200b-\u200f\u2060\ufeff]")  # zero-width chars, bidi marks, BOM
 
 def normalize(text: str) -> str:
     text = unicodedata.normalize("NFKC", text)   # folds many compatibility/fullwidth forms

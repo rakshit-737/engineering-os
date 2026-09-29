@@ -119,6 +119,8 @@ What you say aloud: "Reads dominate 250:1, so cache + CDN; writes are trivial fo
 
 ## Case Studies
 
+Full table with what each teaches and difficulty: [[Case-Studies-Index]].
+
 - [[Case-Study-URL-Shortener]]
 - [[Case-Study-WhatsApp]]
 - [[Case-Study-Instagram]]

@@ -72,3 +72,14 @@ Why: bulk crypto is fast and local; only small key operations hit KMS; access to
 - Use encryption context to bind ciphertext to tenant or resource.
 
 See also: [[Applied-Cryptography]], [[Cloud-Logging]].
+
+## Interview questions
+
+**Q: Why envelope encryption instead of calling KMS Encrypt on the data?**
+A: KMS Encrypt is capped at 4 KB and every call is a network round trip; a local data key encrypts bulk data fast while the KMS key stays inside the HSM boundary. Rotating the KMS key does not require re-encrypting data.
+
+**Q: Who can decrypt with a customer managed key?**
+A: Only principals allowed by the key policy (and IAM, if the key policy delegates to the account via the root principal) plus any grants. The key policy is mandatory and is the primary control.
+
+**Q: What does automatic rotation actually do?**
+A: Creates new backing key material under the same key ID; old material is kept so existing ciphertext still decrypts. It does not re-encrypt data.

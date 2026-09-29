@@ -38,6 +38,16 @@ order: 60
 - [ ] Explain common cloud breach patterns (public buckets, leaked keys, over-privileged roles)
 - [ ] Interview prep ([[Interview-Cybersecurity-Round]])
 
+## How this differs from neighbouring roles
+- vs [[Roadmap-DevSecOps-Engineer]]: DevSecOps owns the pipeline; you own the cloud account boundary: IAM, org policies, network, cloud logging.
+- vs [[Roadmap-Cybersecurity-Engineer]]: little on-prem/Windows work; almost everything is API- and policy-driven.
+- The deciding skill: reading an IAM policy and saying exactly what an attacker holding it can reach.
+
+## Readiness test (do these cold before applying)
+- [ ] Given an IAM policy with `iam:PassRole` + `lambda:CreateFunction`, explain the privilege-escalation path and the fix.
+- [ ] Write an SCP / org policy that blocks public buckets and region sprawl, and test it in a sandbox account.
+- [ ] From CloudTrail (or equivalent) logs, reconstruct what a leaked access key did in the first hour.
+
 ## Portfolio projects
 
 | Project | Scope | What it proves |

@@ -27,12 +27,12 @@ flowchart LR
 ```
 
 - **Little's Law:** L = λ × W (items in system = arrival rate × time in system). Holds for any stable system.
-- **M/M/1 intuition:** mean time in system ∝ 1/(1 − ρ). At ρ = 0.5 wait is 2× service time; at 0.9 it's 10×; at 0.99 it's 100×. Hence run at ~50-70% utilization for latency-sensitive services.
+- **M/M/1 intuition:** mean time in system ∝ 1/(1 − ρ). At ρ = 0.5 time in system (queueing + service) is 2× the service time; at 0.9 it is 10×; at 0.99 it is 100×. Hence run at ~50-70% utilization for latency-sensitive services.
 - **Tail amplification:** if a request fans out to 100 backends and each has a 1% chance of being slow, P(at least one slow) = 1 − 0.99^100 ≈ 63%.
 
 ## Example (assumptions)
 
-A service with 20 ms mean service time, 8 worker threads: max throughput ≈ 8 / 0.02 = 400 RPS. Little's Law at 300 RPS with W = 30 ms: L = 300 × 0.03 = 9 requests in flight — already more than 8 workers, so requests queue. Either add workers/instances or cut service time (cache the 12 ms DB call).
+A service with 20 ms mean service time, 8 worker threads: max throughput ≈ 8 / 0.02 = 400 RPS. Little's Law at 300 RPS with W = 30 ms: L = 300 × 0.03 = 9 requests in the system, but only 300 × 0.02 = 6 are being served (ρ = 6/8 = 75%) — the other ~3 are waiting, which is why W (30 ms) already exceeds the service time (20 ms). Pushing toward 400 RPS makes W grow sharply, not linearly. Either add workers/instances or cut service time (cache the 12 ms DB call).
 
 ## Tradeoffs
 

@@ -39,6 +39,16 @@ order: 40
 - [ ] 3 investigation write-ups from labs or blue-team challenges
 - [ ] Scenario question practice ([[Interview-Cybersecurity-Round]])
 
+## How this differs from neighbouring roles
+- vs [[Roadmap-Cybersecurity-Engineer]]: you investigate and escalate; you rarely build the infrastructure.
+- vs detection engineering (a later step): an analyst triages alerts; a detection engineer writes and tunes the rules. Moving from one to the other is the usual career path.
+- The deciding skill: turning a noisy alert into a yes/no verdict with evidence in under 15 minutes.
+
+## Readiness test (do these cold before applying)
+- [ ] Given Windows event logs, find a 4625 brute-force burst followed by a 4624 logon type 10 and state the verdict and next action.
+- [ ] Map five alerts to MITRE ATT&CK techniques and name the log source that proves each.
+- [ ] Write an escalation note a manager can act on: what happened, scope, containment done, what is unknown.
+
 ## Portfolio projects
 
 | Project | Scope | What it proves |

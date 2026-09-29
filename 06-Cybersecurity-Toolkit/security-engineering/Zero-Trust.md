@@ -55,3 +55,11 @@ Identity, Devices, Networks, Applications and Workloads, Data; cross-cutting vis
 - Does not mean "no network controls"; segmentation still matters.
 
 See also: [[Identity-Security]].
+
+## Interview questions
+
+**Q: Is zero trust a product?**
+A: No. It is an architecture (NIST SP 800-207): per-request authn/authz using identity, device posture and context, no implicit trust from network location.
+
+**Q: What is the first practical step?**
+A: Strong identity (phishing-resistant MFA) and a device inventory; microsegmentation and policy engines depend on both.

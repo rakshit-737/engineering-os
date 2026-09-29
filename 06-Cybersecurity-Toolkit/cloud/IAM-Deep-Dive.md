@@ -39,7 +39,7 @@ Hub: [[Security-Engineering-OS]]
 Default is **implicit deny**. Then:
 
 1. **Explicit deny** in any applicable policy -> request denied. Nothing overrides it.
-2. **Organizations SCPs / RCPs**: if the account is in an org and the action is not allowed by the SCPs at every level down to the account -> deny.
+2. **Organizations SCPs / RCPs** (they never apply to the management account, and they grant nothing - they only cap): if the account is in an org and the action is not allowed by the SCPs at every level down to the account -> deny.
 3. **Resource-based policy**: in the same account, an allow here can grant access to an IAM user or role session named in it even without an identity-policy allow (with nuance for role sessions vs role ARN as principal).
 4. **Identity-based policy**: must allow the action (unless the resource policy already allowed as above).
 5. **Permissions boundary**: if set, action must be allowed by the boundary too.

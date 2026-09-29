@@ -88,6 +88,8 @@ Every hop is an attack surface: use **mTLS** between services (service mesh), pr
 - **How do you handle transactions across services?** Avoid them via boundaries; otherwise sagas with outbox and idempotent steps.
 - **What infra do microservices require?** CI/CD per service, discovery, gateway, centralized logs/metrics/traces, config and secrets management.
 
+Implementation patterns (code, config, and failure handling live there; this note covers the concept and tradeoffs): [[Pattern-Saga]] · [[Pattern-Circuit-Breaker]] · [[Pattern-Bulkhead]] · [[Pattern-Strangler-Fig]] · [[Pattern-Transactional-Outbox]] · [[Pattern-Backend-for-Frontend]]
+
 ## Related
 
 [[System-Design-Index]] · [[Service-Discovery]] · [[API-Gateway]] · [[Event-Driven-Architecture]] · [[Observability]] · [[Fault-Tolerance]] · [[API-Design-REST-gRPC-GraphQL]]

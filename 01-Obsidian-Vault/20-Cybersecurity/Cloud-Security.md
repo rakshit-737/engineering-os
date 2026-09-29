@@ -14,6 +14,8 @@ order: 160
 
 # Cloud Security
 
+> Scope: provider-neutral concepts (shared responsibility, identity-as-perimeter, misconfiguration). AWS-specific services and controls: [[AWS-Security-Fundamentals]], [[IAM-Deep-Dive]], [[Cloud-Logging]].
+
 Hub: [[Cybersecurity-Index]] | Engineering OS: [[Security-Engineering-OS]]
 
 > **Provider-agnostic overview.** AWS-specific depth: AWS Security Fundamentals, IAM Deep Dive, AWS KMS and Encryption, Cloud Logging; workloads: Container Security, Kubernetes Security; checklist: Cloud Security Checklist.

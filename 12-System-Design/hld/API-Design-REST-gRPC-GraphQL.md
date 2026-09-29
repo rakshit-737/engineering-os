@@ -93,6 +93,8 @@ OWASP API Security Top 10: object-level authorization (check the caller owns `/o
 - **How do you make POST safe to retry?** Idempotency key stored with the response; repeat requests return the stored result.
 - **How do you evolve an API?** Add, don't change; tolerate unknown fields; deprecate with telemetry on usage.
 
+Implementation patterns (code, config, and failure handling live there; this note covers the concept and tradeoffs): [[Pattern-API-Versioning]] · [[Pattern-Pagination-Cursor]] · [[Pattern-Idempotency-Keys]] · [[Pattern-Optimistic-Locking]]
+
 ## Related
 
 [[System-Design-Index]] · [[API-Gateway]] · [[Idempotency]] · [[Rate-Limiting]] · [[Microservices]] · [[Case-Study-URL-Shortener]]

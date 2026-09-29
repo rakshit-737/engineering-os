@@ -286,7 +286,7 @@ final class BookingService {
             else {
                 locks.release(b.show, b.seatIds, b.user);
                 b.status = BookingStatus.EXPIRED;
-                // if charged but confirm failed (lock expired), a refund must be issued: > TODO in production
+                // charged but confirm failed (hold expired): production code must refund (idempotent, keyed by booking id) or, better, authorize first and capture only after confirm
             }
             return b;
         }

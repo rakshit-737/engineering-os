@@ -38,6 +38,16 @@ order: 70
 - [ ] End-to-end secure pipeline project documented
 - [ ] Explain tradeoffs: blocking vs warning gates, false positive handling, pipeline speed
 
+## How this differs from neighbouring roles
+- vs [[Roadmap-Cloud-Security-Engineer]]: your unit is the CI/CD pipeline and artifacts (images, IaC, dependencies), not the cloud org.
+- vs a plain DevOps/SRE role: every pipeline stage you build must also enforce a security gate without killing developer velocity.
+- The deciding skill: adding a security check that blocks real problems and has a false-positive rate developers tolerate.
+
+## Readiness test (do these cold before applying)
+- [ ] Add SCA, secret scanning, and image scanning to a CI pipeline with a documented fail threshold and an exception process.
+- [ ] Sign a container image and enforce signature verification at deploy (e.g. cosign + admission policy).
+- [ ] Explain a real supply-chain attack pattern (dependency confusion, typosquatting, compromised CI token) and the control that stops it.
+
 ## Portfolio projects
 
 | Project | Scope | What it proves |

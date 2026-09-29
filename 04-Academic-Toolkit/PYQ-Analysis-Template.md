@@ -66,6 +66,19 @@ Tick each year a topic appeared; record total marks across years.
 |---|---|---|---|
 | | | | |
 
+## Worked Example (illustrative numbers)
+
+Course: Operating Systems · Papers: 2022, 2023, 2024 (each 70 marks, 5 of 8 questions)
+
+| Unit | Topic | 2022 | 2023 | 2024 | Times asked | Total marks | Question types |
+|---|---|---|---|---|---:|---:|---|
+| 2 | CPU scheduling (Gantt, avg waiting) | x | x | x | 3 | 42 | Numerical |
+| 3 | Deadlock, Banker's algorithm | x | x | x | 3 | 36 | Numerical + safe-state check |
+| 4 | Page replacement (FIFO/LRU/OPT) | x | | x | 2 | 24 | Numerical fault counting |
+| 1 | OS structure, system calls | x | | | 1 | 7 | Short theory |
+
+Reading it: scheduling and Banker's appear every year and are numericals, so they are Tier 1 and practised until each takes under 12 minutes. Page replacement is Tier 1 by marks despite skipping 2023. OS structure is Tier 3: one-page summary only. Practise sets: [[CPU-Scheduling]], [[Deadlocks]], [[Virtual-Memory-and-Paging]].
+
 ## Checklist
 
 - [ ] At least 3 years of papers collected

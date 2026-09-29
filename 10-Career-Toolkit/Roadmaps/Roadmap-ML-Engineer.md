@@ -38,6 +38,16 @@ order: 90
 - [ ] End-to-end project deployed with monitoring
 - [ ] ML system design practice (e.g. design a recommendation or fraud-detection system)
 
+## How this differs from neighbouring roles
+- vs [[Roadmap-AI-Engineer]]: you train and serve your own models (tabular, vision, ranking); you own data pipelines and drift.
+- vs data scientist: you are accountable for the model in production (serving, monitoring, retraining), not only the notebook.
+- The deciding skill: catching data leakage and train/serve skew before they reach production.
+
+## Readiness test (do these cold before applying)
+- [ ] Train a model with a proper time-based split, show a leakage bug you introduced deliberately, and how the validation caught it.
+- [ ] Serve the model behind an API with p95 latency measured under load, and a drift monitor on one input feature.
+- [ ] Explain precision/recall trade-off for a fraud-style imbalanced problem and pick a threshold from a cost matrix.
+
 ## Portfolio projects
 
 | Project | Scope | What it proves |

@@ -51,7 +51,7 @@ Assumptions (stated, not measured):
 
 - 10M payments/day.
 - Peak = 5x average.
-- Each payment produces ~4 ledger entries (2 for authorize/capture pair, 2 for fee split) and ~3 state transitions.
+- Each payment produces ~4 ledger entries (2 for the capture: debit customer funds / credit merchant payable; 2 for the fee split: debit merchant payable / credit fee revenue — an authorization is a hold at the issuer, not a ledger movement) and ~3 state transitions.
 - Payment row ~1 KB, ledger entry ~200 B.
 
 Arithmetic:
@@ -248,7 +248,7 @@ If the PSP call times out, the payment stays `PROCESSING`. A recovery worker que
 
 ## 12. Security
 
-- **PCI-DSS scope reduction via tokenization:** card data is entered in PSP-hosted fields/iframes and exchanged for a token; our servers never see the PAN, so most of our infrastructure stays out of cardholder data environment scope. > TODO: confirm the exact SAQ level with a QSA; it depends on integration type.
+- **PCI-DSS scope reduction via tokenization:** card data is entered in PSP-hosted fields/iframes and exchanged for a token; our servers never see the PAN, so most of our infrastructure stays out of cardholder data environment scope. With a fully PSP-hosted iframe or redirect, merchants are typically eligible for SAQ A; if our page serves the payment form or scripts that can affect it (direct post / JS-built form), SAQ A-EP applies. The acquirer (and QSA, if required) makes the final call.
 - Verify webhook signatures (HMAC) and timestamps to block replay.
 - mTLS between internal services; secrets in a vault; least-privilege DB roles (ledger is append-only for the service role). See [[Least-Privilege]].
 - Encrypt at rest; audit log of every admin action.

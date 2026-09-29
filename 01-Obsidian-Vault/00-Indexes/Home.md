@@ -1,6 +1,6 @@
 ---
 title: Home
-description: "Vault entry point: mission, knowledge hubs, capture flow, and quality bar."
+description: "Vault entry point: one link to every canonical domain index, plus capture flow and quality bar."
 domain: command-center
 category: indexes
 type: index
@@ -8,50 +8,51 @@ difficulty: beginner
 status: evergreen
 tags: [index, command-center]
 prerequisites: []
-related: [Home]
+related: [Command-Center-Index]
 ---
 
 # Home
 
-## Mission
+Build a permanent technical knowledge graph that compounds over years. Every note earns its place by being retrievable, linked, and useful under pressure.
 
-Build a permanent technical knowledge graph that compounds over years. Every note earns its place by being retrievable, linked, and useful under pressure (exam, interview, incident, deadline).
+## Canonical indexes
 
-## Knowledge Hubs
+Each domain has exactly one canonical index. Older vault hubs ([[CS-Core-Index]], [[AI-ML-Index]], [[Cybersecurity-Index]], [[Interview-Prep-Index]], [[Research-Index]]) are thin redirects to these.
 
-> Note counts below are approximate and drift as content is added.
+| Domain | Index |
+|---|---|
+| Command center (reviews, goals, dashboards) | [[Command-Center-Index]] |
+| CS fundamentals | [[CS-Core-Curriculum]] |
+| DSA patterns and problems | [[DSA-Index]] |
+| System design (HLD) | [[System-Design-Index]], [[Case-Studies-Index]] |
+| Low-level design | [[LLD-Index]] |
+| AI engineering | [[AI-Engineering-Index]] |
+| Security engineering | [[Security-Engineering-OS]] |
+| Career and interviews | [[Career-Index]], [[Interview-Engine-Index]] |
+| Research | [[Research-OS-Index]] |
+| Academic | [[Academic-Index]] |
+| Developer toolkit and cheat sheets | [[Cheat-Sheet-Index]] |
+| Prompts | [[Prompt-Library]] |
+| Automation | [[Automation-Toolkit]] |
+| Engineering patterns | [[Patterns-Index]] |
+| Checklists | [[Checklists-Index]] |
+| Architecture decision records | [[ADR-Index]] |
+| Project lab | [[Project-Lab-Index]] |
 
-- [[CS-Core-Index]] — 11 subject hubs + concept notes; start with [[CS-Core-Curriculum]]
-- [[Cybersecurity-Index]] — 17 notes: principles, web, crypto, operations, defense in depth
-- [[AI-ML-Index]] — 8 notes: foundations, transformers/LLMs, applied decisions
-- [[Interview-Prep-Index]] — 16 notes: coding patterns + languages/OOP + system design + behavioral
-- [[Research-Index]] — paper summaries, experiment discipline, reading heuristics
-- [[Cheat-Sheet-Index]] — fast-retrieval command and syntax references
+## Capture flow
 
-## Capture Flow
+1. Capture raw notes quickly
+2. Convert to a structured note ([[Concept-Note-Template]]) the same week, or delete
+3. Link each new note from its canonical index and to 2+ related notes
+4. Promote repeated lookups to [[Cheat-Sheet-Index]]
+5. Automate recurring workflows ([[Automation-Toolkit]])
 
-1. Capture raw notes quickly (inbox note, phone, margin)
-2. Convert to structured concept notes (`99-Templates/Concept-Note-Template.md`) — same week or delete
-3. Link each new note to its hub index and 2+ related notes
-4. Promote repeated lookups to [[Cheat-Sheet-Index]] entries
-5. Automate recurring workflows (`08-Automation-Toolkit/`)
+## Note quality bar
 
-## Retrieval Tags
+A note is done when it has a core idea you could say aloud in 20 seconds, at least one worked example, and 2+ working wikilinks. Status: `draft` until it clears the bar, then `evergreen`.
 
-- `#concept` — evergreen explanations
-- `#cheatsheet` — command/syntax speed references
-- `#interview` — patterns and prep material
-- `#project` — tied to something being built
-- `#research` — papers and experiments
-- `#bugfix` — solved problems worth remembering
-
-## Note Quality Bar
-
-A note is done when it has: a Core Idea you could say aloud in 20 seconds, Details with at least one worked example, an Interview Angle, and 2+ working wikilinks. Status frontmatter: `seed` → `evergreen` when it clears the bar.
-
-## Weekly Vault Maintenance (part of Sunday review)
+## Weekly vault maintenance
 
 - Merge duplicate notes; add missing backlinks
-- Promote top notes to templates or cheat sheets
-- Fill or delete any note still `seed` after 3 weeks
-- Archive low-value notes — a small linked vault beats a big dead one
+- Fill or delete any note still `draft` after 3 weeks
+- Archive low-value notes: a small linked vault beats a big dead one

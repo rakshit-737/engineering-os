@@ -43,6 +43,16 @@ order: 10
 - [ ] Resume tailored and reviewed ([[Resume-Review-Checklist]])
 - [ ] Project defense prepared for each project ([[Project-Defense-Guide]])
 
+## How this differs from neighbouring roles
+- vs [[Roadmap-Security-Engineer]]: same coding bar, but you are judged on product delivery (features, latency, reliability), not on threat models.
+- vs [[Roadmap-ML-Engineer]]: no model training; data is something you store and serve, not something you fit.
+- The deciding skill: shipping a tested, deployed service and explaining its trade-offs.
+
+## Readiness test (do these cold before applying)
+- [ ] Solve an unseen LeetCode medium in 25 minutes, talking through complexity, in a language you can write without an IDE.
+- [ ] Take a feature request ("add pagination + search to the task API"), implement it with tests and a migration, and open a PR a stranger could review.
+- [ ] Explain one production failure mode of your project (DB connection exhaustion, N+1 queries, race on concurrent update) and the fix.
+
 ## Portfolio projects
 
 | Project | Scope | What it proves |

@@ -14,6 +14,8 @@ order: 20
 
 # Detection Engineering
 
+> Concept overview: [[Security-Logging-and-Detection]]. Siblings: [[Log-Analysis]] (reading events), [[SIEM-Fundamentals]] (pipeline, queries), [[Detection-Engineering]] (rule lifecycle).
+
 Hub: [[Security-Engineering-OS]]
 
 ## Overview
@@ -42,7 +44,7 @@ Office application spawning a command interpreter (ATT&CK T1204 / T1059):
 
 ```yaml
 title: Office Application Spawning Shell
-id: 00000000-0000-0000-0000-000000000000   # generate a real UUID
+id: 6c0cb0a8-bf52-4268-aedd-dc4b9499cdb5
 status: experimental
 description: Detects Microsoft Office processes spawning cmd or PowerShell, common after malicious document execution.
 logsource:
@@ -68,6 +70,7 @@ level: high
 tags:
   - attack.execution
   - attack.t1059
+  - attack.t1204.002
 ```
 
 ## Testing

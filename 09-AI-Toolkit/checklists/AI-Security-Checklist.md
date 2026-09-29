@@ -50,7 +50,7 @@ Hub: [[AI-Engineering-Index]]
 
 ## Abuse and availability
 
-- [ ] Authentication on all model endpoints
+- [ ] Authentication on all model endpoints; all model calls go through one gateway ([[Pattern-LLM-Gateway]])
 - [ ] Rate limits and spend quotas per user/tenant
 - [ ] Max input size, max output tokens, max agent steps
 - [ ] Input normalization before filters ([[Adversarial-Inputs]])
@@ -70,4 +70,23 @@ Hub: [[AI-Engineering-Index]]
 - [ ] Kill switch for tools/features
 - [ ] Periodic red-team exercise scheduled
 
-> TODO: map items to your organization's security standards and to the OWASP Top 10 for LLM Applications (current edition).
+## Mapping to OWASP Top 10 for LLM Applications (2025 edition)
+
+The list is revised periodically; confirm the edition you report against. Scope note: this checklist is the pre-launch gate. The *why* and the defense designs live in [[Prompt-Injection]] (attack mechanics), [[Guardrails]] (runtime input/output checks) and [[AI-Data-Leakage-and-Privacy]].
+
+| OWASP LLM (2025) | Covered by sections above |
+|---|---|
+| LLM01 Prompt Injection | Prompt injection |
+| LLM02 Sensitive Information Disclosure | Access control and data |
+| LLM03 Supply Chain | Supply chain |
+| LLM04 Data and Model Poisoning | Supply chain (RAG write access, weight provenance) |
+| LLM05 Improper Output Handling | Output handling |
+| LLM06 Excessive Agency | Prompt injection (tool separation, approvals), Access control |
+| LLM07 System Prompt Leakage | Prompt injection (no secrets in prompts) |
+| LLM08 Vector and Embedding Weaknesses | Access control (ACLs in retrieval), Supply chain (poisoning) |
+| LLM09 Misinformation | Not a security control here - see [[Hallucination-Mitigation]] and [[Pattern-RAG-with-Citations]] |
+| LLM10 Unbounded Consumption | Abuse and availability |
+
+- [ ] Every OWASP LLM category above has an owner and at least one tested control
+
+> TODO: map items to your organization's own security standards.

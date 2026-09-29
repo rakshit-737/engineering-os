@@ -53,7 +53,7 @@ Short answers to say out loud; go deeper in the linked notes. If a follow-up goe
 
 **ACID?** Atomicity (all or nothing), Consistency (constraints hold), Isolation (concurrent transactions do not interfere beyond the chosen level), Durability (committed data survives crashes, typically via a write-ahead log).
 
-**Isolation levels and anomalies?** Read uncommitted (dirty reads), read committed (prevents dirty reads), repeatable read (prevents non-repeatable reads), serializable (prevents phantoms as well). Exact behavior varies by engine.
+**Isolation levels and anomalies?** Read uncommitted allows dirty reads; read committed prevents them but allows non-repeatable reads and lost updates; repeatable read prevents non-repeatable reads (ANSI still allows phantoms); serializable prevents all anomalies. Snapshot isolation (PostgreSQL's REPEATABLE READ, Oracle's SERIALIZABLE) is not an ANSI level: it prevents phantoms in reads but allows **write skew**. Follow-up interviewers use: "MySQL default?" -- Repeatable Read; "PostgreSQL default?" -- Read Committed. See [[Transactions-and-Isolation-Levels]].
 
 **Normalization?** 1NF atomic values; 2NF no partial dependency on a composite key; 3NF no transitive dependency on the key; BCNF every determinant is a candidate key. Denormalize deliberately for read performance.
 

@@ -43,7 +43,7 @@ Hub: [[AI-Engineering-Index]]
 
 - [ ] Timeouts per call and total request deadline
 - [ ] Retries with exponential backoff and jitter
-- [ ] Fallback model/provider tested ([[LLM-Cost-Optimization]])
+- [ ] Fallback model/provider tested ([[Pattern-Model-Fallback-Chain]])
 - [ ] Graceful degradation message when AI path unavailable
 - [ ] Load test at expected peak incl. provider rate limits
 - [ ] Provider quota increases requested in advance

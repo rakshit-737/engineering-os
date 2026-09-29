@@ -81,7 +81,7 @@ Image upload service: 200 uploads/s peak, thumbnail generation takes 2 s each ->
 - Visibility timeout (SQS) shorter than processing time -> duplicates.
 - Consumer rebalances storms in Kafka pause consumption.
 - Unbounded lag -> data ages out of retention before processing (data loss).
-- Dual-write problem: DB commit succeeds, publish fails -> use the outbox pattern ([[Event-Driven-Architecture]]).
+- Dual-write problem: DB commit succeeds, publish fails -> use the transactional outbox ([[Pattern-Transactional-Outbox]], concept in [[Event-Driven-Architecture]]).
 
 ## Security Implications
 
@@ -99,6 +99,8 @@ Authenticate producers/consumers (SASL/mTLS for Kafka, IAM for SQS), authorize p
 - **Can you get exactly-once?** End-to-end with external side effects, no; you build at-least-once + idempotent consumers. Kafka's EOS covers Kafka-to-Kafka pipelines.
 - **How do you preserve order per user?** Partition by user ID; one consumer per partition; handle retries without reordering (retry in place or per-key retry topic with care).
 - **What's a DLQ for?** Isolate poison messages so the pipeline keeps flowing and humans can inspect/redrive.
+
+Implementation patterns (code, config, and failure handling live there; this note covers the concept and tradeoffs): [[Pattern-Transactional-Outbox]] · [[Pattern-Idempotency-Keys]] · [[Pattern-Retry-with-Backoff]]
 
 ## Related
 

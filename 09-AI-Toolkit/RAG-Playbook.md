@@ -102,7 +102,7 @@ Question: {{question}}
 
 - Citation IDs must map to real source locations.
 - Order chunks by rerank score. Do not stuff 30 chunks because the window allows it - relevant facts mid-context get less attention ([[Context-Windows]]).
-- Validate cited IDs programmatically; reject/retry on violation.
+- Validate cited IDs programmatically; reject/retry on violation. Reusable implementation: [[Pattern-RAG-with-Citations]].
 
 ## Reference implementation (query path)
 

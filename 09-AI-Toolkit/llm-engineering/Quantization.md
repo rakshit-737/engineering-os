@@ -30,6 +30,19 @@ with scale $s = (x_{max}-x_{min})/(q_{max}-q_{min})$ and zero-point $z$.
 
 **Granularity:** per-tensor (one scale), per-channel (one per output row), per-group (one per block of e.g. 64-128 weights). Finer granularity -> lower error, slightly more metadata.
 
+**Formats you will actually meet** (do not conflate them):
+
+| Format | What it is | Notes |
+|---|---|---|
+| bf16 / fp16 | 16-bit floats; bf16 keeps fp32's 8-bit exponent (range), fp16 has more mantissa (precision) | bf16 is the usual training/serving baseline; fp16 can overflow on large activations |
+| fp8 E4M3 / E5M2 | 8-bit floats; E4M3 more precision (weights/activations), E5M2 more range (gradients) | Needs hardware support (e.g. recent datacenter GPUs) to be fast |
+| int8 | 8-bit integer + scale(s) | W8A8 needs outlier handling (SmoothQuant-style) |
+| int4 (GPTQ/AWQ checkpoints) | 4-bit integer weights with per-group scales | Weight-only; activations stay 16-bit |
+| NF4 | 4-bit "NormalFloat" levels spaced for normally distributed weights, with double-quantized scales | Introduced with QLoRA; mainly a fine-tuning/storage format, not a fast serving format |
+| GGUF (e.g. Q4_K_M) | A *file format* (llama.cpp ecosystem) holding block-quantized weights | CPU/edge and local inference; the suffix names the quant scheme, not a precision alone |
+
+Effective bits per weight exceed the nominal width once scales are counted (e.g. an fp16 scale per 128 int4 weights adds 0.125 bits).
+
 **Outliers:** a few large-magnitude values stretch the range and crush precision for the rest. Many LLM methods exist mainly to handle outliers.
 
 | Approach | Idea |

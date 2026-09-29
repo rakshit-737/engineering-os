@@ -16,6 +16,8 @@ order: 40
 
 Hub: [[AI-Engineering-Index]]
 
+> Scope: the single-agent loop (tools, stopping, budgets, workflow-vs-agent choice). Splitting work across agents: [[Multi-Agent-Systems]]. What persists across turns and sessions: [[Agent-Memory]]. Review list: [[Agent-Design-Checklist]].
+
 ## Core Idea
 
 An agent is an LLM in a loop: it decides the next action (usually a tool call), the runtime executes it, the result is appended to context, and the loop continues until the model produces a final answer or a limit is hit. The difference from a fixed pipeline ("workflow") is that the **model chooses the control flow**. Use an agent only when the steps genuinely cannot be known in advance; otherwise a deterministic workflow is cheaper, faster, and easier to test.

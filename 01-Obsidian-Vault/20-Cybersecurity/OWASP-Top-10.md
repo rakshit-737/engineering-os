@@ -1,6 +1,6 @@
 ---
 title: "OWASP Top 10"
-description: "Concept note: what each OWASP Top 10 (2021) risk category means and why it happens."
+description: "Concept note: what each OWASP Top 10 (2021, with 2025 mapping) risk category means and why it happens."
 domain: cybersecurity
 category: appsec
 type: concept
@@ -16,15 +16,17 @@ order: 30
 
 Hub: [[Cybersecurity-Index]] | Engineering OS: [[Security-Engineering-OS]]
 
-> **Concept vs checklist:** this note explains each risk category (what it is, why it happens, how it is exploited in principle). The actionable audit items with `- [ ]` tasks live in [[Web-Security-Checklist-OWASP]]. Deep dives: [[XSS]], [[SQL-Injection]], CSRF, SSRF, Authentication Security, Secure Coding.
+> **Concept vs checklist:** this note explains each risk category (what it is, why it happens, how it is exploited in principle). The actionable audit items with `- [ ]` tasks live in [[Web-Security-Checklist-OWASP]]. Deep dives: [[XSS]], [[SQL-Injection]], [[CSRF]], [[SSRF]], [[Authentication-Security]], [[Secure-Coding]].
 
 ## Core Idea
 
-The OWASP Top 10 is the consensus list of the most critical web application security risk *categories*, compiled from real-world vulnerability data and updated every few years (2021 edition is the standard reference). It is an awareness document and shared vocabulary, not a complete checklist — passing the Top 10 does not make an app secure.
+The OWASP Top 10 is the consensus list of the most critical web application security risk *categories*, compiled from real-world vulnerability data and updated every few years (2021 and 2025 editions; always name the edition you cite). It is an awareness document and shared vocabulary, not a complete checklist — passing the Top 10 does not make an app secure.
 
 ## Details
 
-> TODO: verify whether the OWASP Top 10 2025 edition has been finalized and update the table if so; this note uses the 2021 edition.
+> **Edition note:** OWASP published the **Top 10:2025** (final, late 2025). The table below is the 2021 list because most tooling, reports and interviewers still cite it; know the mapping.
+>
+> 2025 list: A01 Broken Access Control (now includes SSRF) · A02 Security Misconfiguration · A03 Software Supply Chain Failures (expands 2021 A06) · A04 Cryptographic Failures · A05 Injection · A06 Insecure Design · A07 Authentication Failures · A08 Software or Data Integrity Failures · A09 Security Logging and Alerting Failures · A10 Mishandling of Exceptional Conditions (new).
 
 **The 2021 list, with one attack and one defense each**
 
@@ -62,6 +64,7 @@ The OWASP Top 10 is the consensus list of the most critical web application secu
 - You don't need all ten verbatim; you must know A01 (access control), A03 (injection), and be able to give attack + mitigation for any category the interviewer picks.
 - Citing IDs naturally ("that's classic A01") signals fluency — but only if you can back it up with the mechanics.
 - Expect: "Pick one and go deep." Choose SQLi or XSS — you have full notes and code for both.
+- Expect: "What changed in 2025?" SSRF folded into A01, Security Misconfiguration up to #2, supply chain promoted to A03, new A10 for error/exception handling.
 - Expect: "What changed in the 2021 list?" A01 to the top, XSS merged into Injection, Insecure Design and SSRF added.
 - Appsec-role framing: Top 10 drives secure-code-review checklists, SAST/DAST rule priorities, and developer training topics.
 
@@ -73,8 +76,8 @@ The OWASP Top 10 is the consensus list of the most critical web application secu
 - [[Threat-Modeling-STRIDE]]
 - [[Hashing-vs-Encryption]]
 - [[Web-Security-Checklist-OWASP]]
-- CSRF
-- SSRF
-- Secure Coding
-- SAST DAST SCA
+- [[CSRF]]
+- [[SSRF]]
+- [[Secure-Coding]]
+- [[SAST-DAST-SCA]]
 - [[Cybersecurity-Index]]

@@ -40,7 +40,7 @@ Everything derives from the confusion matrix. Example: screening test on 1000 pa
 - A classifier outputs a score; the threshold converts it to a label. Lowering the threshold raises recall and lowers precision. You choose the operating point from error costs.
 - **ROC curve**: TPR vs FPR across thresholds. **ROC-AUC** = probability that a random positive scores above a random negative. 0.5 = random, 1.0 = perfect ranking.
 - **PR curve / average precision**: preferred under heavy imbalance, because FPR's denominator (all negatives) is huge and hides false positives that would swamp precision. The PR baseline is the positive rate, not 0.5.
-- **Calibration**: does a score of 0.8 mean 80% are positive? Check with reliability diagrams / Brier score; needed when scores feed decisions or costs.
+- **Calibration**: does a score of 0.8 mean 80% are positive? Check with reliability diagrams, Brier score, or expected calibration error (ECE: bin predictions by confidence, average |accuracy - mean confidence| weighted by bin size; sensitive to bin count, so report the binning); needed when scores feed decisions or costs.
 
 **Multiclass averaging**: macro = mean over classes (rare classes count equally); micro = pooled counts (dominated by frequent classes); weighted = macro weighted by support.
 
@@ -66,7 +66,7 @@ print(confusion_matrix(y_true, y_pred))
 p, r, f1, _ = precision_recall_fscore_support(y_true, y_pred, average="binary", zero_division=0)
 print(f"P={p:.2f} R={r:.2f} F1={f1:.2f}")
 print("ROC-AUC", round(roc_auc_score(y_true, y_score), 3))       # needs scores, not labels
-print("PR-AUC ", round(average_precision_score(y_true, y_score), 3))
+print("AP (PR-AUC)", round(average_precision_score(y_true, y_score), 3))
 
 # pick the threshold on VALIDATION data that reaches a recall target
 prec, rec, thr = precision_recall_curve(y_true, y_score)

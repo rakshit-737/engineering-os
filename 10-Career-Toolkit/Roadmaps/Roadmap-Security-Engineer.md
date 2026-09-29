@@ -39,6 +39,16 @@ order: 30
 - [ ] Security system design practice (design a secrets manager, an auth service)
 - [ ] Project defense ready ([[Project-Defense-Guide]])
 
+## How this differs from neighbouring roles
+- vs [[Roadmap-Cybersecurity-Engineer]]: that role operates controls (hardening, scanning, alert handling); this one **writes production code** for security systems and must pass SWE coding rounds.
+- vs [[Roadmap-Application-Security-Engineer]]: AppSec reviews other teams' code; a Security Engineer owns services (auth, secrets, key management) end to end.
+- The deciding skill: designing and implementing a secure system, not finding bugs in one.
+
+## Readiness test (do these cold before applying)
+- [ ] Implement login with Argon2id/bcrypt, session rotation on privilege change, and TOTP MFA, with tests for replay and brute-force limits.
+- [ ] Whiteboard a secrets manager: envelope encryption, KMS root key, rotation, audit log, blast radius of a leaked data key.
+- [ ] Pass a LeetCode medium under interview conditions (this role keeps the SWE bar).
+
 ## Portfolio projects
 
 | Project | Scope | What it proves |
@@ -59,4 +69,4 @@ Rolling your own crypto; ignoring coding prep; knowing attacks but not defensive
 ## Optional certifications
 Rarely required. OSCP (OffSec) is sometimes valued for offensive-leaning teams.
 
-Plain-text topics to study once notes exist: System Design: Rate-Limiting, System Design: API-Gateway.
+Security-flavoured system design prerequisites: [[Rate-Limiting]], [[API-Gateway]].

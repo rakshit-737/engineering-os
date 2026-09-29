@@ -95,6 +95,8 @@ Scope keys per authenticated principal (`tenant:user:key`) — otherwise one use
 - **Can Kafka give exactly-once to my DB?** Not by itself; use transactional outbox/inbox or idempotent writes keyed by offset/event ID.
 - **What's the response for a concurrent duplicate?** 409 or wait-and-return once the first completes.
 
+Implementation patterns (code, config, and failure handling live there; this note covers the concept and tradeoffs): [[Pattern-Idempotency-Keys]] · [[Pattern-Transactional-Outbox]] · [[Pattern-Retry-with-Backoff]]
+
 ## Related
 
 [[System-Design-Index]] · [[Message-Queues]] · [[Event-Driven-Architecture]] · [[Fault-Tolerance]] · [[API-Design-REST-gRPC-GraphQL]] · [[Distributed-Locks]] · [[Case-Study-Payment-System]]

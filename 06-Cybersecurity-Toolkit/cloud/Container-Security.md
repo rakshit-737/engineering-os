@@ -62,3 +62,11 @@ ENTRYPOINT ["/app"]
 - Kernel vulnerabilities (patch hosts; consider gVisor / Kata for untrusted workloads).
 
 See also: [[Kubernetes-Security]].
+
+## Interview questions
+
+**Q: Is a container a security boundary?**
+A: A weak one: containers share the host kernel. Use non-root, dropped capabilities, seccomp, read-only rootfs, and a sandbox runtime (gVisor, Kata) for untrusted code.
+
+**Q: Why pin images by digest?**
+A: Tags are mutable; a digest guarantees the exact bytes you scanned and signed are what runs.

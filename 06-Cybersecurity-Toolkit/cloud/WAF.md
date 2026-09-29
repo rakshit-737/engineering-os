@@ -62,3 +62,11 @@ flowchart LR
 - Rules left in Count forever.
 
 See also: [[OWASP-Top-10]], [[Web-Security-Checklist-OWASP]].
+
+## Interview questions
+
+**Q: Does a WAF fix SQL injection?**
+A: No. It is a compensating control that raises attacker cost and buys patch time; parameterized queries fix the root cause.
+
+**Q: How do you roll out new WAF rules safely?**
+A: Count/log-only mode first, review false positives against real traffic, then block, with per-rule exclusions documented.

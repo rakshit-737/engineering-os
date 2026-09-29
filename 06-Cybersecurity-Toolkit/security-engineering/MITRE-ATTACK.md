@@ -49,3 +49,11 @@ flowchart LR
 - Related: MITRE D3FEND (defensive techniques), CAPEC (attack patterns).
 
 See also: [[Cloud-Logging]], [[SOC-Analyst-Playbook]].
+
+## Interview questions
+
+**Q: Tactic vs technique vs procedure?**
+A: Tactic is the goal (Persistence), technique is how (T1547 Boot or Logon Autostart), procedure is a specific actor's implementation.
+
+**Q: How do you use ATT&CK for coverage?**
+A: Map each detection to techniques, weight by threat intel relevance, and test with emulation; a colored heatmap without tests overstates coverage.

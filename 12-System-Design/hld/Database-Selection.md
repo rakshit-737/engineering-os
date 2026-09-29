@@ -92,6 +92,8 @@ Food delivery app:
 - **When does Postgres stop being enough?** When writes or dataset exceed one primary even after vertical scaling, caching, and read replicas — often much later than people think.
 - **How do you model for Cassandra?** One table per query; partition key spreads load and keeps partitions bounded; clustering key gives order within a partition.
 
+Implementation patterns (code, config, and failure handling live there; this note covers the concept and tradeoffs): [[Pattern-Read-Replicas]]
+
 ## Related
 
 [[System-Design-Index]] · [[Replication]] · [[Sharding-and-Partitioning]] · [[Search-Systems-Inverted-Index]] · [[Storage-Blob-vs-Block-vs-File]] · [[Case-Study-Food-Delivery]]

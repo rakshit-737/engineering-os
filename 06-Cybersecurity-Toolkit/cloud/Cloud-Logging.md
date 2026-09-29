@@ -68,3 +68,11 @@ ORDER BY eventtime DESC;
 ```
 
 See also: [[Cloud-Account-Compromise-Playbook]], [[SOC-Analyst-Playbook]].
+
+## Interview questions
+
+**Q: Which AWS logs matter first in an incident?**
+A: CloudTrail management events (org trail, all regions), then data events for sensitive S3/Lambda, VPC Flow Logs, and GuardDuty findings.
+
+**Q: How do you protect the logs themselves?**
+A: Central log-archive account, S3 Object Lock or restrictive bucket policy, CloudTrail log file validation, and alerts on StopLogging/DeleteTrail/PutEventSelectors.

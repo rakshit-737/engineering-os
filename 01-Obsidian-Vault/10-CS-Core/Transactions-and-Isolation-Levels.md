@@ -66,8 +66,8 @@ sequenceDiagram
 |---|---|---|---|---|---|
 | Read Uncommitted | Possible | Possible | Possible | Possible | Possible |
 | Read Committed | No | Possible | Possible | Possible | Possible |
-| Repeatable Read (lock-based) | No | No | Possible | No | Possible |
-| Snapshot Isolation | No | No | No (reads see a snapshot) | No (first-committer-wins) | **Possible** |
+| Repeatable Read (lock-based) | No | No | Possible | No | No (read locks held to commit block the second writer) |
+| Snapshot Isolation | No | No | No for reads (predicate-based write skew still possible) | No (first-committer-wins) | **Possible** |
 | Serializable | No | No | No | No | No |
 
 ### Per-engine notes
@@ -130,6 +130,9 @@ A: Atomicity (all or nothing), Consistency (constraints preserved), Isolation (c
 
 **Q: MVCC vs 2PL?**
 A: 2PL serializes conflicting access with locks, so readers can block writers. MVCC keeps row versions so reads use a snapshot and never block writes, at the cost of version storage and garbage collection.
+
+**Q: Snapshot isolation vs lock-based Repeatable Read?**
+A: They are incomparable (Berenson et al.). Lock-based RR allows phantoms but blocks write skew on rows it read, because shared locks are held to commit. SI hides phantoms from reads but allows write skew.
 
 **Q: What anomaly does snapshot isolation still allow?**
 A: Write skew: two transactions read the same data, update different rows based on it, and together break an invariant.

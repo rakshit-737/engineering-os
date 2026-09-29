@@ -16,6 +16,8 @@ order: 30
 
 Hub: [[AI-Engineering-Index]]
 
+> Scope: the runtime enforcement layer (what checks run, where, and how they fail). Attack mechanics and why injection cannot be fully fixed: [[Prompt-Injection]]. Pre-launch audit list: [[AI-Security-Checklist]]. Centralize shared checks in [[Pattern-LLM-Gateway]] rather than per feature.
+
 ## Core Idea
 
 Guardrails are deterministic or model-based checks placed **outside** the LLM, on inputs, outputs, and actions. The system prompt is a request; a guardrail is enforcement. Because every individual check can be bypassed, guardrails are layered and the most important ones are deterministic (schema validation, allowlists, permission checks).

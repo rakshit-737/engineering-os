@@ -106,4 +106,15 @@ Remember to allow DNS egress after default-deny.
 - Keep versions supported; patch nodes.
 - Block pod access to cloud metadata endpoint where not needed.
 
-See also: [[Container-Security]], [[Kubernetes-Security]] checklist items in [[Cloud-Security-Checklist]].
+See also: [[Container-Security]], and the Kubernetes checklist items in [[Cloud-Security-Checklist]].
+
+## Interview questions
+
+**Q: Top three things to check in a cluster review?**
+A: RBAC (no wildcard verbs/cluster-admin bindings for workloads, no `create pods`/`escalate`/`bind` to untrusted subjects), Pod Security Admission at `restricted` for app namespaces, and default-deny NetworkPolicies.
+
+**Q: Why is access to create pods dangerous?**
+A: A pod can mount host paths, run privileged, or mount any service account token in the namespace, so it is effectively node or SA escalation.
+
+**Q: Where do you detect Kubernetes abuse?**
+A: API server audit logs (exec, secrets reads, RBAC changes, privileged pod creation) plus runtime sensors (e.g. Falco) on nodes.

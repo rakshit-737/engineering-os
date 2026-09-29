@@ -45,7 +45,7 @@ flowchart TD
 - **Slow start**: begin with a small initial window (RFC 6928 allows 10 segments) and add 1 MSS per ACK. The window doubles each RTT, so growth is exponential. Despite the name, it is fast.
 - **Congestion avoidance (AIMD)**: once past `ssthresh`, increase additively (about 1 MSS per RTT) and decrease multiplicatively on loss (halve). AIMD converges toward fair sharing among competing flows.
 - **Fast retransmit**: 3 duplicate ACKs suggest a single lost segment while later segments are still arriving. Resend it without waiting for the RTO.
-- **Fast recovery** (Reno): after fast retransmit, set `cwnd = ssthresh = cwnd/2` and continue in congestion avoidance instead of dropping to 1. **NewReno** handles multiple losses in one window better. **SACK** tells the sender exactly which blocks are missing.
+- **Fast recovery** (Reno, RFC 5681): set `ssthresh = max(FlightSize/2, 2 MSS)`, retransmit, and temporarily inflate `cwnd = ssthresh + 3 MSS` (+1 MSS per further dup ACK, since each means a segment left the network). When the new ACK arrives, deflate `cwnd` to `ssthresh` and continue in congestion avoidance instead of dropping to 1. The table below shows only the post-recovery value. **NewReno** handles multiple losses in one window better. **SACK** tells the sender exactly which blocks are missing.
 - **Timeout**: treated as severe congestion. `cwnd` goes back to 1 MSS and slow start restarts. **Tahoe** did this on every loss, including triple duplicate ACKs.
 
 ### Algorithms at a high level

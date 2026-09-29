@@ -76,3 +76,14 @@ Enforce verification at deploy with an admission controller (e.g., Sigstore poli
 - OpenSSF Scorecard to assess dependencies' hygiene.
 
 See also: [[Container-Security]].
+
+## Interview questions
+
+**Q: What does SLSA Build L3 add over L2?**
+A: A hardened build platform: builds are isolated from one another and signing material is inaccessible to user-defined build steps, so a tenant cannot forge provenance.
+
+**Q: SBOM vs VEX?**
+A: An SBOM lists components; VEX states whether a known CVE in those components is actually exploitable in this product, cutting false-positive triage.
+
+**Q: How does keyless signing work?**
+A: Fulcio issues a short-lived cert bound to an OIDC identity (e.g. CI workflow), the signature is logged in Rekor, and verifiers check identity plus issuer, not a long-lived key.

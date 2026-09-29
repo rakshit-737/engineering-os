@@ -16,6 +16,8 @@ order: 40
 
 Hub: [[AI-Engineering-Index]]
 
+> Scope: the threat itself - types, attack chains, and architectural containment. Concrete runtime checks: [[Guardrails]]. Launch gate: [[AI-Security-Checklist]].
+
 ## Core Idea
 
 An LLM receives instructions and data in the same channel: a token stream. There is no reliable in-band way to mark "this part is data, never obey it". Prompt injection is when attacker-controlled text is interpreted as instructions. It is structurally similar to [[SQL-Injection]], but unlike SQL there is no parameterized-query equivalent that fully fixes it. Defenses therefore focus on **limiting what a successfully injected model can do**.

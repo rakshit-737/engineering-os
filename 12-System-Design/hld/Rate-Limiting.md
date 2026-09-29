@@ -116,7 +116,7 @@ def sliding_allow(user, limit=100, window=60):
 
 ## Example (assumptions)
 
-Public API tier: 100 req/s sustained, bursts of 200. Token bucket capacity 200, rate 100/s. 1M active keys × ~50 bytes per hash ≈ 50 MB in Redis. At 50k limiter checks/s, a small Redis cluster handles it; on Redis failure, fail open for authenticated paying users but keep a local per-instance limit as a safety net.
+Public API tier: 100 req/s sustained, bursts of 200. Token bucket capacity 200, rate 100/s. 1M active keys × ~150-200 B each (key name + 2-field hash + Redis per-key overhead; measure with `MEMORY USAGE`) ≈ 150-200 MB in Redis — still small. At 50k limiter checks/s, a small Redis cluster handles it; on Redis failure, fail open for authenticated paying users but keep a local per-instance limit as a safety net.
 
 ## Tradeoffs
 
@@ -153,6 +153,8 @@ Rate limits slow credential stuffing, OTP brute force, scraping, and enumeration
 - **What if Redis is down?** Choose per endpoint: fail open with local limits for general traffic; fail closed for security-sensitive endpoints.
 - **Fixed window problem?** A client can send the full limit at the end of one window and again at the start of the next.
 - **How to tell the client?** 429, `Retry-After`, and remaining-quota headers.
+
+Implementation patterns (code, config, and failure handling live there; this note covers the concept and tradeoffs): [[Pattern-Retry-with-Backoff]]
 
 ## Related
 

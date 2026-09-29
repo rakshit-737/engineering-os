@@ -62,7 +62,7 @@ Redlock acquires the lock on a majority of N (e.g., 5) independent Redis masters
 
 ## Example (assumptions)
 
-A nightly billing job runs on 3 replicas for HA; only one must charge customers. Use etcd lease (TTL 15 s, keepalive every 5 s). Each charge write to the ledger DB carries the lease revision; the DB row `job_owner(revision)` rejects writes with older revisions. Plus each charge uses an idempotency key, so even a double run doesn't double-charge.
+A nightly billing job runs on 3 replicas for HA; only one must charge customers. Use etcd lease (TTL 15 s, keepalive every 5 s). Each charge write to the ledger DB carries the lock key's `create_revision` (a lease ID is not monotonic, so it cannot be a fencing token); the ledger stores the highest revision seen in `job_owner(revision)` and rejects writes carrying an older one — the check and the write must be in the same DB transaction. Plus each charge uses an idempotency key, so even a double run doesn't double-charge.
 
 ## Tradeoffs
 
@@ -97,6 +97,8 @@ Anyone who can write to the lock store can seize or release locks — authentica
 - **What is a fencing token?** Monotonic number issued on each acquisition; resources reject operations with a token lower than the highest seen.
 - **Is Redlock safe?** Not for correctness: it relies on timing assumptions and lacks fencing tokens. Fine for efficiency.
 - **How to avoid locks altogether?** Partition ownership, idempotency, conditional writes/CAS, or a single-writer queue per key.
+
+Implementation patterns (code, config, and failure handling live there; this note covers the concept and tradeoffs): [[Pattern-Leader-Election]] · [[Pattern-Optimistic-Locking]] · [[Pattern-Idempotency-Keys]]
 
 ## Related
 

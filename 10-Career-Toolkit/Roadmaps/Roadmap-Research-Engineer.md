@@ -37,6 +37,16 @@ order: 110
 - [ ] One paper reproduction with an honest report of what matched and what did not
 - [ ] Research experience (lab internship, workshop paper, or strong open-source research code)
 
+## How this differs from neighbouring roles
+- vs [[Roadmap-ML-Engineer]]: your output is a correct, reproducible experiment, not a production service.
+- vs research scientist: you are hired for implementation speed and rigor (reproducing papers, scaling training), less for proposing new ideas.
+- The deciding skill: reproducing a paper's number (or showing why you cannot) with seeds, configs and an ablation.
+
+## Readiness test (do these cold before applying)
+- [ ] Reimplement one paper's core result from scratch and report the gap to the published number across 3+ seeds with mean and std.
+- [ ] Find and fix a silent bug in a training loop (wrong loss reduction, data shuffling off, eval in train mode).
+- [ ] Log every run with config, commit hash and seed so a colleague reproduces your best run from the log alone ([[Experiment-Tracking-Guide]]).
+
 ## Portfolio projects
 
 | Project | Scope | What it proves |

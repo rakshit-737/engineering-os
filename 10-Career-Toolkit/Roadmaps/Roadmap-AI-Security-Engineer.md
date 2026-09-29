@@ -37,6 +37,16 @@ order: 100
 - [ ] Published red-team/eval write-up with reproducible test cases
 - [ ] Interview prep across AppSec and ML ([[Interview-Cybersecurity-Round]])
 
+## How this differs from neighbouring roles
+- vs [[Roadmap-AI-Engineer]]: you attack and defend LLM systems rather than ship features on them.
+- vs [[Roadmap-Application-Security-Engineer]]: same review mindset, but new attack surfaces: prompt injection, tool abuse, training-data poisoning, unsafe model files.
+- Prerequisite reality: most people enter from AppSec or AI engineering; there are few true entry-level postings.
+
+## Readiness test (do these cold before applying)
+- [ ] Achieve an indirect prompt injection through a retrieved document in a RAG app you built, then block it with a control you can justify (privilege separation, tool allowlist, output handling).
+- [ ] Explain why loading an untrusted pickle-based model file is code execution, and which format avoids it.
+- [ ] Threat-model an agent with email + calendar tools: list the three highest-impact abuse paths and mitigations.
+
 ## Portfolio projects
 
 | Project | Scope | What it proves |

@@ -46,13 +46,13 @@ Two very different paths: a **write path** (upload -> transcode DAG -> storage) 
 
 Assumptions: 500 hours of video uploaded per minute, 1B views/day, avg watch 5 min at avg 2 Mbps delivered, original upload bitrate ~10 Mbps, renditions total ~1.5x original size combined.
 
-- Upload volume: 500 h/min x 60 = 30,000 h/day = 108M seconds/day. At 10 Mbps = 1.25 MB/s -> 108M x 1.25 MB = **135 TB/day originals**.
-- Renditions: 1.5 x 135 = ~200 TB/day. Total ~**335 TB/day -> ~122 PB/yr** (before replication; x3 replicas or erasure coding ~1.5x).
-- Upload ingress bandwidth: 135 TB / 86,400 s = **~1.6 GB/s**.
+- Upload volume: 500 h/min x 1,440 min/day = **720,000 h/day** = 2.592B seconds/day. At 10 Mbps = 1.25 MB/s -> 2.592B x 1.25 MB = **~3.24 PB/day originals**.
+- Renditions: 1.5 x 3.24 PB = ~4.86 PB/day. Total ~**8.1 PB/day -> ~3 EB/yr** (before replication; x3 replicas or erasure coding ~1.5x). At this size storage policy dominates: keep originals in cold/archival tiers, and drop or lazily regenerate rarely watched renditions (most uploads get few views).
+- Upload ingress bandwidth: 3.24 PB / 86,400 s = **~37.5 GB/s** (~300 Gbps) avg - spread across regional upload endpoints.
 - Views: 1B / 86,400 = **~11.6K view starts/s** avg; peak x3 ~35K/s.
 - Egress: concurrent streams = 1B x 300 s / 86,400 = ~3.5M concurrent avg. x 2 Mbps = **~7 Tbps** avg - only a CDN can serve this.
-- Transcode compute: 30,000 h/day of video; if one rendition ladder takes ~2x real time per core-set, that's tens of thousands of cores continuously - parallelize by chunks.
-- Metadata: 30,000 h/day / avg 10 min video = ~180K videos/day x 5 KB = ~0.9 GB/day. Small.
+- Transcode compute: 720,000 h/day = 30,000 h of new video every hour; if one full rendition ladder takes ~2x real time per core-set (assumption), that is ~60,000 core-sets busy continuously - parallelize by chunks and prioritize (fast low-res first, expensive codecs like AV1 only for popular videos).
+- Metadata: 720,000 h/day / avg 10 min video = ~4.3M videos/day x 5 KB = ~22 GB/day (~8 TB/yr). Small relative to media.
 
 ## 5. API design
 

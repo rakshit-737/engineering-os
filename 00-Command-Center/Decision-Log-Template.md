@@ -43,6 +43,30 @@ For technical architecture decisions inside a codebase, use a proper ADR instead
 
 - [ ] Revisited
 
+## Worked Example
+
+### D-2026-01-12-01: Drop the Android app from the semester project
+
+- Date: 2026-01-12
+- Area: project
+- Reversibility: costly (3 weeks of work lost if reversed late)
+- Context: Team of 3, demo in 6 weeks. Backend API is 40% done; nobody has shipped an Android app before.
+- Options considered:
+  1. Build backend + Android app (original plan)
+  2. Backend + responsive web frontend
+  3. Do nothing: keep plan and cut testing time
+- Decision: Option 2.
+- Why: two of three members already know React; the grading rubric scores working features and tests, not platform.
+- What I expect to happen: all 5 core features demoable by week 5 with integration tests passing.
+- What would make me reverse it: the instructor states mobile is mandatory.
+- Revisit date: 2026-02-23 (demo week)
+
+**Revisit:**
+
+- What actually happened: 5/5 features demoed; 2 integration tests flaky.
+- Was the reasoning sound? Yes; flaky tests came from shared DB state, unrelated to the decision.
+- Lesson: decide platform in week 1 by team skill, not by what looks impressive.
+
 ## Index
 
 | ID | Date | Title | Revisit | Outcome matched expectation? |

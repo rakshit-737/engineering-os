@@ -16,6 +16,8 @@ order: 60
 
 Hub: [[AI-Engineering-Index]]
 
+> Scope: storage and retrieval of state across turns/sessions. The control loop that consumes memory is [[AI-Agents]]; state shared between agents is covered in [[Multi-Agent-Systems]].
+
 ## Core Idea
 
 LLMs are stateless: the only thing the model "remembers" is what is in the current context window. Agent memory is an external system that decides **what to store, how to retrieve it, and what to put back into context**. It is retrieval engineering applied to the agent's own history.

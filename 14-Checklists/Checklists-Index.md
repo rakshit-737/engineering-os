@@ -39,15 +39,25 @@ Every `- [ ]` item in these notes is a trackable checkbox in the app (progress i
 
 ## Owned elsewhere
 
-These checklists live with their subject-matter notes in other toolkits. Search for them by name:
+These checklists live with their subject-matter notes in other toolkits:
 
-- RAG-System-Checklist: retrieval-augmented generation systems (AI toolkit)
-- Agent-Design-Checklist: LLM agents and tool use (AI toolkit)
-- AI-Security-Checklist: prompt injection, data leakage, model abuse (AI toolkit)
-- Security-Review-Checklist: code and design security review (cybersecurity toolkit)
-- Incident-Response-Checklist: detection through postmortem (cybersecurity toolkit)
-- Interview-Prep-Checklist: interview preparation (career toolkit)
-- Reproducibility-Checklist: experiment reproducibility (research toolkit)
+**AI** (`09-AI-Toolkit/checklists/`)
+- [[RAG-System-Checklist]]: design, build, evaluate and operate a RAG system
+- [[Agent-Design-Checklist]]: scope, build, secure and operate LLM agents
+- [[AI-Security-Checklist]]: threat modeling, prompt injection, data protection for LLM apps
+- [[AI-App-Launch-Checklist]]: go-live for an LLM-powered feature
+
+**Security** (`06-Cybersecurity-Toolkit/checklists/`)
+- [[Security-Review-Checklist]]: design or code security review before shipping
+- [[Incident-Response-Checklist]]: run during an incident, preparation through lessons learned
+- [[Cloud-Security-Checklist]]: AWS baseline for identity, logging, network, data, compute
+- [[Web-Security-Checklist-OWASP]]: OWASP Top 10 checks for your own app
+
+**Career, research, academic**
+- [[Interview-Prep-Checklist]]: week before, day before, day of, follow-up
+- [[Resume-Review-Checklist]]: honesty, content, formatting, ATS readability
+- [[Reproducibility-Checklist]]: code, data, environment, seeds, results
+- [[Revision-Checklist]]: pre-exam coverage, active recall, past papers
 
 ## Using checklists well
 

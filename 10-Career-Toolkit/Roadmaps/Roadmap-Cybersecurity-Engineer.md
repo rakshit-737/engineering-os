@@ -40,6 +40,16 @@ order: 20
 - [ ] 2-3 write-ups (CTF, lab, or detection engineering)
 - [ ] Security interview practice ([[Interview-Cybersecurity-Round]], [[Security-Interview-Questions]])
 
+## How this differs from neighbouring roles
+- vs [[Roadmap-Security-Engineer]]: less production coding, more operating tools (firewalls, EDR, SIEM, scanners) across a fleet.
+- vs [[Roadmap-SOC-Analyst]]: you build and harden the controls; the SOC analyst watches their output on shift.
+- This is a **breadth** roadmap: finish it, then commit to one specialized roadmap within 6 months or your profile reads as unfocused.
+
+## Readiness test (do these cold before applying)
+- [ ] Given a fresh Linux VM, harden it (SSH keys only, firewall default-deny, auditd, unattended upgrades) and prove each control with a command.
+- [ ] Read a pcap of a brute-force + successful login and write a one-page incident summary with timeline and IOCs.
+- [ ] Prioritise 20 scanner findings by exploitability and exposure, not CVSS alone, and defend the order.
+
 ## Portfolio projects
 
 | Project | Scope | What it proves |

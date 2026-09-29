@@ -14,6 +14,8 @@ order: 10
 
 # SIEM Fundamentals
 
+> Concept overview: [[Security-Logging-and-Detection]]. Siblings: [[Log-Analysis]] (reading events), [[SIEM-Fundamentals]] (pipeline, queries), [[Detection-Engineering]] (rule lifecycle).
+
 Hub: [[Security-Engineering-OS]]
 
 ## Overview

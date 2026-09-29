@@ -19,13 +19,13 @@ Every case study follows the same 15 sections: Requirements, Functional, Non-fun
 
 | Case study | What this teaches | Difficulty |
 |---|---|---|
-| [[Case-Study-URL-Shortener]] | ID generation, read-heavy caching, and key-value data modeling | beginner |
+| [[Case-Study-URL-Shortener]] | Key generation, fast read-heavy redirects, and click analytics | beginner |
 | [[Case-Study-WhatsApp]] | Real-time messaging over persistent connections, delivery receipts, and offline delivery | advanced |
-| [[Case-Study-Instagram]] | Feed generation with fan-out on write vs read, plus media storage and CDN | intermediate |
+| [[Case-Study-Instagram]] | Feed generation with fan-out on write vs read, the celebrity problem, and a media processing pipeline | advanced |
 | [[Case-Study-YouTube]] | Video upload, transcoding pipelines, and adaptive streaming at scale | advanced |
-| [[Case-Study-Netflix]] | Global content delivery, edge caching, and resilience through microservices | advanced |
+| [[Case-Study-Netflix]] | ISP-embedded edge caching, control-plane/data-plane split, and chaos engineering | advanced |
 | [[Case-Study-Uber]] | Geospatial indexing, real-time location updates, and driver-rider matching | advanced |
-| [[Case-Study-Food-Delivery]] | Order lifecycle state machines, three-sided marketplace coordination, and ETAs | intermediate |
+| [[Case-Study-Food-Delivery]] | Order lifecycle state machines, three-sided marketplace coordination, courier dispatch, and ETA prediction | advanced |
 
 ## Platform and infrastructure systems
 

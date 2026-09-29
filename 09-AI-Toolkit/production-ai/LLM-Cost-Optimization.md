@@ -16,6 +16,8 @@ order: 30
 
 Hub: [[AI-Engineering-Index]]
 
+> Scope: dollars per successful task. Latency levers (streaming, parallelism, TTFT/TPOT) live in [[LLM-Latency-Optimization]]; several levers (caching, smaller models) help both, but routing/cascades and batch APIs often *trade latency for cost*. The gateway that hosts these controls is [[Pattern-LLM-Gateway]]; the ordered-fallback mechanics are [[Pattern-Model-Fallback-Chain]].
+
 ## Core Idea
 
 For API models, cost per request is roughly:
@@ -69,15 +71,16 @@ class TTLCache:
     def set(self, k, val):
         self.data[k] = (time.time(), val)
 
-def cache_key(tenant, model, messages, params):
-    blob = json.dumps({"t": tenant, "m": model, "msg": messages, "p": params}, sort_keys=True)
+def cache_key(scope, model, messages, params):
+    # scope = tenant + user/role + ACL version: anything that changes what the caller may see
+    blob = json.dumps({"t": scope, "m": model, "msg": messages, "p": params}, sort_keys=True)
     return hashlib.sha256(blob.encode()).hexdigest()
 
-def complete(messages, tenant, providers, route, validate, cache, budget_tokens=4000):
+def complete(messages, scope, providers, route, validate, cache, budget_tokens=4000):
     """providers: dict name -> fn(messages, max_tokens) returning {"text", "usage"}."""
     params = {"max_tokens": min(budget_tokens, 1024), "temperature": 0}
     order = ["small", "large", "fallback"] if route(messages) == "simple" else ["large", "fallback"]
-    key = cache_key(tenant, order[0], messages, params)
+    key = cache_key(scope, order[0], messages, params)  # keyed by route, not by whichever model answered
     if (hit := cache.get(key)) is not None:
         return hit
     last_err = None
@@ -108,6 +111,8 @@ Prompt-caching layout: `[static system prompt][tool definitions][static referenc
 - Retry storms on rate limits multiply cost; use backoff with jitter and circuit breakers.
 - Agents with no step cap produce unbounded bills.
 - Cost not attributed per feature, so nobody knows what to optimize.
+- Cascade whose escalation rate creeps up (e.g. after a small-model update) until it costs more than calling the large model directly; alert on escalation rate.
+- Cost per *call* optimized while cost per *successful task* rises (more retries, more user re-asks).
 
 ## Security implications
 

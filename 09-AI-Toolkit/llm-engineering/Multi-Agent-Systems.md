@@ -16,6 +16,8 @@ order: 50
 
 Hub: [[AI-Engineering-Index]]
 
+> Scope: coordination between several agents (topologies, handoffs, shared state). The per-agent loop is in [[AI-Agents]]; persistence in [[Agent-Memory]].
+
 ## Core Idea
 
 A multi-agent system splits work across several LLM instances, each with its own prompt, tools, and context window. The main real benefits are **context isolation** (each worker sees only what it needs), **parallelism**, and **specialized tool sets**. The costs are more tokens, coordination bugs, and harder debugging. Start with one agent; split only when a single context is overloaded or tasks are naturally parallel.

@@ -18,7 +18,7 @@ Hub: [[AI-Engineering-Index]]
 
 How to measure whether an LLM system (prompt + model + retrieval + config) actually works. The core discipline: no prompt or model change ships without a before/after comparison on a fixed eval set.
 
-**Scope:** this note defines *what* to measure - datasets, scorers, rubrics, judges, metrics. *How* to run it continuously (CI gates, regression runs, online eval, sampling, infra) lives in [[LLM-Evaluation-Pipelines]]. A fill-in plan: [[AI-Evaluation-Template]].
+**Scope:** this note defines *what* to measure - datasets, scorers, rubrics, judges, metrics. *How* to run it continuously (CI gates, regression runs, online eval, sampling, infra) lives in [[LLM-Evaluation-Pipelines]]. A fill-in plan: [[AI-Evaluation-Template]]. The reusable judge implementation (rubric prompt, calibration loop) is [[Pattern-LLM-as-Judge]].
 
 ```mermaid
 flowchart LR
@@ -76,7 +76,7 @@ An LLM applies the rubric or compares two outputs. Scales rubric scoring to hund
 | **Sycophancy/anchoring** | Scores drift toward any hint of the "expected" answer or author identity in the prompt | Strip metadata; give the judge only the input, output, and rubric |
 | **Leniency drift** | Judges avoid low scores; everything clusters at 4/5 | Force per-criterion binary pass/fail instead of 1–5 scales; require citing evidence from the output for each verdict |
 
-Calibration procedure: have the judge score 20–30 cases that a human has already scored; measure agreement per criterion. Below ~85% agreement, fix the rubric (usually) or the judge prompt, and re-check. Re-calibrate when the rubric or judge model changes. Spot-check 10% of judge verdicts ongoing.
+Calibration procedure: have the judge score cases a human has already labeled; measure agreement *and* Cohen's kappa per criterion (raw agreement is inflated when one label dominates - a judge that always says PASS on a 90%-pass set gets 90% agreement and kappa 0). 20-30 cases is a smoke test, not a calibration: the Wilson interval on 25 cases is roughly +/-15 points, so aim for 100+ labeled cases, stratified to include failures, before trusting the judge for gating. Set the acceptance bar per criterion from what the decision can tolerate (no universal threshold); if below it, fix the rubric (usually) or the judge prompt, and re-check. Re-calibrate when the rubric or judge model changes. Spot-check 10% of judge verdicts ongoing.
 
 ### 4. Human evaluation
 

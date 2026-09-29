@@ -48,7 +48,7 @@ Assumptions:
 
 - 500M users, 50M DAU.
 - Average user stores 2 GB; 10% of logical bytes deduplicated away.
-- Each DAU modifies 5 files/day of average 2 MB, and each change touches ~2 chunks of 4 MB max (small files are one chunk).
+- Each DAU modifies 5 files/day of average 2 MB, files are split into 4 MB chunks, so a typical 2 MB file is one chunk and an edit to a large file re-uploads only the ~1-2 changed chunks.
 - Metadata per file ~1 KB; per chunk reference ~100 B.
 
 Arithmetic:

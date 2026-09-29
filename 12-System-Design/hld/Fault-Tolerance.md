@@ -64,7 +64,7 @@ Serve cached/stale data, hide non-critical widgets (recommendations), switch to 
 
 ## Example (assumptions)
 
-Product page calls pricing (critical), reviews and recommendations (non-critical). Recommendations p99 = 80 ms -> timeout 100 ms, 1 retry with jitter, breaker opens at 50% failures over 20 requests, fallback = "popular items" from cache. Separate connection pools: pricing 50, reviews 20, recs 20. When recs is down, the page loads ~100 ms faster (breaker fast-fails), not 30 s slower.
+Product page calls pricing (critical), reviews and recommendations (non-critical). Recommendations p99 = 80 ms -> timeout 100 ms, 1 retry with jitter, breaker opens at 50% failures over 20 requests, fallback = "popular items" from cache. Separate connection pools: pricing 50, reviews 20, recs 20. When recs hangs, each page pays at most the 100 ms timeout (plus the retry) until the breaker opens, then ~0 ms because calls fast-fail to the fallback. Without the timeout, a hung recs call would hold the page until some library default (often tens of seconds or infinite) and exhaust the shared thread pool.
 
 ## Tradeoffs
 
@@ -101,6 +101,8 @@ Resilience features double as DoS defenses (shedding, bulkheads per tenant). But
 - **When should you not retry?** Non-idempotent operations without keys, 4xx client errors, when the retry budget is exhausted, or when the caller's deadline has passed.
 - **Circuit breaker vs retry?** Retries handle brief transient faults; breakers handle sustained failure by stopping calls. Use both, breaker outside retries.
 - **What's a bulkhead?** Resource partitioning so one failing dependency can only exhaust its own pool.
+
+Implementation patterns (code, config, and failure handling live there; this note covers the concept and tradeoffs): [[Pattern-Circuit-Breaker]] · [[Pattern-Bulkhead]] · [[Pattern-Retry-with-Backoff]] · [[Pattern-Idempotency-Keys]]
 
 ## Related
 

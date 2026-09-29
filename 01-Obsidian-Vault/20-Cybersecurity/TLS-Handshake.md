@@ -26,7 +26,7 @@ The TLS handshake sets up a secure channel before any application data flows. It
 
 1. **ClientHello** → client sends supported TLS versions, cipher suites, and — key change in 1.3 — its ephemeral (EC)DHE key share(s) immediately, guessing the group.
 2. **ServerHello** → server picks the cipher suite, sends its own ephemeral key share. Both sides now compute the shared secret via Diffie-Hellman and derive session keys. Everything after this point is encrypted.
-3. Server sends {Certificate}, {CertificateVerify} (signs the handshake transcript with its cert private key — proving it owns the cert), and {Finished}.
+3. Server sends {EncryptedExtensions}, {Certificate}, {CertificateVerify} (signs the handshake transcript with its cert private key — proving it owns the cert), and {Finished}.
 4. Client verifies the certificate chain and the signature, sends {Finished}. Application data flows. One round trip total; 0-RTT resumption is possible for repeat visits (with replay caveats).
 
 **Why (EC)DHE gives forward secrecy**

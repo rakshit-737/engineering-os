@@ -53,3 +53,11 @@ Joiner-mover-leaver automation (SCIM), periodic access reviews, remove dormant a
 Impossible travel, new device + MFA reset, MFA fatigue (many push prompts), mass OAuth consent grants, new inbox rules, password spray patterns (many users, few attempts each).
 
 See also: [[Compromised-Credentials-Playbook]], [[IAM-Deep-Dive]].
+
+## Interview questions
+
+**Q: Why is MFA not enough on its own?**
+A: Push-fatigue, SIM swap and adversary-in-the-middle phishing still bypass OTP/push; FIDO2/WebAuthn is origin-bound and resists phishing.
+
+**Q: What identity events would you alert on?**
+A: Impossible travel, MFA method changes, new OAuth consent grants with broad scopes, privileged role assignment, and legacy-auth sign-ins.

@@ -14,6 +14,8 @@ order: 10
 
 # Networking for Security
 
+> Scope: protocol-by-protocol abuse and the logs that reveal it. Architecture-level controls (segmentation, firewalls, IDS) are in [[Network-Security]].
+
 Hub: [[Security-Engineering-OS]]
 
 ## Overview

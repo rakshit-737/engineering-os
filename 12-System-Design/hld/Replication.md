@@ -93,6 +93,8 @@ Encrypt replication traffic (it contains every write). Replicas need the same ac
 - **How do you handle multi-leader conflicts?** Avoid them (route each record's writes to one home region), or LWW, or CRDTs, or app-level merge.
 - **Is a replica a backup?** No — it faithfully replicates deletes and corruption.
 
+Implementation patterns (code, config, and failure handling live there; this note covers the concept and tradeoffs): [[Pattern-Read-Replicas]] · [[Pattern-Leader-Election]]
+
 ## Related
 
 [[System-Design-Index]] · [[Consistency-Models]] · [[CAP-Theorem]] · [[Consensus-Raft-Paxos]] · [[Sharding-and-Partitioning]] · [[Disaster-Recovery]]

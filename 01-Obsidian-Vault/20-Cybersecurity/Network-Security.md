@@ -14,6 +14,8 @@ order: 20
 
 # Network Security
 
+> Scope: concepts of network defense (segmentation, firewalls, IDS/IPS, zero trust). Protocol-level attacker/defender view with log sources lives in [[Networking-for-Security]]; port reference in [[Common-Ports-and-Protocols-Cheat-Sheet]].
+
 Hub: [[Cybersecurity-Index]] | Engineering OS: [[Security-Engineering-OS]]
 
 > **Defense-architecture overview.** Protocol-level attacker/defender detail lives in [[Networking-for-Security]]; architecture evolution in Zero Trust.

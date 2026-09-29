@@ -61,7 +61,7 @@ sequenceDiagram
 
 ## Example (assumptions)
 
-5-node etcd cluster across 3 AZs (2-2-1). Tolerates 2 node failures, or loss of any single AZ. Write latency ≈ 1 RTT from leader to the fastest majority member plus fsync; with ~1 ms intra-region RTT and ~1-2 ms fsync on SSD (assumptions), writes take a few ms. Adding nodes (7) improves fault tolerance but slows writes (bigger majority) — it doesn't add throughput.
+5-node etcd cluster across 3 AZs (2-2-1). Tolerates 2 node failures, or loss of any single AZ. Write latency ≈ 1 RTT from the leader to the *second-fastest* follower (majority of 5 = 3 = leader + 2 follower acks) plus fsync on the leader and those followers; with ~1 ms intra-region RTT and ~1-2 ms fsync on SSD (assumptions), writes take a few ms. Adding nodes (7) improves fault tolerance but slows writes (bigger majority) — it doesn't add throughput.
 
 ## Tradeoffs
 
@@ -94,8 +94,10 @@ Raft/Paxos assume crash failures, not malicious nodes; Byzantine fault tolerance
 
 - **Why an odd number of nodes?** Majority of 2f+1 tolerates f failures; adding one more node (even) increases quorum size without increasing tolerance.
 - **How does Raft prevent two leaders?** At most one per term (one vote per node per term, majority required); stale leaders step down on seeing a higher term. A deposed leader may briefly think it's leader, so reads need read-index/leases.
-- **When is an entry committed?** When stored on a majority by the current term's leader.
+- **When is an entry committed?** When the current term's leader has replicated it to a majority. A leader never commits entries from *earlier* terms by counting replicas (Figure 8 in the Raft paper); they become committed indirectly once an entry from its own term is committed after them — which is why a new leader appends a no-op entry at the start of its term.
 - **Would you put user data in etcd?** No — it's for small, critical coordination data. For data at scale, use a DB that shards into many consensus groups.
+
+Implementation patterns (code, config, and failure handling live there; this note covers the concept and tradeoffs): [[Pattern-Leader-Election]]
 
 ## Related
 

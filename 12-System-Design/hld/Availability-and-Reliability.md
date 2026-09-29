@@ -83,6 +83,8 @@ DDoS is an availability attack — plan for [[Rate-Limiting]], [[CDN]] absorptio
 - **Availability vs reliability?** Up vs correct. A cache serving stale prices is available but not reliable for that use.
 - **How do you reduce MTTR?** Good alerts on symptoms, runbooks, one-click rollback, feature flags, automatic failover.
 
+Implementation patterns (code, config, and failure handling live there; this note covers the concept and tradeoffs): [[Pattern-Circuit-Breaker]] · [[Pattern-Bulkhead]] · [[Pattern-Canary-Release]] · [[Pattern-Blue-Green-Deployment]]
+
 ## Related
 
 [[System-Design-Index]] · [[Fault-Tolerance]] · [[Disaster-Recovery]] · [[Observability]] · [[Replication]] · [[CAP-Theorem]]

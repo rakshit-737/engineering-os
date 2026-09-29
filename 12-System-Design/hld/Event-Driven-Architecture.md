@@ -34,7 +34,7 @@ sequenceDiagram
   participant DB as Order DB
   participant R as Relay (poller or CDC)
   participant B as Broker
-  S->>DB: BEGIN; INSERT order; INSERT outbox(event); COMMIT
+  S->>DB: one txn: INSERT order + INSERT outbox(event), COMMIT
   R->>DB: read new outbox rows / tail WAL
   R->>B: publish event
   R->>DB: mark sent
@@ -96,6 +96,8 @@ Events broadcast data widely — minimize PII in payloads (send IDs, let authori
 - **Saga vs 2PC?** 2PC gives atomicity but blocks and couples availability; sagas stay available with compensations and eventual consistency.
 - **Do you need event sourcing for CQRS?** No. CQRS can use CDC or dual models from a normal DB.
 - **Choreography or orchestration?** Choreography for simple, few-step flows; orchestration once you have many steps, timeouts, and need visibility.
+
+Implementation patterns (code, config, and failure handling live there; this note covers the concept and tradeoffs): [[Pattern-Transactional-Outbox]] · [[Pattern-Saga]] · [[Pattern-CQRS]] · [[Pattern-Idempotency-Keys]]
 
 ## Related
 

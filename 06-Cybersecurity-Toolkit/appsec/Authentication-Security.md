@@ -14,6 +14,8 @@ order: 40
 
 # Authentication Security
 
+> Scope: implementation hardening of authentication. The authn vs authz distinction is in [[Authentication-vs-Authorization]].
+
 Hub: [[Security-Engineering-OS]]
 
 ## Password storage

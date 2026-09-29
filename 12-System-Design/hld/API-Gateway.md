@@ -83,6 +83,8 @@ The gateway is the edge policy enforcement point: validate tokens (pin algorithm
 - **Isn't it a SPOF?** Stateless and horizontally scaled behind an LB across AZs; rate-limit state in a replicated store.
 - **What is a BFF?** A client-specific API layer that aggregates and shapes data for one frontend.
 
+Implementation patterns (code, config, and failure handling live there; this note covers the concept and tradeoffs): [[Pattern-Backend-for-Frontend]] · [[Pattern-API-Versioning]]
+
 ## Related
 
 [[System-Design-Index]] · [[Rate-Limiting]] · [[Load-Balancing]] · [[Service-Discovery]] · [[API-Design-REST-gRPC-GraphQL]] · [[Case-Study-Authentication-Platform]]

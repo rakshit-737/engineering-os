@@ -16,6 +16,8 @@ order: 25
 
 One note per paper you read at pass 2 or 3 (see [[How-to-Read-a-Paper]]). Name it `Paper-YYYY-FirstAuthor-ShortTitle.md`. Write in your own words. If you can't fill a section, that's a sign you haven't understood that part of the paper yet.
 
+Worked example of a filled note (abridged): see the bottom of this page.
+
 ## Citation
 
 - Title:
@@ -95,3 +97,18 @@ Stated by the authors, and the open directions I see. Mark any that could become
 - Related notes:
 
 - [ ] Added to the synthesis matrix in [[Literature-Review-Template]]
+
+## Worked Example (abridged)
+
+- **Title:** Attention Is All You Need · Vaswani et al. · NeurIPS 2017 · arXiv 1706.03762
+- **One-sentence summary:** Replaces recurrence and convolution in sequence transduction with stacked self-attention, making training parallel across positions.
+- **Problem:** RNN encoder-decoders process tokens sequentially, limiting parallelism and making long-range dependencies hard to learn.
+- **Hypothesis (inferred):** If attention alone connects all positions, translation quality will match or beat recurrent/convolutional models at lower training cost, because every pair of positions is one step apart.
+- **Method:** multi-head scaled dot-product attention; sinusoidal positional encodings; residual + layer norm; encoder-decoder stack. New: removing recurrence entirely. Borrowed: attention, residual connections.
+- **Dataset:** WMT 2014 English-German and English-French.
+- **Baseline:** prior RNN/CNN translation systems, quoted from their papers (not re-run: a comparability caveat).
+- **Metrics:** BLEU. Not measured: behaviour on very long sequences, where self-attention is O(n^2) in length.
+- **Limitations found by me:** quadratic memory in sequence length; baselines quoted rather than re-run; results on translation only.
+- **Novelty:** "Unlike attention-augmented RNNs, this model has no recurrence, which makes training parallel over sequence positions."
+- **My take:** trust high (widely reproduced since). Reusable: the attention ablation table (heads, key size) as a model for my own ablations ([[Ablation-Study-Guide]]).
+

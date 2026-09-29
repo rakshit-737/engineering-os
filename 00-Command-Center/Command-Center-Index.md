@@ -63,4 +63,5 @@ flowchart TD
 
 - Academic work: [[Academic-Index]]
 - Research work: [[Research-OS-Index]]
-- Historical inventory (needs refresh): [[Asset-Manifest]]
+- Vault entry point and all canonical indexes: [[Home]]
+- Content inventory: [[Asset-Manifest]]

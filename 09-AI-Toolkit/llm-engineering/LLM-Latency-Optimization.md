@@ -16,13 +16,15 @@ order: 100
 
 Hub: [[AI-Engineering-Index]]
 
+> Scope: wall-clock and perceived time per request. Cost levers live in [[LLM-Cost-Optimization]]; serving internals (batching, KV cache, PagedAttention) in [[LLM-Inference-and-Serving]]. Timeouts and fallback ordering: [[Pattern-Model-Fallback-Chain]].
+
 ## Core Idea
 
 End-to-end latency for a single LLM call is approximately:
 
 $T \approx T_{network} + T_{queue} + \text{TTFT} + N_{out}\times \text{TPOT}$
 
-where TTFT (time to first token) grows with prompt length and queueing, and TPOT (time per output token) is set by model size, hardware and batch load. **Output tokens usually dominate**, so the biggest lever is often generating fewer of them. For multi-step apps (RAG, agents), sequential calls add up; parallelizing them matters as much as speeding each one.
+where TTFT (time to first token) grows with prompt length and queueing, and TPOT (time per output token) is set by model size, hardware and batch load. **For typical chat/generation workloads, output tokens usually dominate** (for long-prompt, short-answer workloads such as classification over large documents, prefill/TTFT can dominate instead), so the biggest lever is often generating fewer of them. For multi-step apps (RAG, agents), sequential calls add up; parallelizing them matters as much as speeding each one.
 
 ## Levers
 

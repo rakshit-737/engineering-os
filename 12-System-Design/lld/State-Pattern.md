@@ -259,7 +259,7 @@ Alternative: a **table-driven FSM** (`Map<State, Map<Event, State>>`, or Java `e
 
 - TCP connection states (`LISTEN`, `SYN_RECEIVED`, `ESTABLISHED`, ...) — the GoF book's original example (`TCPConnection` delegating to `TCPState`).
 - Java `enum` with constant-specific method bodies is a compact State implementation commonly used for order/workflow status.
-- Spring Statemachine provides a framework for state machines. > TODO: confirm specific API names before citing further.
+- Spring Statemachine (a Spring project) is a framework for declaring states, events, transitions, guards and actions instead of hand-writing State classes — worth it once you need persistence of machine state, hierarchical states, or distributed coordination.
 
 ## Pattern comparisons
 

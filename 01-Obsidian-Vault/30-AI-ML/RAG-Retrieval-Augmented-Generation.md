@@ -36,6 +36,13 @@ flowchart LR
 - BM25 + vectors + cross-encoder: [[Hybrid-Search-and-Reranking]]
 - Grounding and refusals: [[Hallucination-Mitigation]]
 - Pre-launch review: [[RAG-System-Checklist]]
+- Reusable citation-enforcement pattern: [[Pattern-RAG-with-Citations]]
+
+## When RAG is the wrong tool
+
+- The answer needs aggregation over many records (counts, joins, "all invoices over X") - query the database or give the model a SQL tool.
+- The whole corpus fits comfortably in context and changes rarely - long context plus prompt caching can be simpler (measure quality; see [[Context-Windows]]).
+- The problem is output format or tone, not missing knowledge - see [[Fine-Tuning-vs-Prompting]].
 
 ## One-line interview answer
 

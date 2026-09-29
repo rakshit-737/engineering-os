@@ -57,6 +57,28 @@ Write this **before** running the experiment that tests it, and commit it to git
 - Did the mechanism check out (failure-case analysis)?
 - Next hypothesis:
 
+## Worked Example (illustrative, student course project)
+
+**H1: char-n-gram features for code-mixed sentiment**
+
+- Gap: prior baselines for Hinglish sentiment use word-level TF-IDF, which fragments on inconsistent romanised spelling ("bahut", "bohot", "bhot").
+
+**Statement:** If character 2-5-gram TF-IDF replaces word TF-IDF, then macro-F1 on the course's held-out Hinglish test split will rise by at least 2 points over the word-level logistic-regression baseline, because spelling variants share character n-grams.
+
+| Field | Value |
+|---|---|
+| Independent variable | Tokenisation: word vs char 2-5-gram |
+| Dependent variable | Macro-F1 on held-out test split |
+| Controlled variables | Same classifier (logistic regression, C tuned on the same dev grid), same splits, same preprocessing |
+| Baseline | Word TF-IDF + logistic regression, reproduced |
+| Minimum meaningful effect | +2 macro-F1 |
+| Number of seeds | 5 (split shuffles) |
+| Expected noise | Measure std over 5 baseline runs first; if std > 1, raise seeds |
+
+**Kill criterion:** gain < 1 std of baseline noise, or gain disappears when the word model gets the same feature count.
+
+**Alternative explanations:** (1) more features, not better features -> cap both at the same vocabulary size; (2) dev-set tuning leak -> tune only on dev, report test once.
+
 ## Good vs Bad
 
 | Bad | Why | Better |

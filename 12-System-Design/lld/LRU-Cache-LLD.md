@@ -270,7 +270,7 @@ public class LruDemo {
 - `get` is a **write** to the recency list. `ReadWriteLock` or `ConcurrentHashMap` alone does not make the linked list safe.
 - Global lock: simple and correct; the bottleneck under high contention.
 - Striping: per-segment locks; LRU becomes approximate. State this trade-off explicitly.
-- Production caches (e.g. Caffeine) avoid the lock on reads by recording accesses into buffers and replaying them asynchronously. > TODO: cite Caffeine design docs if you want to mention specifics.
+- Production caches (e.g. Caffeine) avoid the lock on reads by recording accesses into buffers and replaying them asynchronously. Caffeine (per its design wiki) records reads into striped lossy ring buffers and writes into a bounded write buffer, draining them under a single lock to update its W-TinyLFU policy — so reads rarely contend.
 - **Cache stampede:** many threads miss the same key and all call the loader. `getOrLoad` under the lock prevents duplicate loads but serializes loaders; a per-key future map (`ConcurrentHashMap<K, CompletableFuture<V>>`) avoids blocking other keys.
 - Eviction listener runs under the lock in this code; a slow listener blocks the cache. Collect evictions and fire them after unlocking in production.
 

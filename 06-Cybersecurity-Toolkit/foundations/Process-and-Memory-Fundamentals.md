@@ -50,7 +50,7 @@ flowchart TB
 - Memory scans for private executable regions or PE headers in non-image memory.
 - Linux: unexpected `ptrace`, writes to `/proc/<pid>/mem`, `LD_PRELOAD` in service environments.
 
-> TODO: add specific ProcessAccess GrantedAccess mask values after verifying against Microsoft documentation.
+- `GrantedAccess` masks to know on Sysmon 10 targeting `lsass.exe`: `PROCESS_VM_READ` = `0x0010`, `PROCESS_QUERY_INFORMATION` = `0x0400`, `PROCESS_QUERY_LIMITED_INFORMATION` = `0x1000`, `PROCESS_ALL_ACCESS` = `0x1FFFFF`. Combinations containing `0x0010` (e.g. `0x1010`, `0x1410`) mean memory read and are the credential-dumping signal; baseline legitimate readers (AV/EDR, WerFault) before alerting.
 
 ## Hardening
 

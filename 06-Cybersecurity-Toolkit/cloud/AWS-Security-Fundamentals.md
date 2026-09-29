@@ -14,6 +14,8 @@ order: 10
 
 # AWS Security Fundamentals
 
+> Scope: AWS-specific services and baseline controls. Provider-neutral concepts are in [[Cloud-Security]].
+
 Hub: [[Security-Engineering-OS]]
 
 ## Shared responsibility model
