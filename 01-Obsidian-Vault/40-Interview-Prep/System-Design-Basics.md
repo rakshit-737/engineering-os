@@ -1,12 +1,21 @@
 ---
-tags: [concept, interview]
-created: 2026-08-01
+title: System Design Basics
+description: The 45-minute system design round in one page - framework, building blocks, estimation, pitfalls.
+domain: system-design
+category: hld-fundamentals
+type: concept
+difficulty: beginner
 status: evergreen
+tags: [concept, interview, system-design]
+prerequisites: []
+related: [System-Design-Index, Scalability, Caching, Load-Balancing, CAP-Theorem]
+order: 1
+created: 2026-08-01
 ---
 
 # System Design Basics
 
-Hub: [[Interview-Prep-Index]]
+Hub: [[Interview-Prep-Index]] · Full library: [[System-Design-Index]]
 
 ## Core Idea
 
@@ -57,6 +66,8 @@ A system design interview is a structured conversation, not a quiz: clarify requ
 
 ## Related
 
+- [[System-Design-Index]] (learning path + estimation cheat sheet)
+- [[Scalability]], [[Caching]], [[Load-Balancing]], [[Message-Queues]], [[Replication]], [[Sharding-and-Partitioning]], [[CDN]], [[Database-Selection]], [[CAP-Theorem]]
 - [[Concurrency-Basics]]
 - [[Hash-Tables]]
 - [[TLS-Handshake]]

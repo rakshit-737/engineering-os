@@ -1,12 +1,21 @@
 ---
-tags: [concept, interview]
-created: 2026-08-02
+title: OOP Concepts
+description: The four OOP pillars, overloading vs overriding, abstract class vs interface, composition over inheritance, and SOLID one-liners.
+domain: lld
+category: foundations
+type: concept
+difficulty: beginner
 status: evergreen
+tags: [concept, interview, oop, java, cpp]
+prerequisites: []
+related: [LLD-Index, Composition-vs-Inheritance, Interfaces-and-Abstraction, Liskov-Substitution-Principle]
+created: 2026-08-02
+order: 0
 ---
 
 # OOP Concepts
 
-Hub: [[Interview-Prep-Index]]
+Hub: [[Interview-Prep-Index]] | LLD academy: [[LLD-Index]]
 
 ## Core Idea
 
@@ -87,6 +96,20 @@ Composition exposes only the intended API, allows swapping implementations, and 
 - **I**nterface Segregation — many small interfaces beat one fat one; never force unused methods.
 - **D**ependency Inversion — depend on abstractions, not concrete classes; inject dependencies.
 
+Deep dives: [[Single-Responsibility-Principle]], [[Open-Closed-Principle]], [[Liskov-Substitution-Principle]], [[Interface-Segregation-Principle]], [[Dependency-Inversion-Principle]].
+
+**Object relationships (UML) — asked alongside the pillars:**
+
+| Relationship | Meaning | Lifetime | Java shape |
+|---|---|---|---|
+| Association | uses / knows about | independent | field or parameter reference |
+| Aggregation | has-a, parts can outlive whole | independent | `Team` holds `List<Player>` passed in |
+| Composition | owns, parts die with whole | bound to owner | `House` creates its `Room`s internally |
+| Dependency | transient use | call-scoped | method parameter / local variable |
+| Generalization | is-a | n/a | `extends` / `implements` |
+
+**Equality contract:** override `equals` and `hashCode` together; equal objects must have equal hash codes, otherwise `HashMap`/`HashSet` lookups break. Value objects (`Money`, `Point`) should be immutable (final fields, no setters) — Java `record` gives this for free.
+
 ## Interview Angle
 
 - **Diamond problem:** D inherits B and C, both inheriting A — whose A does D get? **C++** permits multiple class inheritance and fixes the ambiguity with `virtual` inheritance (one shared A subobject). **Java** bans multiple class inheritance outright; the diamond reappears only when two interfaces supply the same `default` method — the compiler then forces D to override it (it may delegate with `B.super.method()`).
@@ -97,6 +120,9 @@ Composition exposes only the intended API, allows swapping implementations, and 
 
 ## Related
 
+- [[LLD-Index]]
+- [[Composition-vs-Inheritance]]
+- [[Interfaces-and-Abstraction]]
 - [[Java-Interview-Essentials]]
 - [[Cpp-Interview-Essentials]]
 - [[System-Design-Basics]]
