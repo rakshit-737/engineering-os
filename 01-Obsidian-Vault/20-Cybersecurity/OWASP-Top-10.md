@@ -1,18 +1,30 @@
 ---
-tags: [concept, cybersecurity]
-created: 2026-08-01
+title: "OWASP Top 10"
+description: "Concept note: what each OWASP Top 10 (2021) risk category means and why it happens."
+domain: cybersecurity
+category: appsec
+type: concept
+difficulty: beginner
 status: evergreen
+tags: [cybersecurity, owasp, web, appsec]
+prerequisites: []
+related: [Web-Security-Checklist-OWASP, XSS, SQL-Injection]
+order: 30
 ---
 
 # OWASP Top 10
 
-Hub: [[Cybersecurity-Index]]
+Hub: [[Cybersecurity-Index]] | Engineering OS: [[Security-Engineering-OS]]
+
+> **Concept vs checklist:** this note explains each risk category (what it is, why it happens, how it is exploited in principle). The actionable audit items with `- [ ]` tasks live in [[Web-Security-Checklist-OWASP]]. Deep dives: [[XSS]], [[SQL-Injection]], CSRF, SSRF, Authentication Security, Secure Coding.
 
 ## Core Idea
 
 The OWASP Top 10 is the consensus list of the most critical web application security risk *categories*, compiled from real-world vulnerability data and updated every few years (2021 edition is the standard reference). It is an awareness document and shared vocabulary, not a complete checklist — passing the Top 10 does not make an app secure.
 
 ## Details
+
+> TODO: verify whether the OWASP Top 10 2025 edition has been finalized and update the table if so; this note uses the 2021 edition.
 
 **The 2021 list, with one attack and one defense each**
 
@@ -60,4 +72,9 @@ The OWASP Top 10 is the consensus list of the most critical web application secu
 - [[Authentication-vs-Authorization]]
 - [[Threat-Modeling-STRIDE]]
 - [[Hashing-vs-Encryption]]
+- [[Web-Security-Checklist-OWASP]]
+- CSRF
+- SSRF
+- Secure Coding
+- SAST DAST SCA
 - [[Cybersecurity-Index]]

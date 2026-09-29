@@ -1,4 +1,20 @@
+---
+title: "Windows Security Cheat Sheet"
+description: "PowerShell-first Windows hardening, detection, and DFIR commands."
+domain: cybersecurity
+category: reference
+type: cheatsheet
+difficulty: intermediate
+status: evergreen
+tags: [cybersecurity, windows, dfir, powershell]
+prerequisites: []
+related: [Linux-Security-Cheat-Sheet]
+order: 120
+---
+
 # Windows Security Cheat Sheet
+
+Hub: [[Security-Engineering-OS]]
 
 > Defensive/DFIR companion to Linux-Security-Cheat-Sheet.md. Commands are for **hardening, detection, and analysis of your own systems or authorized investigations** (your lab, TryHackMe/HTB boxes, systems you are cleared to defend). PowerShell-first; run elevated ("Run as administrator") where noted. During a live incident, follow the order of volatility in Incident-Response-Playbook.md — read before you change.
 

@@ -1,4 +1,22 @@
+---
+title: "Incident Response Playbook"
+description: "Generic master IR playbook: severity matrix, roles, and PICERL step-by-step actions."
+domain: cybersecurity
+category: playbooks
+type: playbook
+difficulty: intermediate
+status: evergreen
+tags: [cybersecurity, incident-response, dfir]
+prerequisites: [Incident-Response-Lifecycle]
+related: [SOC-Analyst-Playbook]
+order: 50
+---
+
 # Incident Response Playbook
+
+Hub: [[Security-Engineering-OS]]
+
+> **Playbook vs concept:** this is the generic *master* runbook you execute during an incident. The theory behind the phases lives in [[Incident-Response-Lifecycle]]. Scenario runbooks that specialise this one: Phishing Response Playbook, Ransomware Response Playbook, Compromised Credentials Playbook, Cloud Account Compromise Playbook. Quick tick-list: Incident Response Checklist.
 
 > Defensive playbook based on the PICERL lifecycle (Preparation, Identification, Containment, Eradication, Recovery, Lessons Learned). Use this to respond to incidents on systems **you own or are authorized to defend**. Fill in the blanks per incident; keep a copy of the completed playbook as the incident record.
 

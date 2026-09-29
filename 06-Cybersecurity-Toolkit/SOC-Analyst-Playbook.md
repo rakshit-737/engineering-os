@@ -1,4 +1,20 @@
+---
+title: "SOC Analyst Playbook"
+description: "Working manual for SOC analysts: alert triage, investigation, escalation."
+domain: cybersecurity
+category: playbooks
+type: playbook
+difficulty: beginner
+status: evergreen
+tags: [cybersecurity, soc, triage]
+prerequisites: []
+related: [Incident-Response-Playbook]
+order: 90
+---
+
 # SOC Analyst Playbook
+
+Hub: [[Security-Engineering-OS]]
 
 > The working manual for the most common entry role in security: SOC analyst. Everything here is defensive — triaging alerts, investigating on systems your organization owns or is authorized to defend. Pairs with [[Incident-Response-Lifecycle]], [[Security-Logging-and-Detection]], and Incident-Response-Playbook.md (this folder): when an alert becomes a confirmed incident, that playbook takes over.
 

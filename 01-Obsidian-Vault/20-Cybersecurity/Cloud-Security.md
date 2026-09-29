@@ -1,12 +1,22 @@
 ---
-tags: [concept, cybersecurity]
-created: 2026-08-01
+title: "Cloud Security"
+description: "Provider-agnostic cloud security: shared responsibility, identity, network, data, logging."
+domain: cybersecurity
+category: cloud
+type: concept
+difficulty: intermediate
 status: evergreen
+tags: [cybersecurity, cloud]
+prerequisites: [Least-Privilege]
+related: []
+order: 160
 ---
 
 # Cloud Security
 
-Hub: [[Cybersecurity-Index]]
+Hub: [[Cybersecurity-Index]] | Engineering OS: [[Security-Engineering-OS]]
+
+> **Provider-agnostic overview.** AWS-specific depth: AWS Security Fundamentals, IAM Deep Dive, AWS KMS and Encryption, Cloud Logging; workloads: Container Security, Kubernetes Security; checklist: Cloud Security Checklist.
 
 ## Core Idea
 

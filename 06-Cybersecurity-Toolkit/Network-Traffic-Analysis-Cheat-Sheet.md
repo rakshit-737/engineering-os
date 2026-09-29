@@ -1,4 +1,20 @@
+---
+title: "Network Traffic Analysis Cheat Sheet"
+description: "Wireshark and tcpdump filters and workflows for defenders."
+domain: cybersecurity
+category: reference
+type: cheatsheet
+difficulty: intermediate
+status: evergreen
+tags: [cybersecurity, networking, pcap, wireshark]
+prerequisites: [Networking-for-Security]
+related: [Common-Ports-and-Protocols-Cheat-Sheet]
+order: 70
+---
+
 # Network Traffic Analysis Cheat Sheet
+
+Hub: [[Security-Engineering-OS]]
 
 > Defender's reference for **Wireshark + tcpdump**. All capture and analysis commands are for traffic on **your own systems, networks you administer, or authorized lab targets** (TryHackMe / HTB / picoCTF / practice pcaps). Capturing traffic on networks you don't own or administer is illegal in most jurisdictions, including under the IT Act in India.
 

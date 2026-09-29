@@ -1,12 +1,20 @@
 ---
-tags: [concept, cybersecurity]
-created: 2026-08-01
+title: "TLS Handshake"
+description: "How TLS 1.2/1.3 establishes an authenticated, encrypted channel."
+domain: cybersecurity
+category: cryptography
+type: concept
+difficulty: intermediate
 status: evergreen
+tags: [cybersecurity, tls, cryptography, networking]
+prerequisites: [Applied-Cryptography]
+related: [Networking-for-Security]
+order: 80
 ---
 
 # TLS Handshake
 
-Hub: [[Cybersecurity-Index]]
+Hub: [[Cybersecurity-Index]] | Engineering OS: [[Security-Engineering-OS]]
 
 ## Core Idea
 

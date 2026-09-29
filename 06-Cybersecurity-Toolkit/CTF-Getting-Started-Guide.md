@@ -1,4 +1,20 @@
+---
+title: "CTF Getting Started Guide"
+description: "How to start CTFs legally: platforms, categories, workflow, and writeups."
+domain: cybersecurity
+category: labs
+type: guide
+difficulty: beginner
+status: evergreen
+tags: [cybersecurity, ctf, labs]
+prerequisites: [Home-Lab-Setup-Guide]
+related: []
+order: 20
+---
+
 # CTF Getting Started Guide
+
+Hub: [[Security-Engineering-OS]]
 
 > **Scope statement — read once, applies to every command and technique in this file.** CTF platforms are the only place a student gets *explicit written authorization* to attack a system. Everything here is done on picoCTF / TryHackMe / Hack The Box targets, on official competition infrastructure, or on your own lab VMs (`Home-Lab-Setup-Guide.md`). Techniques do not transfer to systems you don't own — the same nmap command is training on an HTB box and an offence under India's IT Act, 2000 against your college's server. Every platform's target list *is* your scope document; nothing outside it is in scope, including the platform's own website.
 

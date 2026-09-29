@@ -1,12 +1,22 @@
 ---
-tags: [concept, cybersecurity]
-created: 2026-08-01
+title: "Incident Response Lifecycle"
+description: "Concept note: the NIST/PICERL IR phases, why their order matters, and IR metrics."
+domain: cybersecurity
+category: defensive
+type: concept
+difficulty: beginner
 status: evergreen
+tags: [cybersecurity, incident-response]
+prerequisites: []
+related: [Incident-Response-Playbook]
+order: 180
 ---
 
 # Incident Response Lifecycle
 
-Hub: [[Cybersecurity-Index]]
+Hub: [[Cybersecurity-Index]] | Engineering OS: [[Security-Engineering-OS]]
+
+> **Concept vs playbook:** this note explains *why* the IR phases exist and why their order matters. For the step-by-step operational runbook (severity matrix, roles, commands), use [[Incident-Response-Playbook]]; for a printable tick-list use Incident Response Checklist; scenario-specific runbooks: Phishing Response Playbook, Ransomware Response Playbook, Compromised Credentials Playbook, Cloud Account Compromise Playbook.
 
 ## Core Idea
 

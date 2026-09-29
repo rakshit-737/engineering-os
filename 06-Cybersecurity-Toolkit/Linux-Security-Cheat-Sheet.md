@@ -1,4 +1,20 @@
+---
+title: "Linux Security Cheat Sheet"
+description: "Linux hardening and investigation commands for systems you administer."
+domain: cybersecurity
+category: reference
+type: cheatsheet
+difficulty: intermediate
+status: evergreen
+tags: [cybersecurity, linux, hardening, dfir]
+prerequisites: []
+related: [Windows-Security-Cheat-Sheet]
+order: 60
+---
+
 # Linux Security Cheat Sheet
+
+Hub: [[Security-Engineering-OS]]
 
 > Defender's reference for **hardening** systems you administer and **investigating** systems you are authorized to defend. Commands assume a modern systemd distro (Debian/Ubuntu/RHEL family). Run investigation commands as root/sudo where noted; prefer read-only commands during an active incident (see Incident-Response-Playbook order of volatility).
 

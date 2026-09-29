@@ -1,12 +1,22 @@
 ---
-tags: [concept, cybersecurity]
-created: 2026-08-01
+title: "Authentication vs Authorization"
+description: "Who you are versus what you may do, and how systems enforce each."
+domain: cybersecurity
+category: fundamentals
+type: concept
+difficulty: beginner
 status: evergreen
+tags: [cybersecurity, authn, authz, identity]
+prerequisites: []
+related: [Least-Privilege]
+order: 140
 ---
 
 # Authentication vs Authorization
 
-Hub: [[Cybersecurity-Index]]
+Hub: [[Cybersecurity-Index]] | Engineering OS: [[Security-Engineering-OS]]
+
+> **Concept overview.** Implementation pitfalls (sessions, JWT, OAuth) are in Authentication Security; enterprise identity in Identity Security and Active Directory Security.
 
 ## Core Idea
 

@@ -1,12 +1,20 @@
 ---
-tags: [concept, cybersecurity]
-created: 2026-08-01
+title: "Least Privilege"
+description: "Grant only the access needed, for only as long as needed."
+domain: cybersecurity
+category: fundamentals
+type: concept
+difficulty: beginner
 status: evergreen
+tags: [cybersecurity, access-control]
+prerequisites: []
+related: []
+order: 190
 ---
 
 # Least Privilege
 
-Hub: [[Cybersecurity-Index]]
+Hub: [[Cybersecurity-Index]] | Engineering OS: [[Security-Engineering-OS]]
 
 ## Core Idea
 

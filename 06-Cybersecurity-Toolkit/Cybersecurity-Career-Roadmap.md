@@ -1,4 +1,20 @@
+---
+title: "Cybersecurity Career Roadmap"
+description: "Defensive-security career plan for a CS undergrad: skills, certs, projects, roles."
+domain: cybersecurity
+category: career
+type: roadmap
+difficulty: beginner
+status: evergreen
+tags: [cybersecurity, career, roadmap]
+prerequisites: []
+related: [Security-Engineering-OS, Security-Interview-Questions]
+order: 30
+---
+
 # Cybersecurity Career Roadmap
+
+Hub: [[Security-Engineering-OS]]
 
 > Defensive-security career plan for a CS undergrad in India. All hands-on work happens on systems you own or authorized lab platforms (TryHackMe, HackTheBox, picoCTF). Any commands referenced in this toolkit are for hardening, detection, and analysis of your own or authorized systems — nothing here targets third parties.
 

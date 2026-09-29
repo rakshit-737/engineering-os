@@ -1,12 +1,20 @@
 ---
-tags: [concept, cybersecurity]
-created: 2026-08-01
+title: "CIA Triad"
+description: "Confidentiality, integrity, availability: the base vocabulary of security."
+domain: cybersecurity
+category: fundamentals
+type: concept
+difficulty: beginner
 status: evergreen
+tags: [cybersecurity, fundamentals]
+prerequisites: []
+related: [Threat-Modeling-STRIDE, Least-Privilege]
+order: 150
 ---
 
 # CIA Triad
 
-Hub: [[Cybersecurity-Index]]
+Hub: [[Cybersecurity-Index]] | Engineering OS: [[Security-Engineering-OS]]
 
 ## Core Idea
 

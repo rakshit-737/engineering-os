@@ -1,12 +1,20 @@
 ---
-tags: [concept, cybersecurity]
-created: 2026-08-02
+title: "Reverse Engineering Basics"
+description: "Reading compiled binaries: disassembly, decompilation, and common tools."
+domain: cybersecurity
+category: defensive
+type: concept
+difficulty: advanced
 status: evergreen
+tags: [cybersecurity, reverse-engineering]
+prerequisites: []
+related: []
+order: 40
 ---
 
 # Reverse Engineering Basics
 
-Hub: [[Cybersecurity-Index]]
+Hub: [[Cybersecurity-Index]] | Engineering OS: [[Security-Engineering-OS]]
 
 > All commands and workflows here are for analyzing your own binaries, authorized lab samples, and CTF challenges (picoCTF, TryHackMe, HackTheBox) — never software you lack permission to analyze.
 

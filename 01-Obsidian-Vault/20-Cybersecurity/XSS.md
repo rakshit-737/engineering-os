@@ -1,12 +1,20 @@
 ---
-tags: [concept, cybersecurity]
-created: 2026-08-01
+title: "Cross-Site Scripting (XSS)"
+description: "Reflected, stored, and DOM XSS: mechanism, impact, and defenses."
+domain: cybersecurity
+category: appsec
+type: concept
+difficulty: beginner
 status: evergreen
+tags: [cybersecurity, web, xss]
+prerequisites: []
+related: [OWASP-Top-10]
+order: 90
 ---
 
 # XSS
 
-Hub: [[Cybersecurity-Index]]
+Hub: [[Cybersecurity-Index]] | Engineering OS: [[Security-Engineering-OS]]
 
 ## Core Idea
 

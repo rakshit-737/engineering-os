@@ -1,12 +1,22 @@
 ---
-tags: [concept, cybersecurity]
-created: 2026-08-01
+title: "Network Security"
+description: "Network defense concepts: segmentation, firewalls, IDS/IPS, VPNs."
+domain: cybersecurity
+category: foundations
+type: concept
+difficulty: beginner
 status: evergreen
+tags: [cybersecurity, networking]
+prerequisites: []
+related: [Networking-for-Security]
+order: 20
 ---
 
 # Network Security
 
-Hub: [[Cybersecurity-Index]]
+Hub: [[Cybersecurity-Index]] | Engineering OS: [[Security-Engineering-OS]]
+
+> **Defense-architecture overview.** Protocol-level attacker/defender detail lives in [[Networking-for-Security]]; architecture evolution in Zero Trust.
 
 ## Core Idea
 

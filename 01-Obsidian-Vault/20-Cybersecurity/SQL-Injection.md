@@ -1,12 +1,20 @@
 ---
-tags: [concept, cybersecurity]
-created: 2026-08-01
+title: "SQL Injection"
+description: "How SQL injection works, how to find it in your own code, and how to prevent it."
+domain: cybersecurity
+category: appsec
+type: concept
+difficulty: beginner
 status: evergreen
+tags: [cybersecurity, web, injection]
+prerequisites: []
+related: [OWASP-Top-10]
+order: 60
 ---
 
 # SQL Injection
 
-Hub: [[Cybersecurity-Index]]
+Hub: [[Cybersecurity-Index]] | Engineering OS: [[Security-Engineering-OS]]
 
 ## Core Idea
 

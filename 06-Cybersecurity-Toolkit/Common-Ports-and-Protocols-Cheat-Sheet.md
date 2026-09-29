@@ -1,4 +1,20 @@
+---
+title: "Common Ports and Protocols Cheat Sheet"
+description: "Must-know ports and protocols with the defender view of each exposure."
+domain: cybersecurity
+category: reference
+type: cheatsheet
+difficulty: beginner
+status: evergreen
+tags: [cybersecurity, networking, ports]
+prerequisites: [Networking-for-Security]
+related: [Network-Traffic-Analysis-Cheat-Sheet, Network-Security]
+order: 10
+---
+
 # Common Ports & Protocols Cheat Sheet
+
+Hub: [[Security-Engineering-OS]]
 
 > The memorize-this sheet. Every security interview, every SOC shift, every nmap output assumes you know these cold. Security significance column = defender's view: what an attacker does with it, what exposure means, whether it should ever face the internet.
 

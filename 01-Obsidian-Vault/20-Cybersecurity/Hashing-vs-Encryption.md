@@ -1,12 +1,20 @@
 ---
-tags: [concept, cybersecurity]
-created: 2026-08-01
+title: "Hashing vs Encryption"
+description: "One-way hashing versus reversible encryption, and when to use which."
+domain: cybersecurity
+category: cryptography
+type: concept
+difficulty: beginner
 status: evergreen
+tags: [cybersecurity, cryptography]
+prerequisites: []
+related: [Applied-Cryptography]
+order: 170
 ---
 
 # Hashing vs Encryption
 
-Hub: [[Cybersecurity-Index]]
+Hub: [[Cybersecurity-Index]] | Engineering OS: [[Security-Engineering-OS]]
 
 ## Core Idea
 

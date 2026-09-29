@@ -1,12 +1,20 @@
 ---
-tags: [concept, cybersecurity]
-created: 2026-08-02
+title: "Applied Cryptography"
+description: "Practical crypto for engineers: primitives, modes, key management, and pitfalls."
+domain: cybersecurity
+category: cryptography
+type: concept
+difficulty: intermediate
 status: evergreen
+tags: [cybersecurity, cryptography]
+prerequisites: [Hashing-vs-Encryption]
+related: [TLS-Handshake]
+order: 130
 ---
 
 # Applied Cryptography
 
-Hub: [[Cybersecurity-Index]]
+Hub: [[Cybersecurity-Index]] | Engineering OS: [[Security-Engineering-OS]]
 
 ## Core Idea
 

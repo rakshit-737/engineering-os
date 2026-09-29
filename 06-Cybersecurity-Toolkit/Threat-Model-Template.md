@@ -1,4 +1,22 @@
+---
+title: "Threat Model Template"
+description: "Fill-in threat model template: DFD, trust boundaries, STRIDE table, mitigation tracker."
+domain: cybersecurity
+category: security-engineering
+type: template
+difficulty: intermediate
+status: evergreen
+tags: [cybersecurity, threat-modeling, stride, template]
+prerequisites: [Threat-Modeling-STRIDE]
+related: []
+order: 100
+---
+
 # Threat Model Template
+
+Hub: [[Security-Engineering-OS]]
+
+> **Template vs concept:** the method (four questions, DFDs, trust boundaries, STRIDE) is explained in [[Threat-Modeling-STRIDE]]; complementary techniques: Attack Trees, MITRE ATTACK.
 
 > Defensive design exercise: find the threats to **your own system** before an attacker does, and track mitigations to done. Work through the sections in order — you can't enumerate threats against a system you haven't drawn. A filled mini-example for a simple web app is at the bottom; copy this file per project and replace the example with your system.
 

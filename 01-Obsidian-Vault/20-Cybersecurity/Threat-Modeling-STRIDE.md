@@ -1,12 +1,20 @@
 ---
-tags: [concept, cybersecurity]
-created: 2026-08-01
+title: "Threat Modeling (STRIDE)"
+description: "Concept note for threat modeling: the four-question process, DFDs, trust boundaries, STRIDE."
+domain: cybersecurity
+category: security-engineering
+type: concept
+difficulty: intermediate
 status: evergreen
+tags: [cybersecurity, threat-modeling, stride]
+prerequisites: [CIA-Triad]
+related: [Threat-Model-Template]
+order: 70
 ---
 
 # Threat Modeling STRIDE
 
-Hub: [[Cybersecurity-Index]]
+Hub: [[Cybersecurity-Index]] | Engineering OS: [[Security-Engineering-OS]]
 
 ## Core Idea
 
@@ -57,8 +65,55 @@ The "property violated" column is exactly the [[CIA-Triad]] extended with authn/
 - Say "trust boundary" out loud and focus analysis there — it signals you know where real threats concentrate.
 - Tie-in: this vault's Threat-Model-Template in 06-Cybersecurity-Toolkit operationalizes exactly this process.
 
+## DFD Example (Mermaid)
+
+```mermaid
+flowchart LR
+  U["User (external entity)"] -->|"HTTPS login"| API["Auth API (process)"]
+  subgraph TB1["Trust boundary: internal network"]
+    API -->|"SQL over TLS"| DB[("User DB (data store)")]
+    API -->|"audit events"| LOG[("Audit log")]
+  end
+  API -->|"token"| U
+```
+
+Every arrow crossing a trust boundary gets the full STRIDE pass; data stores get T, I, D (and R for logs); processes get all six.
+
+## Choosing a Method
+
+| Method | Focus | Use when |
+|---|---|---|
+| STRIDE | Per-element threat categories | Default for design reviews of software systems |
+| Attack Trees | Goal decomposition of one attacker objective | Deep-diving a single high-value asset or abuse case |
+| PASTA | Seven-stage, risk and business-impact centric | Heavier process, when business risk alignment is required |
+| LINDDUN | Privacy threats (linkability, identifiability, ...) | Systems processing personal data |
+| MITRE ATTACK | Observed adversary behaviour | Mapping threats to detections and validating coverage |
+
+## Attacker View vs Defender View
+
+- **Attacker:** looks for the weakest trust boundary, implicit trust (internal services without authn), and data flows nobody drew (debug endpoints, admin panels, CI credentials).
+- **Defender:** makes trust explicit, puts controls at boundaries, and records each threat with an owner and a decision (mitigate / eliminate / transfer / accept) in the [[Threat-Model-Template]].
+
+## Tradeoffs
+
+- Lightweight models (one whiteboard session per feature) get done; exhaustive models get skipped. Prefer frequent, small, feature-level models.
+- STRIDE generates many low-value findings if applied mechanically; prioritise by trust-boundary crossings and asset value.
+- Risk scoring (DREAD) is subjective; many teams replace it with simple high/medium/low plus a justification.
+
+## Interview Questions
+
+1. **What is a trust boundary?** A point where data or control passes between components with different privilege or trust; most real threats concentrate there.
+2. **Which STRIDE categories apply to a data store?** Tampering, Information disclosure, Denial of service; Repudiation if it is a log.
+3. **When would you use attack trees instead of STRIDE?** When analysing one specific attacker goal in depth and comparing the cost of alternative paths.
+4. **How do you keep a threat model alive?** Store it with the code, review it in design reviews and when a trust boundary changes, and link findings to tickets.
+5. **How does threat modeling connect to detection?** Unmitigated or accepted threats become detection requirements; map them to ATT&CK techniques and write rules (Detection Engineering).
+
 ## Related
 
+- [[Threat-Model-Template]]
+- Attack Trees
+- MITRE ATTACK
+- Security Architecture
 - [[CIA-Triad]]
 - [[OWASP-Top-10]]
 - [[Incident-Response-Lifecycle]]

@@ -1,4 +1,20 @@
+---
+title: "Security Interview Questions"
+description: "Entry-level SOC and AppSec interview question bank with answer outlines."
+domain: cybersecurity
+category: career
+type: guide
+difficulty: beginner
+status: evergreen
+tags: [cybersecurity, interview, career]
+prerequisites: []
+related: [Cybersecurity-Career-Roadmap, Security-Engineering-OS]
+order: 80
+---
+
 # Security Interview Questions — Entry Level
+
+Hub: [[Security-Engineering-OS]]
 
 > Prep bank for SOC / AppSec / security-adjacent fresher interviews. Each question has a strong-answer outline (skeleton, not script — say it in your own words) and the vault note that covers it deeper. Scenario answers assume you are the defender of systems you are authorized to protect. Drill order: read the note, close it, answer aloud, compare against the outline.
 

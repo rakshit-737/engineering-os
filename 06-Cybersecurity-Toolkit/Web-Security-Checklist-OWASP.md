@@ -1,4 +1,22 @@
+---
+title: "Web Security Checklist (OWASP Top 10)"
+description: "Actionable audit checklist for your own web app, organized by OWASP Top 10 2021."
+domain: cybersecurity
+category: checklists
+type: checklist
+difficulty: intermediate
+status: evergreen
+tags: [cybersecurity, owasp, web, appsec]
+prerequisites: [OWASP-Top-10]
+related: []
+order: 110
+---
+
 # Web Security Checklist (OWASP Top 10 — 2021)
+
+Hub: [[Security-Engineering-OS]]
+
+> **Checklist vs concept:** for the explanation of each category read [[OWASP-Top-10]] first; this file is only the verification list. For a broader design/code review list see Security Review Checklist; for authorized testing methodology see Web App Pentest Methodology.
 
 > Defensive checklist for auditing **your own application**. Each item: what it is, how to test for it in your own code and config (code review + configuration checks, plus safe dynamic checks against your own staging environment), and the fix. Only test systems you own or are explicitly authorized to assess.
 

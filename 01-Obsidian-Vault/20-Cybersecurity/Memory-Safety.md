@@ -1,12 +1,22 @@
 ---
-tags: [concept, cybersecurity]
-created: 2026-08-01
+title: "Memory Safety"
+description: "Memory-corruption bug classes and why memory-safe languages matter."
+domain: cybersecurity
+category: fundamentals
+type: concept
+difficulty: intermediate
 status: evergreen
+tags: [cybersecurity, memory, exploitation]
+prerequisites: []
+related: []
+order: 10
 ---
 
 # Memory Safety
 
-Hub: [[Cybersecurity-Index]]
+Hub: [[Cybersecurity-Index]] | Engineering OS: [[Security-Engineering-OS]]
+
+> See Exploitation Fundamentals for how memory-corruption bugs are exploited in principle and how ASLR/DEP/canaries mitigate them.
 
 ## Core Idea
 

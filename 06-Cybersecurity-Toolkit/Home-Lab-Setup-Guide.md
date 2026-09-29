@@ -1,4 +1,20 @@
+---
+title: "Home Lab Setup Guide"
+description: "Build an isolated home security lab: hypervisor, VMs, networking, logging, SIEM."
+domain: cybersecurity
+category: labs
+type: guide
+difficulty: beginner
+status: evergreen
+tags: [cybersecurity, labs, home-lab]
+prerequisites: []
+related: [CTF-Getting-Started-Guide]
+order: 40
+---
+
 # Home Lab Setup Guide
+
+Hub: [[Security-Engineering-OS]]
 
 > **Scope statement — read once, applies to every command in this file.** Everything here runs on virtual machines you built, on hardware you own, on a virtual network that cannot reach the internet or your campus/hostel LAN. Every scan, capture, and log query below is aimed at *your own lab VMs*. Never point any tool in this guide at a system you do not own or do not have **written** authorization to test. For practice against systems you don't own, use platforms that grant that authorization explicitly: TryHackMe, Hack The Box, picoCTF (see `CTF-Getting-Started-Guide.md`).
 

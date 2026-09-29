@@ -1,12 +1,22 @@
 ---
-tags: [concept, cybersecurity]
-created: 2026-08-01
+title: "Security Logging and Detection"
+description: "Overview of what to log, where it goes, and how detections turn logs into alerts."
+domain: cybersecurity
+category: defensive
+type: concept
+difficulty: beginner
 status: evergreen
+tags: [cybersecurity, logging, detection]
+prerequisites: []
+related: []
+order: 50
 ---
 
 # Security Logging and Detection
 
-Hub: [[Cybersecurity-Index]]
+Hub: [[Cybersecurity-Index]] | Engineering OS: [[Security-Engineering-OS]]
+
+> **Overview note.** Deeper, non-overlapping follow-ups: Log Analysis (event IDs and queries), Detection Engineering (writing/testing rules), SIEM Fundamentals (the platform), Threat Hunting (proactive search), Security Monitoring (program design).
 
 ## Core Idea
 
