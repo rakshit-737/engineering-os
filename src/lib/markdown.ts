@@ -1,5 +1,5 @@
 import { Marked, type Tokens } from 'marked';
-import DOMPurify from 'dompurify';
+import { sanitizeHtml } from './sanitize';
 import { createSlugger, toSlug } from './slug';
 
 export interface RenderOptions {
@@ -60,26 +60,7 @@ export function rewriteWikilinks(md: string, exists?: (slug: string) => boolean)
   return out.join('\n');
 }
 
-let hooked = false;
-function ensureHooks() {
-  if (hooked) return;
-  hooked = true;
-  DOMPurify.addHook('afterSanitizeAttributes', (node) => {
-    if (node.tagName === 'A') {
-      const href = node.getAttribute('href') ?? '';
-      if (/^https?:\/\//i.test(href)) {
-        node.setAttribute('target', '_blank');
-        node.setAttribute('rel', 'noopener noreferrer');
-      } else {
-        node.removeAttribute('target');
-      }
-    }
-    if (node.tagName === 'INPUT' && node.getAttribute('type') !== 'checkbox') node.remove();
-  });
-}
-
 export function renderMarkdown(md: string, opts: RenderOptions = {}): RenderResult {
-  ensureHooks();
   const slugger = createSlugger();
   let hasMermaid = false;
   let hasCode = false;
@@ -113,11 +94,6 @@ export function renderMarkdown(md: string, opts: RenderOptions = {}): RenderResu
     },
   });
   const raw = marked.parse(rewriteWikilinks(md, opts.exists), { async: false }) as string;
-  const html = DOMPurify.sanitize(raw, {
-    USE_PROFILES: { html: true },
-    FORBID_TAGS: ['style', 'form', 'iframe', 'object', 'embed', 'script'],
-    FORBID_ATTR: ['style'],
-    ALLOWED_URI_REGEXP: /^(?:(?:https?|mailto):|#|\/|\.{0,2}\/|[^:]*$)/i,
-  });
+  const html = sanitizeHtml(raw);
   return { html, hasMermaid, hasCode };
 }

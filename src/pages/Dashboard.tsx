@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Plus, X } from 'lucide-react';
 import { DOMAINS } from '../lib/domains';
+import { domainHref } from '../components/hubs';
 import { progressByDomain, pulse, PULSE_KEYS } from '../lib/progress';
 import { setSlice, useAppState } from '../lib/store';
 import { newId } from '../lib/storage';
@@ -83,6 +84,27 @@ function Objectives() {
   );
 }
 
+/** Shown until the user has done anything at all — tells a first-time visitor exactly where to start. */
+export function StartHere({ docs }: { docs: DocMeta[] }) {
+  const first = docs.find((d) => d.domain === 'cs-core') ?? docs[0];
+  return (
+    <section className="card onboard" aria-labelledby="start-here">
+      <div className="card-title"><h2 id="start-here" style={{ fontSize: 15 }}>Start here</h2><span className="subtle">{docs.length} notes ready</span></div>
+      <p className="muted" style={{ margin: 0 }}>Nothing is tracked yet. Everything stays in this browser (export it from Settings).</p>
+      <ol>
+        <li><Link to="/today">Open Today</Link> — five suggested notes (build, learn, research, career, review). Do one.</li>
+        <li>On any note, set its status (<em>Learning</em>, <em>Done</em>, <em>Revise</em>). The pulse bars and Today&apos;s review slot are computed from those statuses.</li>
+        <li>Set a one-sentence mission below and up to three weekly objectives.</li>
+      </ol>
+      <div className="row" style={{ marginTop: 12 }}>
+        <Link className="btn btn-primary" to="/today">Plan today</Link>
+        {first && <Link className="btn" to={`/doc/${encodeURIComponent(first.slug)}`}>Read a first note</Link>}
+        <Link className="btn btn-ghost" to="/knowledge">Browse all notes</Link>
+      </div>
+    </section>
+  );
+}
+
 function Body({ docs }: { docs: DocMeta[] }) {
   const s = useAppState((st) => st);
   const bySlug = new Map(docs.map((d) => [d.slug, d]));
@@ -91,8 +113,11 @@ function Body({ docs }: { docs: DocMeta[] }) {
   const active = s.projects.filter((x) => x.status === 'active');
   const saved = [...new Set([...s.pins, ...s.bookmarks])].filter((x) => bySlug.has(x)).slice(0, 10);
 
+  const isNew = !s.mission && Object.keys(s.docStatus).length === 0 && s.activity.length === 0 && s.projects.length === 0 && saved.length === 0;
+
   return (
     <>
+      {isNew && docs.length > 0 && <StartHere docs={docs} />}
       <div className="card" style={{ marginBottom: 16 }}>
         <div className="card-title">Current mission</div>
         <Mission />
@@ -168,9 +193,8 @@ function Body({ docs }: { docs: DocMeta[] }) {
           <div className="grid grid-auto">
             {DOMAINS.filter((d) => perDomain[d.id]).map((d) => {
               const pr = perDomain[d.id]!;
-              const hub = ['system-design', 'lld', 'ai', 'cybersecurity', 'dsa', 'cs-core'].includes(d.id);
               return (
-                <Link key={d.id} className="tile" to={hub ? `/${d.id}` : `/domain/${d.id}`}>
+                <Link key={d.id} className="tile" to={domainHref(d.id)}>
                   <div className="tile-head"><span className="chip-dot" style={{ background: d.color }} aria-hidden="true" />{d.label}</div>
                   <p>{d.blurb}</p>
                   <ProgressBar value={pr.pct} label={`${d.label} progress`} />

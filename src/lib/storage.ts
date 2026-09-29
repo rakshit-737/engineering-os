@@ -2,6 +2,33 @@ import { z } from 'zod';
 import type { AppState, TodaySlot } from '../types';
 
 export const STORAGE_PREFIX = 'eos:v1:';
+/** Schema version written into exports. Bump together with a MIGRATIONS entry. */
+export const STATE_VERSION = 1;
+/** Reject imports above this before JSON.parse to avoid freezing the tab. */
+export const MAX_IMPORT_BYTES = 5 * 1024 * 1024;
+
+/**
+ * Migration strategy for a future v2: add `MIGRATIONS[1] = (v1) => v2shape` and bump
+ * STATE_VERSION. Imports (and, when the key prefix changes to eos:v2:, a one-time
+ * read of the eos:v1:* slices) run through `migrate` before validation, so old
+ * exports keep working and nothing is silently dropped.
+ */
+export const MIGRATIONS: Record<number, (s: Record<string, unknown>) => Record<string, unknown>> = {};
+
+export function migrate(input: Record<string, unknown>): { ok: true; state: Record<string, unknown> } | { ok: false; error: string } {
+  const raw = input.version;
+  let v = raw === undefined ? 1 : raw;
+  if (typeof v !== 'number' || !Number.isInteger(v) || v < 1) return { ok: false, error: `Unknown state version "${String(raw)}".` };
+  if (v > STATE_VERSION) return { ok: false, error: `Export is from a newer app version (v${v}); this build understands up to v${STATE_VERSION}.` };
+  let s: Record<string, unknown> = { ...input };
+  while (v < STATE_VERSION) {
+    const step = MIGRATIONS[v];
+    if (!step) return { ok: false, error: `No migration from v${v}.` };
+    s = step(s);
+    v += 1;
+  }
+  return { ok: true, state: { ...s, version: STATE_VERSION } };
+}
 export const TODAY_SLOTS: TodaySlot[] = ['build', 'learn', 'research', 'career', 'review'];
 
 const str = z.string().max(20000);
@@ -183,6 +210,9 @@ export type ImportResult = { ok: true; state: AppState } | { ok: false; error: s
 
 /** Strict import: the whole payload must validate, otherwise nothing is changed. */
 export function importState(json: string): ImportResult {
+  if (json.length > MAX_IMPORT_BYTES) {
+    return { ok: false, error: `File is too large (max ${Math.round(MAX_IMPORT_BYTES / 1024 / 1024)} MB).` };
+  }
   let parsed: unknown;
   try {
     parsed = JSON.parse(json);
@@ -191,9 +221,11 @@ export function importState(json: string): ImportResult {
   }
   const candidate =
     parsed && typeof parsed === 'object' && 'state' in parsed ? (parsed as { state: unknown }).state : parsed;
-  if (!candidate || typeof candidate !== 'object') return { ok: false, error: 'Missing state object.' };
+  if (!candidate || typeof candidate !== 'object' || Array.isArray(candidate)) return { ok: false, error: 'Missing state object.' };
+  const migrated = migrate(candidate as Record<string, unknown>);
+  if (!migrated.ok) return migrated;
   // allow older exports that omit newer slices
-  const merged = { ...defaultState(), ...(candidate as object) };
+  const merged = { ...defaultState(), ...migrated.state };
   const r = StateSchema.safeParse(merged);
   if (!r.success) {
     const issue = r.error.issues[0];

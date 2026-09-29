@@ -4,6 +4,7 @@ import { renderMarkdown } from '../lib/markdown';
 import { highlightWithin, renderMermaidWithin } from '../lib/enhance';
 import { setSlice, useAppState } from '../lib/store';
 import { useResolvedTheme } from '../lib/theme';
+import { scrollBehavior } from './ui';
 
 interface Props {
   slug: string;
@@ -68,7 +69,11 @@ export function Markdown({ slug, body, linkMap, exists }: Props) {
     const href = a.getAttribute('href') ?? '';
     if (href.startsWith('#/anchor/')) {
       e.preventDefault();
-      document.getElementById(decodeURIComponent(href.slice(9)))?.scrollIntoView({ behavior: 'smooth' });
+      const target = document.getElementById(decodeURIComponent(href.slice(9)));
+      target?.scrollIntoView({ behavior: scrollBehavior() });
+      // Move keyboard focus with the scroll so the next Tab continues from the target.
+      target?.setAttribute('tabindex', '-1');
+      target?.focus({ preventScroll: true });
     } else if (href.startsWith('#/')) {
       e.preventDefault();
       navigate(href.slice(1));

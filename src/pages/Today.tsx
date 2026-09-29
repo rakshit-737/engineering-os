@@ -74,11 +74,11 @@ function Planner({ docs }: { docs: DocMeta[] }) {
               </div>
               <div className="row">
                 <label className="checkbox-row">
-                  <input type="checkbox" checked={st.done} disabled={!doc} onChange={() => {
+                  <input type="checkbox" aria-label={`Mark ${slot} done`} checked={st.done} disabled={!doc} onChange={() => {
                     update(slot, { done: !st.done });
                     if (!st.done && doc) logActivity('today', `Completed ${slot}: ${doc.title}`, doc.slug);
                   }} />
-                  <span className="sr-only">Mark {slot} done</span>Done
+                  <span aria-hidden="true">Done</span>
                 </label>
                 <button type="button" className="icon-btn" aria-pressed={st.locked} aria-label={st.locked ? `Unlock ${slot}` : `Lock ${slot}`} onClick={() => update(slot, { locked: !st.locked })}>
                   {st.locked ? <Lock size={14} aria-hidden="true" /> : <Unlock size={14} aria-hidden="true" />}

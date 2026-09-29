@@ -62,6 +62,8 @@ export interface SearchEntry {
   tags: string[];
   domain: string;
   type: string;
+  /** h2/h3 heading text — high-signal, boosted above body text */
+  headings?: string[];
   text: string;
 }
 

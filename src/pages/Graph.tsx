@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Maximize2, Minus, Plus } from 'lucide-react';
 import { loadGraph, useAsync } from '../lib/content';
@@ -16,6 +16,9 @@ function GraphView({ data }: { data: GraphData }) {
   const [focus, setFocus] = useState<string | null>(null);
   const [view, setView] = useState<View>({ x: 0, y: 0, k: 1 });
   const drag = useRef<{ px: number; py: number; moved: boolean } | null>(null);
+  // Active pointers, for two-finger pinch zoom on touch screens.
+  const pointers = useRef(new Map<number, { x: number; y: number }>());
+  const pinch = useRef<number | null>(null);
   const svgRef = useRef<SVGSVGElement>(null);
 
   const { nodes, edges } = useMemo(() => {
@@ -69,10 +72,30 @@ function GraphView({ data }: { data: GraphData }) {
   };
 
   const zoom = (f: number) => setView((v) => ({ ...v, k: Math.min(8, Math.max(0.3, v.k * f)) }));
+  // React's onWheel is passive, so the page would scroll while zooming. Attach a non-passive listener.
+  useEffect(() => {
+    const el = svgRef.current;
+    if (!el) return;
+    const onWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      setView((v) => ({ ...v, k: Math.min(8, Math.max(0.3, v.k * (e.deltaY < 0 ? 1.15 : 1 / 1.15))) }));
+    };
+    el.addEventListener('wheel', onWheel, { passive: false });
+    return () => el.removeEventListener('wheel', onWheel);
+  }, []);
+
+  const endPointer = (id: number) => {
+    pointers.current.delete(id);
+    if (pointers.current.size < 2) pinch.current = null;
+    if (pointers.current.size === 0) setTimeout(() => (drag.current = null), 0);
+  };
+
   const scale = svgRef.current ? bounds.w / Math.max(1, svgRef.current.clientWidth) : 1;
 
   const cx = bounds.x + bounds.w / 2, cy = bounds.y + bounds.h / 2;
   const transform = `translate(${cx + view.x} ${cy + view.y}) scale(${view.k}) translate(${-cx} ${-cy})`;
+  // Tabbing through hundreds of nodes is a trap; only expose all nodes to Tab for small graphs.
+  const keyboardNodes = nodes.length <= 120;
   const showLabels = view.k > 1.6 || nodes.length < 60;
 
   return (
@@ -86,7 +109,7 @@ function GraphView({ data }: { data: GraphData }) {
           <input className="input" type="search" placeholder="Find a note to focus…" aria-label="Find a note in the graph" value={q} onChange={(e) => setQ(e.target.value)}
             onKeyDown={(e) => { if (e.key === 'Enter' && matches[0]) { centerOn(matches[0].id); setQ(''); } }} />
           {matches.length > 0 && (
-            <ul className="doc-list" style={{ position: 'absolute', zIndex: 5, width: 300, background: 'var(--bg)', boxShadow: 'var(--shadow)' }}>
+            <ul className="doc-list" style={{ position: 'absolute', zIndex: 5, width: 'min(300px, calc(100vw - 32px))', background: 'var(--bg)', boxShadow: 'var(--shadow)' }}>
               {matches.map((m) => (
                 <li key={m.id}><button type="button" className="doc-row btn-ghost" style={{ width: '100%', border: 'none', background: 'none', cursor: 'pointer', textAlign: 'left' }} onClick={() => { centerOn(m.id); setQ(''); }}>{m.title}</button></li>
               ))}
@@ -100,11 +123,23 @@ function GraphView({ data }: { data: GraphData }) {
         <svg
           ref={svgRef}
           viewBox={`${bounds.x} ${bounds.y} ${bounds.w} ${bounds.h}`}
-          role="img"
-          aria-label={`Knowledge graph with ${nodes.length} notes. Use the list below for keyboard navigation.`}
-          onWheel={(e) => zoom(e.deltaY < 0 ? 1.15 : 1 / 1.15)}
-          onPointerDown={(e) => { drag.current = { px: e.clientX, py: e.clientY, moved: false }; (e.target as Element).setPointerCapture?.(e.pointerId); }}
+          role="group"
+          aria-label={`Knowledge graph with ${nodes.length} notes. ${keyboardNodes ? 'Tab to a node and press Enter to open it.' : 'Filter by domain or find a note to make nodes keyboard-focusable, or use the list below.'}`}
+          onPointerDown={(e) => {
+            pointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
+            if (pointers.current.size === 1) drag.current = { px: e.clientX, py: e.clientY, moved: false };
+            (e.target as Element).setPointerCapture?.(e.pointerId);
+          }}
           onPointerMove={(e) => {
+            if (pointers.current.has(e.pointerId)) pointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
+            if (pointers.current.size >= 2) {
+              const [a, b] = [...pointers.current.values()] as [{ x: number; y: number }, { x: number; y: number }];
+              const dist = Math.hypot(a.x - b.x, a.y - b.y);
+              if (pinch.current) { const f = dist / pinch.current; setView((v) => ({ ...v, k: Math.min(8, Math.max(0.3, v.k * f)) })); }
+              pinch.current = dist;
+              if (drag.current) drag.current.moved = true;
+              return;
+            }
             const d = drag.current;
             if (!d) return;
             const dx = e.clientX - d.px, dy = e.clientY - d.py;
@@ -112,7 +147,8 @@ function GraphView({ data }: { data: GraphData }) {
             d.px = e.clientX; d.py = e.clientY;
             setView((v) => ({ ...v, x: v.x + dx * scale, y: v.y + dy * scale }));
           }}
-          onPointerUp={() => setTimeout(() => (drag.current = null), 0)}
+          onPointerUp={(e) => endPointer(e.pointerId)}
+          onPointerCancel={(e) => endPointer(e.pointerId)}
         >
           <g transform={transform}>
             {edges.map((e) => {
@@ -129,6 +165,10 @@ function GraphView({ data }: { data: GraphData }) {
               return (
                  
                 <g key={n.id} className={`graph-node${dim ? ' dim' : ''}`} transform={`translate(${p.x} ${p.y})`}
+                  role="link" aria-label={n.title}
+                  tabIndex={keyboardNodes || (neighbours?.has(n.id) ?? false) ? 0 : undefined}
+                  onFocus={() => setFocus(n.id)}
+                  onKeyDown={(e) => { if (e.key === 'Enter') navigate(`/doc/${encodeURIComponent(n.id)}`); }}
                   onClick={() => { if (!drag.current?.moved) navigate(`/doc/${encodeURIComponent(n.id)}`); }}>
                   <title>{n.title}</title>
                   <circle r={r} fill={domainInfo(n.domain).color} />
@@ -165,7 +205,7 @@ export default function Graph() {
   const g = useAsync(loadGraph, []);
   return (
     <>
-      <PageHeader title="Knowledge graph" description="Notes connected by prerequisites, related links and wikilinks. Scroll to zoom, drag to pan, click a node to open it." />
+      <PageHeader title="Knowledge graph" description="Notes connected by prerequisites, related links and wikilinks. Scroll or pinch to zoom, drag to pan, click or tap a node to open it. A keyboard-friendly list is below the graph." />
       {g.error ? <ErrorState error={g.error} onRetry={g.retry} /> : !g.data ? <Loading /> : g.data.nodes.length ? <GraphView data={g.data} /> : <EmptyState title="Graph is empty">No notes have been ingested yet.</EmptyState>}
     </>
   );

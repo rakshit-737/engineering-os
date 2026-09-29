@@ -20,19 +20,31 @@ export interface DocSearch {
   search(q: string, filters?: SearchFilters, limit?: number): SearchHit[];
 }
 
+/**
+ * Fuzzy only for longer terms: short tokens ("cap", "raft", "jwt") are usually
+ * acronyms/exact names where one edit ("craft", "draft") is pure noise.
+ */
+export function fuzzyFor(term: string): number | false {
+  if (term.length < 5) return false;
+  return term.length < 8 ? 1 : 2;
+}
+
 export function createSearch(entries: SearchEntry[]): DocSearch {
   const ms = new MiniSearch<SearchEntry>({
     idField: 'slug',
-    fields: ['title', 'tags', 'description', 'text'],
+    fields: ['title', 'slug', 'tags', 'headings', 'description', 'text'],
     storeFields: ['title', 'description', 'domain', 'type'],
     extractField: (doc, field) => {
       const v = doc[field as keyof SearchEntry];
-      return Array.isArray(v) ? v.join(' ') : (v as string);
+      if (v == null) return '';
+      return Array.isArray(v) ? v.join(' ') : String(v);
     },
     searchOptions: {
-      boost: { title: 4, tags: 2.5, description: 1.5, text: 1 },
-      prefix: true,
-      fuzzy: (term) => (term.length > 3 ? 0.2 : false),
+      boost: { title: 5, slug: 3, tags: 3, headings: 2, description: 1.5, text: 1 },
+      // prefix only for 3+ chars; exact matches outrank prefix/fuzzy expansions
+      prefix: (term) => term.length >= 3,
+      fuzzy: fuzzyFor,
+      weights: { prefix: 0.3, fuzzy: 0.2 },
       combineWith: 'AND',
     },
   });

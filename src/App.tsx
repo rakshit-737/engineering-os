@@ -5,6 +5,7 @@ import { ErrorBoundary } from './components/ErrorBoundary';
 import { Loading } from './components/ui';
 import { useAppState } from './lib/store';
 import { applyTheme } from './lib/theme';
+import { HUBS } from './components/hubs';
 
 const page = (load: () => Promise<{ default: ComponentType }>) => lazy(load);
 
@@ -25,7 +26,6 @@ const Settings = page(() => import('./pages/Settings'));
 const About = page(() => import('./pages/About'));
 const NotFound = page(() => import('./pages/NotFound'));
 
-const HUBS = ['system-design', 'lld', 'ai', 'cybersecurity', 'dsa', 'cs-core'] as const;
 
 export function AppRoutes() {
   const loc = useLocation();

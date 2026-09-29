@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { createSearch } from './search';
+import { createSearch, fuzzyFor } from './search';
 import type { SearchEntry } from '../types';
 
 const e = (slug: string, title: string, o: Partial<SearchEntry> = {}): SearchEntry => ({
@@ -40,5 +40,29 @@ describe('search', () => {
   it('returns nothing for blank queries and tolerates duplicate slugs', () => {
     expect(s.search('   ')).toEqual([]);
     expect(() => createSearch([...entries, entries[0]!])).not.toThrow();
+  });
+});
+
+describe('search tuning', () => {
+  it('disables fuzzy matching for short acronyms', () => {
+    expect(fuzzyFor('cap')).toBe(false);
+    expect(fuzzyFor('raft')).toBe(false);
+    expect(fuzzyFor('kafka')).toBe(1);
+    expect(fuzzyFor('injection')).toBe(2);
+  });
+
+  it('does not match "raft" to "draft"/"craft"', () => {
+    const s = createSearch([e('consensus-raft-paxos', 'Consensus: Raft and Paxos'), e('adr', 'ADR Template', { text: 'draft craft' })]);
+    expect(s.search('raft').map((h) => h.slug)).toEqual(['consensus-raft-paxos']);
+  });
+
+  it('matches hyphenated slugs and boosts headings over body', () => {
+    const s = createSearch([
+      e('rate-limiter-lld', 'Limiter LLD'),
+      e('body-only', 'Other', { text: 'consistent hashing' }),
+      e('with-heading', 'Sharding', { headings: ['Consistent Hashing'] }),
+    ]);
+    expect(s.search('rate-limiter')[0]!.slug).toBe('rate-limiter-lld');
+    expect(s.search('consistent hashing')[0]!.slug).toBe('with-heading');
   });
 });

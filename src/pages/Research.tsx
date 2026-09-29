@@ -3,7 +3,7 @@ import type { Experiment, ResearchPaper } from '../types';
 import { setSlice, useAppState } from '../lib/store';
 import { newId } from '../lib/storage';
 import { CrudTable, type FieldDef } from '../components/CrudTable';
-import { PageHeader } from '../components/ui';
+import { PageHeader, TabPanel, Tabs } from '../components/ui';
 import { DocBrowser } from './Knowledge';
 import { WithIndex } from '../components/WithIndex';
 
@@ -39,12 +39,8 @@ export default function Research() {
   return (
     <>
       <PageHeader title="Research" description="A structured reading list and an experiment log. Each paper captures problem, gap, method, results, limitations and novelty." />
-      <div className="tabs" role="tablist">
-        {tabs.map(([k, l]) => (
-          <button key={k} role="tab" type="button" aria-selected={tab === k} aria-controls={`panel-${k}`} id={`tab-${k}`} onClick={() => setTab(k)}>{l}</button>
-        ))}
-      </div>
-      <div role="tabpanel" id={`panel-${tab}`} aria-labelledby={`tab-${tab}`}>
+      <Tabs label="Research sections" idPrefix="rs" tabs={tabs} value={tab} onChange={setTab} />
+      <TabPanel idPrefix="rs" value={tab}>
         {tab === 'papers' && (
           <CrudTable
             noun="paper" items={papers} fields={PAPER_FIELDS} filterField="status"
@@ -62,7 +58,7 @@ export default function Research() {
           />
         )}
         {tab === 'notes' && <WithIndex>{(docs) => <DocBrowser docs={docs} lockDomain="research" />}</WithIndex>}
-      </div>
+      </TabPanel>
     </>
   );
 }

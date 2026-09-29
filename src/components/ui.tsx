@@ -161,3 +161,39 @@ export function ConfirmDialog({ title, message, confirmLabel = 'Confirm', danger
 export function DocLink({ slug, title }: { slug: string; title?: string }) {
   return <Link to={`/doc/${encodeURIComponent(slug)}`}>{title ?? humanize(slug)}</Link>;
 }
+
+/** WAI-ARIA tabs: roving tabindex, Arrow/Home/End move focus and select (automatic activation). */
+export function Tabs<K extends string>({ label, idPrefix, tabs, value, onChange }: {
+  label: string; idPrefix: string; tabs: readonly (readonly [K, ReactNode])[]; value: K; onChange: (k: K) => void;
+}) {
+  const onKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+    const i = tabs.findIndex(([k]) => k === value);
+    let n = -1;
+    if (e.key === 'ArrowRight') n = (i + 1) % tabs.length;
+    else if (e.key === 'ArrowLeft') n = (i - 1 + tabs.length) % tabs.length;
+    else if (e.key === 'Home') n = 0;
+    else if (e.key === 'End') n = tabs.length - 1;
+    if (n < 0) return;
+    e.preventDefault();
+    const k = tabs[n]![0];
+    onChange(k);
+    document.getElementById(`${idPrefix}-tab-${k}`)?.focus();
+  };
+  return (
+    <div className="tabs" role="tablist" aria-label={label}>
+      {tabs.map(([k, l]) => (
+        <button key={k} type="button" role="tab" id={`${idPrefix}-tab-${k}`} aria-controls={`${idPrefix}-panel`}
+          aria-selected={value === k} tabIndex={value === k ? 0 : -1} onKeyDown={onKeyDown} onClick={() => onChange(k)}>{l}</button>
+      ))}
+    </div>
+  );
+}
+
+export function TabPanel({ idPrefix, value, children }: { idPrefix: string; value: string; children: ReactNode }) {
+  return <div role="tabpanel" id={`${idPrefix}-panel`} aria-labelledby={`${idPrefix}-tab-${value}`} tabIndex={0} className="tabpanel">{children}</div>;
+}
+
+/** Smooth scroll unless the user asked for reduced motion. */
+export function scrollBehavior(): ScrollBehavior {
+  return typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+}

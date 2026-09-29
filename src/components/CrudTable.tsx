@@ -57,6 +57,13 @@ export function CrudTable<T extends { id: string }>({ noun, items, fields, onCha
     return out;
   }, [items, filter, filterField, q, sort, fields]);
 
+  // Give per-row action buttons a distinguishable accessible name ("Edit project Foo").
+  const rowName = (item: T) => {
+    const first = fields.find((f) => f.required && f.inTable) ?? cols[0];
+    const v = first ? item[first.key] : '';
+    return typeof v === 'string' && v.trim() ? ` ${v.trim().slice(0, 60)}` : '';
+  };
+
   const save = (item: T) => {
     const exists = items.some((i) => i.id === item.id);
     onChange(exists ? items.map((i) => (i.id === item.id ? item : i)) : [item, ...items]);
@@ -97,7 +104,20 @@ export function CrudTable<T extends { id: string }>({ noun, items, fields, onCha
           {empty.text}
         </EmptyState>
       ) : (
-        <div className="table-wrap">
+        <>
+        <div className="row table-sort-hint" style={{ marginBottom: 10 }}>
+          <select className="select" aria-label="Sort by" value={sort.key ? `${sort.key}:${sort.dir}` : ''} onChange={(e) => {
+            const [key = '', dir] = e.target.value.split(':');
+            setSort({ key, dir: dir === '-1' ? -1 : 1 });
+          }}>
+            <option value="">Sort: default</option>
+            {cols.flatMap((c) => [
+              <option key={`${c.key}:1`} value={`${c.key}:1`}>Sort: {c.label} ↑</option>,
+              <option key={`${c.key}:-1`} value={`${c.key}:-1`}>Sort: {c.label} ↓</option>,
+            ])}
+          </select>
+        </div>
+        <div className="table-wrap stack-sm">
           <table className="table">
             <thead>
               <tr>
@@ -116,13 +136,13 @@ export function CrudTable<T extends { id: string }>({ noun, items, fields, onCha
               {view.map((item) => (
                 <tr key={item.id}>
                   {cols.map((c) => (
-                    <td key={c.key}>{c.render ? c.render(item) : label(c, item[c.key])}</td>
+                    <td key={c.key} data-label={c.label}>{c.render ? c.render(item) : label(c, item[c.key])}</td>
                   ))}
                   <td className="actions">
-                    <button type="button" className="icon-btn" aria-label={`Edit ${noun}`} onClick={() => setEditing(item)}>
+                    <button type="button" className="icon-btn" aria-label={`Edit ${noun}${rowName(item)}`} onClick={() => setEditing(item)}>
                       <Pencil size={14} aria-hidden="true" />
                     </button>
-                    <button type="button" className="icon-btn" aria-label={`Delete ${noun}`} onClick={() => setDeleting(item)}>
+                    <button type="button" className="icon-btn" aria-label={`Delete ${noun}${rowName(item)}`} onClick={() => setDeleting(item)}>
                       <Trash2 size={14} aria-hidden="true" />
                     </button>
                   </td>
@@ -134,6 +154,7 @@ export function CrudTable<T extends { id: string }>({ noun, items, fields, onCha
             </tbody>
           </table>
         </div>
+        </>
       )}
       {editing && (
         <EditForm

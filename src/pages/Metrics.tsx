@@ -9,31 +9,31 @@ import type { DocMeta } from '../types';
 
 interface Bar { label: string; value: number; max?: number; color?: string; suffix?: string }
 
-/** Plain SVG horizontal bar chart; no chart library. */
+/**
+ * Horizontal bar chart as plain HTML (no chart library). HTML instead of a scaled SVG keeps labels
+ * at a readable size on phones and gives screen readers a real list.
+ */
 export function BarChart({ title, bars }: { title: string; bars: Bar[] }) {
   const max = Math.max(1, ...bars.map((b) => b.max ?? b.value));
-  const rowH = 22;
-  const labelW = 130;
-  const w = 480;
+  const allZero = bars.every((b) => b.value === 0);
   return (
     <figure className="card" style={{ margin: 0 }}>
       <figcaption className="card-title">{title}</figcaption>
-      {bars.length === 0 ? (
+      {bars.length === 0 || allZero ? (
         <p className="subtle" style={{ margin: 0 }}>No data yet.</p>
       ) : (
-        <svg viewBox={`0 0 ${w} ${bars.length * rowH}`} width="100%" role="img" aria-label={`${title}: ${bars.map((b) => `${b.label} ${b.value}${b.max ? ` of ${b.max}` : ''}`).join(', ')}`}>
-          {bars.map((b, i) => {
-            const bw = ((w - labelW - 70) * (b.max ? b.value / Math.max(1, b.max) : b.value / max));
+        <ul className="bar-list">
+          {bars.map((b) => {
+            const pct = (b.max ? b.value / Math.max(1, b.max) : b.value / max) * 100;
             return (
-              <g key={b.label} transform={`translate(0 ${i * rowH})`}>
-                <text x={0} y={15} fontSize={12} fill="var(--fg-muted)">{b.label.length > 18 ? `${b.label.slice(0, 17)}…` : b.label}</text>
-                <rect x={labelW} y={5} width={w - labelW - 70} height={12} rx={3} fill="var(--bg-muted)" />
-                <rect x={labelW} y={5} width={Math.max(0, bw)} height={12} rx={3} fill={b.color ?? 'var(--accent)'} />
-                <text x={w - 62} y={15} fontSize={12} fill="var(--fg)">{b.value}{b.max ? `/${b.max}` : ''}{b.suffix ?? ''}</text>
-              </g>
+              <li key={b.label} className="progress-row">
+                <span className="bar-label" title={b.label}>{b.label}</span>
+                <span className="progress" aria-hidden="true"><span style={{ width: `${Math.max(0, Math.min(100, pct))}%`, background: b.color ?? 'var(--accent)' }} /></span>
+                <span className="subtle">{b.value}{b.max ? `/${b.max}` : ''}{b.suffix ?? ''}</span>
+              </li>
             );
           })}
-        </svg>
+        </ul>
       )}
     </figure>
   );
@@ -58,7 +58,7 @@ function Body({ docs }: { docs: DocMeta[] }) {
   return (
     <>
       <div className="grid grid-auto" style={{ marginBottom: 16 }}>
-        {stat('Notes done', Object.values(s.docStatus).filter((x) => x === 'done').length, `of ${docs.length}`)}
+        {stat('Notes done', docs.filter((d) => s.docStatus[d.slug] === 'done').length, `of ${docs.length}`)}
         {stat('DSA problems solved', problems.filter((d) => s.docStatus[d.slug] === 'done').length, `of ${problems.length} problem notes`)}
         {stat('Papers read', papersRead, `${s.papers.length} on list`)}
         {stat('Security labs done', labs.filter((d) => s.docStatus[d.slug] === 'done').length, `of ${labs.length}`)}

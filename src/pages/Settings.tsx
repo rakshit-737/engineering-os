@@ -44,14 +44,16 @@ export default function Settings() {
     <>
       <PageHeader title="Settings" description="Everything is stored locally in this browser (localStorage). Export regularly — clearing site data erases it." />
       <section className="card">
-        <div className="card-title">Theme</div>
-        <div className="row" role="radiogroup" aria-label="Theme">
+        <fieldset style={{ border: 'none', padding: 0, margin: 0 }}>
+        <legend className="card-title">Theme</legend>
+        <div className="row">
           {(['system', 'light', 'dark'] as ThemePref[]).map((t) => (
             <label key={t} className="checkbox-row" style={{ marginRight: 12 }}>
               <input type="radio" name="theme" checked={theme === t} onChange={() => setSlice('theme', t)} /> {t[0]!.toUpperCase() + t.slice(1)}
             </label>
           ))}
         </div>
+        </fieldset>
       </section>
 
       <section className="card section">
@@ -75,7 +77,7 @@ export default function Settings() {
             <legend className="slot-label" style={{ marginBottom: 6 }}>{slot.toUpperCase()}</legend>
             <div className="row">
               {DOMAINS.map((d) => (
-                <label key={d.id} className="chip" style={{ cursor: 'pointer' }}>
+                <label key={d.id} className="chip chip-toggle">
                   <input type="checkbox" checked={config.domains[slot].includes(d.id)} onChange={() => toggleDomain(slot, d.id)} /> {d.label}
                 </label>
               ))}

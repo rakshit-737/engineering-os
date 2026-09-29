@@ -4,6 +4,17 @@ import { clearState, defaultState, loadState, saveSlice, SLICE_KEYS, STORAGE_PRE
 
 let state: AppState = loadState();
 const listeners = new Set<() => void>();
+/** Set when localStorage rejects a write (quota exceeded, private mode, blocked). */
+let persistError: string | null = null;
+
+function persist<K extends SliceKey>(key: K, value: AppState[K]): void {
+  const ok = saveSlice(key, value);
+  persistError = ok ? null : `Could not save "${key}" — browser storage is full or unavailable. Export your data now.`;
+}
+
+export function getPersistError(): string | null {
+  return persistError;
+}
 
 function emit() {
   for (const l of listeners) l();
@@ -18,7 +29,7 @@ export function setSlice<K extends SliceKey>(key: K, updater: AppState[K] | ((pr
   const next = typeof updater === 'function' ? (updater as (p: AppState[K]) => AppState[K])(prev) : updater;
   if (next === prev) return;
   state = { ...state, [key]: next };
-  saveSlice(key, next);
+  persist(key, next);
   emit();
 }
 
@@ -29,7 +40,8 @@ export function logActivity(kind: string, label: string, slug?: string): void {
 
 export function replaceState(next: AppState): void {
   state = next;
-  for (const k of SLICE_KEYS) saveSlice(k, next[k] as never);
+  const failed = SLICE_KEYS.filter((k) => !saveSlice(k, next[k] as never));
+  persistError = failed.length ? `Could not save ${failed.join(', ')} — browser storage is full or unavailable.` : null;
   emit();
 }
 
@@ -56,6 +68,11 @@ if (typeof window !== 'undefined') {
 
 export function useAppState<T>(select: (s: AppState) => T): T {
   return useSyncExternalStore(subscribe, () => select(state), () => select(state));
+}
+
+/** Non-null while the latest write to localStorage failed; UI should surface it. */
+export function usePersistError(): string | null {
+  return useSyncExternalStore(subscribe, getPersistError, getPersistError);
 }
 
 /** For tests */

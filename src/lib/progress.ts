@@ -10,10 +10,6 @@ export interface Progress {
   pct: number;
 }
 
-export function statusOf(statuses: Record<string, DocProgress>, slug: string): DocProgress {
-  return statuses[slug] ?? 'not-started';
-}
-
 export function computeProgress(docs: DocMeta[], statuses: Record<string, DocProgress>): Progress {
   let done = 0, learning = 0, revise = 0;
   for (const d of docs) {

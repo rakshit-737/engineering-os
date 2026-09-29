@@ -5,7 +5,7 @@ import { setSlice, useAppState } from '../lib/store';
 import { newId } from '../lib/storage';
 import { localDate } from '../lib/progress';
 import { CrudTable, type FieldDef } from '../components/CrudTable';
-import { PageHeader } from '../components/ui';
+import { PageHeader, TabPanel, Tabs } from '../components/ui';
 
 const now = () => new Date().toISOString();
 const today = () => localDate();
@@ -133,12 +133,8 @@ export default function CommandCenter() {
   return (
     <>
       <PageHeader title="Command Center" description={<>Tasks, goals, habits and logs — the operational side of the system. Templates live in the <Link to="/domain/command-center">command-center notes</Link>.</>} />
-      <div className="tabs" role="tablist" aria-label="Command center sections">
-        {tabs.map((t) => (
-          <button key={t} type="button" role="tab" id={`cc-${t}`} aria-controls="cc-panel" aria-selected={tab === t} onClick={() => setTab(t)}>{t}</button>
-        ))}
-      </div>
-      <div role="tabpanel" id="cc-panel" aria-labelledby={`cc-${tab}`}>
+      <Tabs label="Command center sections" idPrefix="cc" tabs={tabs.map((t) => [t, t] as const)} value={tab} onChange={setTab} />
+      <TabPanel idPrefix="cc" value={tab}>
         {tab === 'Tasks' && (
           <CrudTable noun="task" items={s.tasks} fields={TASK_FIELDS} filterField="status" defaultSort="due" onChange={(l) => setSlice('tasks', l)}
             makeEmpty={(): Task => ({ id: newId(), title: '', status: 'todo', due: '', area: '', createdAt: now() })}
@@ -177,7 +173,7 @@ export default function CommandCenter() {
             ))}
           </div>
         )}
-      </div>
+      </TabPanel>
     </>
   );
 }

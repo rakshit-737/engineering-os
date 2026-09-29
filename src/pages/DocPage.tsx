@@ -5,9 +5,10 @@ import { loadDoc, sortDocs, useAsync, useIndex } from '../lib/content';
 import { logActivity, setSlice, useAppState } from '../lib/store';
 import { checklistProgress } from '../lib/progress';
 import { domainInfo, humanize } from '../lib/domains';
+import { domainHref } from '../components/hubs';
 import type { DocMeta, DocProgress } from '../types';
 import { Markdown } from '../components/Markdown';
-import { Chip, DomainChip, EmptyState, ErrorState, Loading, ProgressBar, STATUSES, statusLabel } from '../components/ui';
+import { Chip, DomainChip, EmptyState, ErrorState, Loading, ProgressBar, scrollBehavior, STATUSES, statusLabel } from '../components/ui';
 
 /** The page header already shows the title; drop a leading `# Title` to avoid a duplicate h1. */
 function stripLeadingH1(body: string): string {
@@ -46,7 +47,7 @@ function Toc({ headings }: { headings: DocMeta['headings'] }) {
                 aria-current={active === h.id ? 'true' : undefined}
                 onClick={() => {
                   const el = document.getElementById(h.id);
-                  el?.scrollIntoView({ behavior: 'smooth' });
+                  el?.scrollIntoView({ behavior: scrollBehavior() });
                   el?.setAttribute('tabindex', '-1');
                   el?.focus({ preventScroll: true });
                 }}
@@ -133,7 +134,7 @@ export default function DocPage() {
       <article>
         <header className="doc-header">
           <nav className="breadcrumbs" aria-label="Breadcrumb">
-            <Link to={`/domain/${d.domain}`}>{domainInfo(d.domain).label}</Link>
+            <Link to={domainHref(d.domain)}>{domainInfo(d.domain).label}</Link>
             <span aria-hidden="true">/</span>
             <Link to={`/domain/${d.domain}?category=${encodeURIComponent(d.category)}`}>{humanize(d.category)}</Link>
           </nav>
@@ -150,7 +151,7 @@ export default function DocPage() {
             {d.role && <Chip>Role: {d.role}</Chip>}
             <span className="subtle">{Math.max(1, Math.round(d.wordCount / 220))} min read</span>
           </div>
-          <div className="row" style={{ marginTop: 12 }}>
+          <div className="row no-print" style={{ marginTop: 12 }}>
             <label className="row" htmlFor="doc-status">
               <span className="subtle">Status</span>
               <select id="doc-status" className="select" style={{ width: 140 }} value={status} onChange={(e) => setStatus(e.target.value as DocProgress)}>
@@ -175,7 +176,7 @@ export default function DocPage() {
             </div>
           )}
         </header>
-        <Markdown slug={d.slug} body={stripLeadingH1(d.body)}linkMap={d.linkMap} exists={exists} />
+        <Markdown slug={d.slug} body={stripLeadingH1(d.body)} linkMap={d.linkMap} exists={exists} />
         <footer className="doc-footer">
           <div className="side-panel">
             <LinkPanel title="Prerequisites" slugs={d.prerequisites} bySlug={bySlug} />

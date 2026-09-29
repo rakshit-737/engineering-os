@@ -1,4 +1,4 @@
-import DOMPurify from 'dompurify';
+import { sanitizeSvg } from './sanitize';
 /** Lazy post-render enhancements: syntax highlighting and mermaid diagrams. */
 
 type HljsCore = typeof import('highlight.js/lib/core').default;
@@ -68,7 +68,7 @@ export async function renderMermaidWithin(root: HTMLElement, theme: 'dark' | 'de
       fig.setAttribute('aria-label', 'Diagram');
       fig.dataset.src = src;
       // mermaid runs with securityLevel 'strict'; sanitize again as defence in depth
-      fig.innerHTML = DOMPurify.sanitize(svg, { USE_PROFILES: { svg: true, svgFilters: true, html: true }, ADD_TAGS: ['foreignObject'] });
+      fig.innerHTML = sanitizeSvg(svg);
       el.replaceWith(fig);
     } catch {
       el.classList.add('mermaid-error');

@@ -6,6 +6,7 @@ import { toggleTheme, useResolvedTheme } from '../lib/theme';
 import { Icon } from './Icon';
 import { useFocusTrap } from './ui';
 import { CommandPalette } from './CommandPalette';
+import { usePersistError } from '../lib/store';
 
 function NavTree({ onNavigate }: { onNavigate?: () => void }) {
   const loc = useLocation();
@@ -62,6 +63,7 @@ export function Layout({ children }: { children: ReactNode }) {
   const [drawer, setDrawer] = useState(false);
   const [palette, setPalette] = useState(false);
   const theme = useResolvedTheme();
+  const persistError = usePersistError();
   const loc = useLocation();
   const mainRef = useRef<HTMLElement>(null);
 
@@ -81,9 +83,26 @@ export function Layout({ children }: { children: ReactNode }) {
     return () => document.removeEventListener('keydown', onKey);
   }, []);
 
-  // Move focus to main content on route change for screen readers; reset scroll.
+  // On route change (not first load): reset scroll and move focus to the new page's h1 (or <main>)
+  // so screen-reader and keyboard users land on the new content instead of the stale nav link.
+  const firstRender = useRef(true);
   useEffect(() => {
-    window.scrollTo?.(0, 0);
+    try { window.scrollTo(0, 0); } catch { /* jsdom */ }
+    if (firstRender.current) { firstRender.current = false; return; }
+    let tries = 0;
+    let raf = 0;
+    const focusTarget = () => {
+      const main = mainRef.current;
+      if (!main) return;
+      const h1 = main.querySelector<HTMLElement>('h1');
+      // Pages are lazy-loaded: wait a few frames for the h1 to appear before falling back to <main>.
+      if (!h1 && tries++ < 10) { raf = requestAnimationFrame(focusTarget); return; }
+      const target = h1 ?? main;
+      if (target !== main) target.setAttribute('tabindex', '-1');
+      target.focus({ preventScroll: true });
+    };
+    raf = requestAnimationFrame(focusTarget);
+    return () => cancelAnimationFrame(raf);
   }, [loc.pathname]);
 
   const themeBtn = (
@@ -120,6 +139,12 @@ export function Layout({ children }: { children: ReactNode }) {
           {themeBtn}
         </header>
         <main id="main" ref={mainRef} tabIndex={-1} className="page">
+          {persistError && (
+            <div role="alert" className="persist-error">
+              Your changes could not be saved in this browser ({persistError}). Export a backup from{' '}
+              <Link to="/settings">Settings</Link> and free up storage.
+            </div>
+          )}
           {children}
         </main>
       </div>

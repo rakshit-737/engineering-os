@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { defaultState, exportState, importState, loadState, saveSlice, STORAGE_PREFIX, validateSlice } from './storage';
+import { defaultState, exportState, importState, loadState, MAX_IMPORT_BYTES, migrate, saveSlice, STATE_VERSION, STORAGE_PREFIX, validateSlice } from './storage';
 
 class MemStorage {
   m = new Map<string, string>();
@@ -70,5 +70,36 @@ describe('import / export', () => {
   ])('rejects %s', (_n, json) => {
     const r = importState(json);
     expect(r.ok).toBe(false);
+  });
+});
+
+describe('import hardening + migrations', () => {
+  it('rejects oversized imports before parsing', () => {
+    const r = importState(' '.repeat(MAX_IMPORT_BYTES + 1));
+    expect(r).toEqual({ ok: false, error: expect.stringMatching(/too large/) });
+  });
+
+  it('rejects exports from a newer schema version instead of silently dropping data', () => {
+    const r = importState(JSON.stringify({ state: { ...defaultState(), version: STATE_VERSION + 1 } }));
+    expect(r.ok).toBe(false);
+    if (!r.ok) expect(r.error).toMatch(/newer/);
+  });
+
+  it('treats a missing version as v1 and rejects non-object payloads', () => {
+    const rest: Record<string, unknown> = { ...defaultState(), mission: 'm' };
+    delete rest.version;
+    expect(importState(JSON.stringify({ state: rest }))).toMatchObject({ ok: true, state: { mission: 'm', version: 1 } });
+    expect(importState('[1,2]').ok).toBe(false);
+    expect(importState(JSON.stringify({ state: { version: 'x' } })).ok).toBe(false);
+  });
+
+  it('runs registered migrations in order', () => {
+    expect(migrate({ version: 1, a: 1 })).toEqual({ ok: true, state: { version: STATE_VERSION, a: 1 } });
+    expect(migrate({ version: 0 }).ok).toBe(false);
+  });
+
+  it('reports quota failures from saveSlice', () => {
+    const full = { getItem: () => null, removeItem: () => undefined, setItem: () => { throw new DOMException('full', 'QuotaExceededError'); } };
+    expect(saveSlice('mission', 'x', full)).toBe(false);
   });
 });
